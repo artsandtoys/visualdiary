@@ -1,231 +1,261 @@
 <!DOCTYPE html>
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="tinyguru3-10px_small.png" type="image/png">
+<head>
+  <!-- Meta tag for responsive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
-<style>
-  
-* 
-  {
-  box-sizing: border-box;
-}
+  <!-- Favicon for the site -->
+  <link rel="icon" href="tinyguru3-10px_small.png" type="image/png">
 
-body 
-  {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
+  <style>
+    /* Global box-sizing reset */
+    * {
+      box-sizing: border-box;
+    }
 
-.header 
-  {
-  overflow: hidden;
+    /* Base body styles */
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-  padding: 32px 12px;
-}
+    /* Header navigation styles */
+    .header {
+      overflow: hidden;
+      padding: 32px 12px;
+    }
 
-.header a 
-  {
-  float: left;
-  color: black;
-  text-align: center;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px; 
-  line-height: 24px;
-}
+    .header a {
+      float: left;
+      color: black;
+      text-align: center;
+      padding: 12px;
+      text-decoration: none;
+      font-size: 18px;
+      line-height: 24px;
+    }
 
-.header a.logo 
-  {
-  font-size: 24px;
-  font-weight: bold;
-}
+    .header a.logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
 
-.header a:hover 
-  {
-  background-color: #ddd;
-  color: black;
-}
+    .header a:hover {
+      background-color: #ddd;
+      color: black;
+    }
 
-.header a.active 
-  {
-  background-color: darkgray;
-  color: white;
-}
+    .header a.active {
+      background-color: darkgray;
+      color: white;
+    }
 
-.header-right 
-  {
-  float: right;
-}
+    .header-right {
+      float: right;
+    }
 
-img {
-  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(100%);
-}
+    /* Main row of image columns */
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 4px;
+    }
 
-.row 
-  {
-  display: -ms-flexbox; /* IE10 */
-  display: flex;
-  -ms-flex-wrap: wrap; /* IE10 */
-  flex-wrap: wrap;
-  padding: 0 4px;
-}
+    /* Column layout for images */
+    .column {
+      flex: 33.33%;
+      max-width: 33.33%;
+      padding: 0 4px;
+    }
 
-/* Create three equal columns that sits next to each other */
-.column 
-  {
-  -ms-flex: 33.33%; /* IE10 */
-  flex: 33.33%;
-  max-width: 33.33%;
-  padding: 0 4px;
-}
+    /* Images inside columns */
+    .column img {
+      margin-top: 8px;
+      vertical-align: middle;
+      width: 100%;
+    }
 
-.column img 
-  {
-  margin-top: 8px;
-  vertical-align: middle;
-  width: 50%; /* test down from 100 */
-}
-  
-.overlay 
-  {
-  position: absolute; 
-  bottom: 0; 
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.5); /* Black see-through */
-  color: #f1f1f1; 
-  width: 100%;
-  transition: .5s ease;
-  opacity:0;
-  color: white;
-  font-size: 20px;
-  padding: 20px;
-  text-align: center;
-}
+    /* Text overlay that appears on hover */
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+      color: white;
+      width: 100%;
+      transition: .5s ease;
+      opacity: 0;
+      font-size: 20px;
+      padding: 20px;
+      text-align: center;
+    }
 
-.container 
-  {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-}
-  
-.container:hover .overlay 
-  {
-  opacity: 1;
-}
+    /* Container that holds image and overlay */
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+    }
 
-.image-link img 
-  {
-  filter: grayscale(100%);
-  transition: filter 0.3s ease;
-}
+    /* Show overlay text when hovering on container */
+    .container:hover .overlay {
+      opacity: 1;
+    }
 
-.image-link:hover img 
-  {
-  filter: grayscale(0%);
-}
+    /* Wrapper that holds both the static image and animated GIF */
+    .image-swap {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
 
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) 
-  {
-  .column {
-    -ms-flex: 50%;
-    flex: 50%;
-    max-width: 50%;
-  }
-}
+    /* Both images (static and animated) are stacked on top of each other */
+    .image-swap img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: opacity 0.3s ease;
+      display: block;
+    }
 
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) 
-  {
-  .column 
-  {
-    -ms-flex: 100%;
-    flex: 100%;
-    max-width: 100%;
-  }
-}
-</style>
-  
+    /* Hide the GIF by default */
+    .image-swap .animated {
+      opacity: 0;
+    }
+
+    /* On hover, show the GIF and hide the static image */
+    .container:hover .image-swap .animated {
+      opacity: 1;
+    }
+
+    .container:hover .image-swap .static {
+      opacity: 0;
+    }
+
+    /* Responsive: 2 columns on medium screens */
+    @media screen and (max-width: 800px) {
+      .column {
+        flex: 50%;
+        max-width: 50%;
+      }
+    }
+
+    /* Responsive: 1 column on small screens */
+    @media screen and (max-width: 600px) {
+      .column {
+        flex: 100%;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+
 <body>
-  
-<!-- NAVBAR -->
+
+<!-- NAVIGATION BAR -->
 <div class="header">
   <a href="#default" class="logo">ARTS & TOYS</a>
   <div class="header-right">
     <a class="active" href="https://artsandtoys.com/">HOME</a>
   </div>
 </div>
-  
+
 <!-- CENTER HEADER TITLES -->
-  <Center>
+<center>
   <h1>VISUAL DIARY</h1>
   <p>ASSORTED WORKS 2020 -</p>
-</Center>
+</center>
 
-<!-- PHOTOS BEGIN -->
-<div class="row"> 
-  
+<!-- BEGIN IMAGE GRID -->
+<div class="row">
+
+  <!-- COLUMN 1 -->
   <div class="column">
-    
+    <!-- Image container with hover effect -->
     <div class="container">
-    <img src="superFlower-light-frame1-3k+.png" style="width:100%" class="image-link">
-    <div class="overlay">Endless Bloom EP Artwork</div>
+      <div class="image-swap">
+        <!-- Static PNG -->
+        <img src="superFlower-light-frame1-3k+.png" class="static" alt="Static Image">
+        <!-- Animated GIF -->
+        <img src="superFlower-animated.gif" class="animated" alt="Animated GIF">
+      </div>
+      <div class="overlay">Endless Bloom EP Artwork</div>
+    </div>
+
+    <!-- Repeat for other images -->
+    <div class="container">
+      <div class="image-swap">
+        <img src="superFlower-light-frame1-3k+.png" class="static" alt="Static Image">
+        <img src="superFlower-animated.gif" class="animated" alt="Animated GIF">
+      </div>
+      <div class="overlay">Endless Bloom EP Artwork</div>
     </div>
 
     <div class="container">
-    <img src="superFlower-light-frame1-3k+.png" style="width:100%" class="image-link">
-    <div class="overlay">Endless Bloom EP Artwork</div>
+      <div class="image-swap">
+        <img src="superFlower-light-frame1-3k+.png" class="static" alt="Static Image">
+        <img src="superFlower-animated.gif" class="animated" alt="Animated GIF">
+      </div>
+      <div class="overlay">Endless Bloom EP Artwork</div>
     </div>
-    
-    <div class="container">
-    <img src="superFlower-light-frame1-3k+.png" style="width:100%" class="image-link">
-    <div class="overlay">Endless Bloom EP Artwork</div>
-    </div>
-  
-  </div>
-  
-  <div class="column">
-    
-    <div class="container">
-    <img src="superFlower-light-frame1-3k+.png" style="width:100%" class="image-link">
-    <div class="overlay">Endless Bloom EP Artwork</div>
-    </div>
-
-    <div class="container">
-    <img src="superFlower-light-frame1-3k+.png" style="width:100%" class="image-link">
-    <div class="overlay">Endless Bloom EP Artwork</div>
-    </div>
-    
-    <div class="container">
-    <img src="superFlower-light-frame1-3k+.png" style="width:100%" class="image-link">
-    <div class="overlay">Endless Bloom EP Artwork</div>
-    </div>
-  
   </div>
 
+  <!-- COLUMN 2 -->
   <div class="column">
-    
     <div class="container">
-    <img src="superFlower-light-frame1-3k+.png" style="width:100%" class="image-link">
-    <div class="overlay">Endless Bloom EP Artwork</div>
+      <div class="image-swap">
+        <img src="superFlower-light-frame1-3k+.png" class="static" alt="Static Image">
+        <img src="superFlower-animated.gif" class="animated" alt="Animated GIF">
+      </div>
+      <div class="overlay">Endless Bloom EP Artwork</div>
     </div>
 
     <div class="container">
-    <img src="superFlower-light-frame1-3k+.png" style="width:100%" class="image-link">
-    <div class="overlay">Endless Bloom EP Artwork</div>
+      <div class="image-swap">
+        <img src="superFlower-light-frame1-3k+.png" class="static" alt="Static Image">
+        <img src="superFlower-animated.gif" class="animated" alt="Animated GIF">
+      </div>
+      <div class="overlay">Endless Bloom EP Artwork</div>
     </div>
-    
+
     <div class="container">
-    <img src="superFlower-light-frame1-3k+.png" style="width:100%" class="image-link">
-    <div class="overlay">Endless Bloom EP Artwork</div>
+      <div class="image-swap">
+        <img src="superFlower-light-frame1-3k+.png" class="static" alt="Static Image">
+        <img src="superFlower-animated.gif" class="animated" alt="Animated GIF">
+      </div>
+      <div class="overlay">Endless Bloom EP Artwork</div>
     </div>
-  
   </div>
-  
+
+  <!-- COLUMN 3 -->
+  <div class="column">
+    <div class="container">
+      <div class="image-swap">
+        <img src="superFlower-light-frame1-3k+.png" class="static" alt="Static Image">
+        <img src="superFlower-animated.gif" class="animated" alt="Animated GIF">
+      </div>
+      <div class="overlay">Endless Bloom EP Artwork</div>
+    </div>
+
+    <div class="container">
+      <div class="image-swap">
+        <img src="superFlower-light-frame1-3k+.png" class="static" alt="Static Image">
+        <img src="superFlower-animated.gif" class="animated" alt="Animated GIF">
+      </div>
+      <div class="overlay">Endless Bloom EP Artwork</div>
+    </div>
+
+    <div class="container">
+      <div class="image-swap">
+        <img src="superFlower-light-frame1-3k+.png" class="static" alt="Static Image">
+        <img src="superFlower-animated.gif" class="animated" alt="Animated GIF">
+      </div>
+      <div class="overlay">Endless Bloom EP Artwork</div>
+    </div>
+  </div>
+
 </div>
-<!-- PHOTOS END -->
+<!-- END IMAGE GRID -->
 
 </body>
 </html>
