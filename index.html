@@ -1,25 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!-- Meta tag for responsive design -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- Favicon for the site -->
-  <link rel="icon" href="tinyguru3-10px_small.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="tinyguru3-10px_small.png" type="image/png" />
 
   <style>
-    /* Global box-sizing reset */
+    /* GLOBAL STYLES */
     * {
       box-sizing: border-box;
     }
 
-    /* Base body styles */
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    /* Header navigation styles */
+    /* NAVIGATION BAR */
     .header {
       overflow: hidden;
       padding: 32px 12px;
@@ -54,85 +51,89 @@
       float: right;
     }
 
-    /* Main row of image columns */
+    /* LAYOUT GRID */
     .row {
       display: flex;
       flex-wrap: wrap;
       padding: 0 4px;
     }
 
-    /* Column layout for images */
     .column {
       flex: 33.33%;
       max-width: 33.33%;
       padding: 0 4px;
     }
 
-    /* Images inside columns */
     .column img {
       margin-top: 8px;
       vertical-align: middle;
       width: 100%;
     }
 
-    /* Text overlay that appears on hover */
-    .overlay {
-      position: absolute;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5); /* semi-transparent black */
-      color: white;
-      width: 100%;
-      transition: .5s ease;
-      opacity: 0;
-      font-size: 20px;
-      padding: 20px;
-      text-align: center;
-    }
-
-    /* Container that holds image and overlay */
+    /* IMAGE CONTAINER */
     .container {
       position: relative;
       width: 100%;
       max-width: 100%;
     }
 
-    /* Show overlay text when hovering on container */
-    .container:hover .overlay {
-      opacity: 1;
-    }
-
-    /* Wrapper that holds both the static image and animated GIF */
+    /* IMAGE SWAP WRAPPER */
     .image-swap {
       position: relative;
       width: 100%;
       height: auto;
+      aspect-ratio: 1 / 1; /* Optional: preserve square shape */
     }
 
-    /* Both images (static and animated) are stacked on top of each other */
+    /* BOTH IMAGES STACKED */
     .image-swap img {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      transition: opacity 0.3s ease;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.5s ease, filter 0.5s ease;
       display: block;
+      filter: grayscale(100%);
+      opacity: 1;
     }
 
-    /* Hide the GIF by default */
+    /* GIF is hidden initially */
     .image-swap .animated {
       opacity: 0;
     }
 
-    /* On hover, show the GIF and hide the static image */
+    /* On hover: fade in GIF, fade out static PNG, remove grayscale */
     .container:hover .image-swap .animated {
       opacity: 1;
+      filter: grayscale(0%);
     }
 
     .container:hover .image-swap .static {
       opacity: 0;
+      filter: grayscale(0%);
     }
 
-    /* Responsive: 2 columns on medium screens */
+    /* TEXT OVERLAY */
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      font-size: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container:hover .overlay {
+      opacity: 1;
+    }
+
+    /* RESPONSIVE BREAKPOINTS */
     @media screen and (max-width: 800px) {
       .column {
         flex: 50%;
@@ -140,7 +141,6 @@
       }
     }
 
-    /* Responsive: 1 column on small screens */
     @media screen and (max-width: 600px) {
       .column {
         flex: 100%;
@@ -152,7 +152,7 @@
 
 <body>
 
-<!-- NAVIGATION BAR -->
+<!-- NAVBAR -->
 <div class="header">
   <a href="#default" class="logo">ARTS & TOYS</a>
   <div class="header-right">
@@ -160,29 +160,26 @@
   </div>
 </div>
 
-<!-- CENTER HEADER TITLES -->
+<!-- TITLE SECTION -->
 <center>
   <h1>VISUAL DIARY</h1>
   <p>ASSORTED WORKS 2020 -</p>
 </center>
 
-<!-- BEGIN IMAGE GRID -->
+<!-- IMAGE GRID -->
 <div class="row">
 
   <!-- COLUMN 1 -->
   <div class="column">
-    <!-- Image container with hover effect -->
+    <!-- REPEATABLE IMAGE CONTAINER -->
     <div class="container">
       <div class="image-swap">
-        <!-- Static PNG -->
         <img src="superFlower-light-frame1-3k+.png" class="static" alt="Static Image">
-        <!-- Animated GIF -->
         <img src="superFlower-animated.gif" class="animated" alt="Animated GIF">
       </div>
       <div class="overlay">Endless Bloom EP Artwork</div>
     </div>
 
-    <!-- Repeat for other images -->
     <div class="container">
       <div class="image-swap">
         <img src="superFlower-light-frame1-3k+.png" class="static" alt="Static Image">
@@ -255,7 +252,7 @@
   </div>
 
 </div>
-<!-- END IMAGE GRID -->
+<!-- END GRID -->
 
 </body>
 </html>
