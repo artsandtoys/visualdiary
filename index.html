@@ -39,8 +39,8 @@
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Vertically center the block */
-            align-items: center; /* Horizontally center the block */
+            justify-content: center;
+            align-items: center;
             position: sticky;
             top: 0;
             height: 100vh;
@@ -50,15 +50,26 @@
 
         /* Container for content inside the left column to align text and control position */
         .left-content {
-            text-align: left; /* Align text content to the left */
+            text-align: left;
             width: 75%;
             
-            /* KEY CHANGE: Move the content block up from the center point */
-            margin-top: -15vh; /* Adjusts the block to align h2 with right column's h2 */
+            /* KEY CHANGE: Increased negative margin to pull content up further. */
+            /* -25vh is used to pull the h1 much higher, while h2 still aligns with the right column's h2. */
+            margin-top: -25vh; 
         }
 
-        .left-content h1, .left-content h2, .left-content h3 {
+        .left-content h1, .left-content h2 {
             margin: 0.5em 0;
+        }
+
+        /* Styling for the new description text (formerly h3) */
+        .left-content .description-text {
+            /* Remove the bold/heading style */
+            font-size: 1em; 
+            font-weight: normal;
+            line-height: 1.5; /* Matches typical paragraph text in the right column */
+            margin-top: 1em; 
+            margin-bottom: 2em;
         }
 
         .left-content nav a {
@@ -92,11 +103,18 @@
             padding: 40px 0;
         }
         #about-me {
-            /* This is the target vertical position for alignment */
+            /* This is the target vertical position for alignment (h2 target) */
             padding-top: 15vh; 
         }
+        
+        /* Ensure the paragraph text is consistent */
+        .right-column-wrapper p {
+            line-height: 1.5;
+            margin-top: 1em;
+        }
 
-        /* Timeline Styling */
+
+        /* Timeline Styling - Reverted/Simplified for text-only hover */
         .timeline {
             position: relative;
             padding: 20px 0 20px 30px;
@@ -139,7 +157,7 @@
             z-index: 1;
         }
 
-        /* Ensuring all text elements inside the link inherit the hover color */
+        /* Hover color inheritance for nested text elements */
         .timeline-date, .timeline-title, .timeline-item-link p {
             margin-bottom: 5px;
             transition: color 0.3s ease;
@@ -184,7 +202,9 @@
             <div class="left-content">
                 <h1>[Your Name]</h1>
                 <h2>[Your Job Title]</h2>
-                <h3>A brief, punchy description of what you do.</h3>
+                <div class="description-text">
+                    A brief, punchy description of what you do, now styled like the paragraph text on the right.
+                </div>
 
                 <nav>
                     <a href="#about-me">About Me</a>
@@ -223,7 +243,7 @@
                         <div class="timeline-date">2020</div>
                         <div class="timeline-title">Personal Portfolio (v1)</div>
                         <p>First public-facing project, a static site built with pure HTML/CSS to showcase fundamental skills.</p>
-                    </a>
+                    </p>
                 </div>
             </section>
 
