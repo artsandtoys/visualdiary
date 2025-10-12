@@ -204,61 +204,7 @@
             text-decoration: underline;
         }
 
-/* ###################################################### */
-/* MEDIA QUERY FOR MOBILE/NARROW SCREENS (Max 800px)    */
-/* ###################################################### */
-
-@media (max-width: 800px) {
-    
-    /* 1. MAIN CONTAINER: Switch from side-by-side to stacking */
-    .main-container {
-        width: 90%; /* Increase width slightly for better mobile use */
-        flex-direction: column; /* Stacks the left column above the right column */
-    }
-
-    /* 2. LEFT COLUMN: Reset fixed/sticky behavior and full width */
-    .left-column {
-        position: static; /* Essential: Allows it to scroll normally */
-        width: 100%;     /* Use full width */
-        height: auto;    /* Allow height to be determined by content */
-        padding-right: 0;
-        
-        /* Reset vertical centering to align text to the start */
-        justify-content: flex-start; 
-        align-items: flex-start;
-    }
-    
-    .left-content {
-        width: 100%;
-        text-align: center; /* Center the name/title */
-        margin-top: 0;      /* Essential: Remove the -30vh offset */
-        padding-top: 20px;  /* Add some top spacing */
-    }
-    
-    .left-content nav a {
-        display: inline-block; /* Change navigation links from vertical list to horizontal row */
-        margin: 5px 10px;
-    }
-
-    /* 3. RIGHT COLUMN: Ensure it takes full width and has no left padding/margin */
-    .right-column-wrapper {
-        flex-basis: 100%;  
-        padding-left: 0;   
-        padding-top: 20px; /* Adjust top padding */
-    }
-    
-    /* 4. ABOUT ME: Reset the large padding needed for desktop alignment */
-    #about-me {
-        padding-top: 36px; /* Reset to normal section padding */
-    }
-
-    /* 5. FOOTER: Make the footer static to follow content on scroll */
-    .footer {
-        position: static;
-        margin-top: 20px;
-    }
-}
-    </style>
+</style>
     
 </head>
     
