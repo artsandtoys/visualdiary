@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Two-Column Portfolio Layout</title>
+    <title>Two-Column Portfolio Layout - Refined</title>
     <style>
         /* Base Styling */
         body {
-            /* Set background to black and default text to white with Helvetica */
             background-color: #000;
             color: #fff;
             font-family: Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex; /* Enable flexbox for the main container */
-            min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+            display: flex;
+            min-height: 100vh;
             box-sizing: border-box;
         }
 
@@ -23,13 +22,12 @@
         /* -------------------------------------- */
 
         .main-container {
-            /* 1/8 of the page size for margin on both sides */
-            width: 75%; /* 100% - (1/8 margin left + 1/8 margin right) = 75% */
-            max-width: 1200px; /* Optional: Sets a maximum width for large screens */
-            margin: 0 auto; /* Center the container horizontally */
+            width: 75%;
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             flex-grow: 1;
-            padding-bottom: 50px; /* Space for the fixed footer */
+            padding-bottom: 50px;
         }
 
         /* -------------------------------------- */
@@ -37,37 +35,41 @@
         /* -------------------------------------- */
 
         .left-column {
-            /* 1/4 of the main container's width (75% of page) */
-            flex-basis: 33.33%; /* Approximately 1/4 of the full page width (since main-container is 75%) */
-            flex-shrink: 0; /* Prevents the column from shrinking */
+            flex-basis: 33.33%;
+            flex-shrink: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Vertically center the content */
-            align-items: center; /* Horizontally center the content */
-            text-align: center;
-            position: sticky; /* Keep it fixed */
-            top: 0; /* Stick it to the top */
-            height: 100vh; /* Ensure it takes up the full viewport height */
-            padding-right: 20px; /* Space between columns */
-            box-sizing: border-box; /* Include padding in height calculation */
+            justify-content: center; /* Vertically center the block */
+            align-items: center; /* Horizontally center the block */
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            padding-right: 20px;
+            box-sizing: border-box;
         }
 
-        .left-column h1, .left-column h2, .left-column h3 {
+        /* Container for content inside the left column to align text */
+        .left-content {
+            /* This is a wrapper to constrain the size of the text block */
+            text-align: left; /* Align text content to the left */
+            width: 75%; /* Arbitrary width for a compact look */
+        }
+
+        .left-content h1, .left-content h2, .left-content h3 {
             margin: 0.5em 0;
         }
 
-        .left-column nav a {
+        .left-content nav a {
             color: #fff;
             text-decoration: none;
             display: block;
             margin: 10px 0;
             padding: 5px 10px;
-            /* Removed border styling */
             transition: color 0.3s;
         }
 
-        .left-column nav a:hover {
-            color: #b3ff00; /* Neon yellow/green on hover for navigation links */
+        .left-content nav a:hover {
+            color: #b3ff00; /* Neon yellow/green on hover */
         }
 
         /* -------------------------------------- */
@@ -75,27 +77,20 @@
         /* -------------------------------------- */
 
         .right-column-wrapper {
-            /* 2/4 (1/2) of the main container's width */
             flex-basis: 66.66%;
-            flex-grow: 1; /* Allow it to grow */
-            overflow-y: auto; /* Enable scrolling for the content */
-            padding-left: 20px; /* Space between columns */
-            padding-top: 5vh; /* Top padding for aesthetics */
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-left: 20px;
+            padding-top: 5vh;
             box-sizing: border-box;
         }
 
         /* Content Sections */
         .content-section {
             padding: 40px 0;
-            /* The 'About Me' section should align with the headers.
-               Adjust padding-top for the first section to achieve this visually. */
         }
         #about-me {
-            padding-top: 15vh; /* Adjusted to align with left column headers visually */
-        }
-
-        .content-section:last-child {
-            border-bottom: none;
+            padding-top: 15vh; /* Aligns with left column headers visually */
         }
 
         /* Timeline Styling */
@@ -111,36 +106,47 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: #444; /* Timeline line color */
+            background: #444;
         }
 
-        .timeline-item-link { /* New class for the clickable wrapper */
+        .timeline-item-link {
             position: relative;
-            display: block; /* Make the entire item clickable */
-            margin-bottom: 30px;
-            padding: 15px 20px; /* Padding for hover effect */
-            padding-left: 20px; /* Consistent with previous offset */
-            text-decoration: none; /* Remove underline from links */
-            color: inherit; /* Inherit text color from parent */
-            border-radius: 5px; /* Slightly rounded corners for hover */
+            display: block;
+            /* Adjust padding to create a tighter rectangle around the text */
+            margin-bottom: 15px; /* Less margin to compress the timeline */
+            padding: 10px 20px; 
+            padding-left: 20px;
+            text-decoration: none;
+            color: inherit;
+            border-radius: 5px;
             transition: background-color 0.3s ease;
+            /* To make the bullet point align correctly, we need the link's text content
+               to start further in. */
+            margin-left: -20px; /* Shift the content back left to align bullet */
+        }
+        
+        /* New class to contain the text and pull it over the bullet */
+        .timeline-text-content {
+            padding-left: 20px; /* Indent the text to the right of the bullet */
         }
 
         .timeline-item-link:hover {
             background-color: #333; /* Dark gray on hover */
-            cursor: pointer; /* Indicate clickability */
+            cursor: pointer;
         }
-
+        
+        /* Position the bullet relative to the .timeline-item-link container */
         .timeline-item-link::before {
             content: '';
             position: absolute;
-            left: -10px; /* Position relative to the timeline line */
-            top: 20px; /* Adjust vertical position */
-            width: 8px; /* Half size */
-            height: 8px; /* Half size */
+            left: -10px;
+            top: 50%; /* Center vertically within the link box */
+            transform: translateY(-50%); /* Fine-tune vertical centering */
+            width: 8px;
+            height: 8px;
             background: #b3ff00; /* Neon yellow/green */
             border-radius: 50%;
-            z-index: 1; /* Ensure it's above the timeline line */
+            z-index: 1;
         }
 
         .timeline-title {
@@ -164,12 +170,12 @@
             color: #fff;
             text-align: center;
             padding: 15px 0;
-            position: fixed; /* Fixed position */
-            bottom: 0; /* Stick to the bottom */
+            position: fixed;
+            bottom: 0;
             left: 0;
             right: 0;
-            border-top: 1px solid #222; /* Optional: subtle separator */
-            z-index: 1000; /* Ensure footer is on top of other content */
+            border-top: 1px solid #222;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -177,15 +183,17 @@
 
     <div class="main-container">
         <div class="left-column">
-            <h1>[Your Name]</h1>
-            <h2>[Your Job Title]</h2>
-            <h3>A brief, punchy description of what you do.</h3>
+            <div class="left-content">
+                <h1>[Your Name]</h1>
+                <h2>[Your Job Title]</h2>
+                <h3>A brief, punchy description of what you do.</h3>
 
-            <nav>
-                <a href="#about-me">About Me</a>
-                <a href="#projects">Projects & Timeline</a>
-                <a href="#contact">Contact</a>
-            </nav>
+                <nav>
+                    <a href="#about-me">About Me</a>
+                    <a href="#projects">Projects & Timeline</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
         </div>
 
         <div class="right-column-wrapper">
@@ -193,30 +201,36 @@
             <section id="about-me" class="content-section">
                 <h2>About Me</h2>
                 <p>
-                    This is the main descriptive text part on top. It serves as an introduction or an overview of your professional self.<br><br>
-                    You can use this space to elaborate on your skills, philosophy, and background. The right column is the only part that scrolls, so the user can always see your name and the navigation links on the left.
+                    This is the main descriptive text part on top. It serves as an introduction or an overview of your professional self. You can use this space to elaborate on your skills, philosophy, and background.
                 </p>
             </section>
 
             <section id="projects" class="content-section">
                 <h2>Project Timeline</h2>
                 <div class="timeline">
+                    
                     <a href="https://example.com/project-delta" target="_blank" class="timeline-item-link">
-                        <div class="timeline-date">2024</div>
-                        <div class="timeline-title">Project Delta (Current Role)</div>
-                        <p>Developed a full-stack e-commerce solution using React and Node.js. Led a team of four developers.</p>
+                        <div class="timeline-text-content">
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-title">Project Delta (Current Role)</div>
+                            <p>Developed a full-stack e-commerce solution using React and Node.js. Led a team of four developers.</p>
+                        </div>
                     </a>
 
                     <a href="https://example.com/startup-x-redesign" target="_blank" class="timeline-item-link">
-                        <div class="timeline-date">2022 - 2023</div>
-                        <div class="timeline-title">Startup X Website Redesign</div>
-                        <p>Implemented a responsive, mobile-first design system that resulted in a 30% increase in user engagement.</p>
+                        <div class="timeline-text-content">
+                            <div class="timeline-date">2022 - 2023</div>
+                            <div class="timeline-title">Startup X Website Redesign</div>
+                            <p>Implemented a responsive, mobile-first design system that resulted in a 30% increase in user engagement.</p>
+                        </div>
                     </a>
 
                     <a href="https://example.com/portfolio-v1" target="_blank" class="timeline-item-link">
-                        <div class="timeline-date">2020</div>
-                        <div class="timeline-title">Personal Portfolio (v1)</div>
-                        <p>First public-facing project, a static site built with pure HTML/CSS to showcase fundamental skills.</p>
+                        <div class="timeline-text-content">
+                            <div class="timeline-date">2020</div>
+                            <div class="timeline-title">Personal Portfolio (v1)</div>
+                            <p>First public-facing project, a static site built with pure HTML/CSS to showcase fundamental skills.</p>
+                        </div>
                     </a>
                 </div>
             </section>
@@ -224,8 +238,8 @@
             <section id="contact" class="content-section">
                 <h2>Contact</h2>
                 <p>You can reach me at: contact@example.com</p>
-                <br><br><br><br><br><br><br><br><br><br>
-                <p>Scroll down to see the fixed footer!</p>
+                <div style="height: 300px;"></div>
+                <p>End of content.</p>
             </section>
         </div>
     </div>
