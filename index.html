@@ -41,43 +41,46 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* Using sticky instead of fixed allows it to respect its container's height/boundaries */
-            position: sticky; /* changed */
+            position: sticky; 
             top: 0;
-            height: 82vh;
+            height: 90vh;
             padding-right: 20px;
             box-sizing: border-box;
         }
 
-        /* Container for content inside the left column to align text and control position */
         .left-content {
             text-align: left;
             width: 75%;
-            /* Pulling the whole block up */
             margin-top: -30vh; 
         }
 
         .left-content h1 {
-            margin: 0 0 1em 0; 
+            /* No bottom margin */
+            margin: 0; 
         }
         
         .left-content h2 {
-            margin: 0 0 0em 0; 
+            /* Gap between H2 (title) and H1 (name) */
+            margin: 0 0 0.5em 0; 
         }
 
+        /* ************************************************* */
+        /* 🔥 CONSISTENT GAP: Left column description */
+        /* The margin-top and margin-bottom here define the space */
         .left-content .description-text {
             font-size: 1em; 
             font-weight: normal;
             line-height: 1.5;
-            margin-top: 1em; 
-            margin-bottom: 2em;
+            margin-top: 1.5em;  /* Gap after H2/title (24px) */
+            margin-bottom: 1.5em; /* Gap before navigation (24px) */
         }
+        /* ************************************************* */
 
         .left-content nav a {
             color: #fff;
             text-decoration: none;
             display: block;
-            margin: 5px 0;
+            margin: 10px 0;
             padding: 5px 10px;
             transition: color 0.3s;
         }
@@ -99,29 +102,36 @@
             box-sizing: border-box;
         }
 
+        /* General H2 Style */
+        .right-column-wrapper h2 {
+            /* Set consistent bottom margin for all section headers (About Me, Projects) */
+            margin-bottom: 1.5em; /* 🔥 CONSISTENT GAP: Gap between H2 and content (24px) */
+        }
+
         /* Content Sections */
         .content-section {
             padding: 36px 0;
         }
         #about-me {
-            /* This is the target vertical position for alignment (h2 target) */
             padding-top: 15vh; 
         }
         
         #about-me p:first-of-type {
+            /* Ensures no top margin on the first paragraph, letting the H2 control the gap */
             margin-top: 0em;
         }
 
         .right-column-wrapper p {
             line-height: 1.5;
+            /* Added margin-bottom for better paragraph separation */
+            margin-bottom: 1.2em;
         }
-
-        /* Timeline Styling */
+        
+        /* ... (Timeline Styling remains the same) ... */
         .timeline {
             position: relative;
             padding: 20px 0 20px 30px;
         }
-
         .timeline::before {
             content: '';
             position: absolute;
@@ -131,7 +141,6 @@
             width: 2px;
             background: #444;
         }
-
         .timeline-item-link {
             position: relative;
             display: block;
@@ -141,12 +150,10 @@
             color: inherit;
             transition: color 0.3s ease;
         }
-
         .timeline-item-link:hover {
             color: #666; 
             cursor: pointer;
         }
-
         .timeline-item-link::before {
             content: '';
             position: absolute;
@@ -158,23 +165,18 @@
             border-radius: 50%;
             z-index: 1;
         }
-
-        /* Hover color inheritance for nested text elements */
         .timeline-date, .timeline-title, .timeline-item-link p {
             margin-bottom: 5px;
             transition: color 0.3s ease;
         }
-
         .timeline-item-link:hover .timeline-date, 
         .timeline-item-link:hover .timeline-title, 
         .timeline-item-link:hover p {
             color: #666;
         }
-        
         .timeline-date {
             color: #ccc;
         }
-
         .timeline-item-link:hover .timeline-date {
             color: #666;
         }
@@ -203,11 +205,55 @@
         .footer a:hover {
             text-decoration: underline;
         }
+        
+        /* ###################################################### */
+        /* MEDIA QUERY FOR MOBILE/NARROW SCREENS (Max 800px)    */
+        /* ###################################################### */
 
-</style>
-    
+        @media (max-width: 800px) {
+            .main-container {
+                width: 90%;
+                flex-direction: column;
+            }
+
+            .left-column {
+                position: static;
+                width: 100%;
+                height: auto;
+                padding-right: 0;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+            
+            .left-content {
+                width: 100%;
+                text-align: center;
+                margin-top: 0;
+                padding-top: 20px;
+            }
+            
+            .left-content nav a {
+                display: inline-block;
+                margin: 5px 10px;
+            }
+
+            .right-column-wrapper {
+                flex-basis: 100%;
+                padding-left: 0;
+                padding-top: 20px;
+            }
+            
+            #about-me {
+                padding-top: 36px;
+            }
+
+            .footer {
+                position: static;
+                margin-top: 20px;
+            }
+        }
+    </style>
 </head>
-    
 <body>
 
     <div class="main-container">
@@ -224,7 +270,7 @@
                 <nav>
                     <a href="#about-me">About Me</a>
                     <a href="#projects">Projects</a>
-                    </nav>
+                </nav>
                 
             </div>
         </div>
@@ -265,8 +311,7 @@
                 <div style="height: 300px;"></div>
                 <p>Fin.</p>
             </section>
-            
-            </div>
+        </div>
     </div>
 
     <div class="footer">
