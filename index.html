@@ -22,9 +22,9 @@
         /* -------------------------------------- */
 
         .main-container {
-            /* Kept width at 75% for centering, but its role is diminished due to fixed column */
             width: 75%;
-            max-width: 1200px;
+            /* 💥 CRITICAL REFERENCE POINT: The fixed column aligns to this max-width */
+            max-width: 1200px; 
             margin: 0 auto;
             display: flex;
             flex-grow: 1;
@@ -48,16 +48,23 @@
             top: 0;
             height: 90vh;
             
-            /* Ensure the fixed column aligns with the centered main-container */
-            left: 12.5%; 
-            width: calc(1200px * 0.3333); 
-            max-width: calc(75vw * 0.3333);
+            /* 💥 NEW: STATIC WIDTH (1/3 of 1200px = 400px) */
+            width: 400px; 
+            
+            /* 💥 NEW: STATIC LEFT POSITION */
+            /* Centers the 1200px content block: calc(50% - 600px). This is the content's left edge. */
+            left: calc(50% - 600px); 
 
             padding-right: 20px;
             box-sizing: border-box;
+            
+            /* Add this media query for smaller screens to prevent overflow/misalignment */
+            /* Below 1200px, the fixed column might need percentage-based width to scale */
+            /* For simplicity, we'll assume the fixed behavior is desired on larger screens. */
+            /* If you need mobile responsiveness, you would change position to static in a media query. */
         }
 
-        /* Content inside the left column */
+        /* Container for content inside the left column */
         .left-content {
             text-align: left;
             width: 75%;
@@ -75,9 +82,9 @@
         .left-content .description-text {
             font-size: 1em; 
             font-weight: normal;
-            line-height: 1;
+            line-height: 1.5;
             margin-top: 1em; 
-            margin-bottom: 1em;
+            margin-bottom: 2em;
         }
 
         .left-content nav a {
@@ -98,14 +105,14 @@
         /* -------------------------------------- */
 
         .right-column-wrapper {
-            /* Push content right to clear the fixed left column */
+            /* Keep this margin to clear the space now occupied by the fixed left column */
             margin-left: 33.33%; 
 
-            flex-basis: 66.66%;
+            flex-basis: 66.66%; 
             flex-grow: 1;
             overflow-y: auto;
             padding-left: 20px;
-            padding-top: 2.5vh;
+            padding-top: 5vh;
             box-sizing: border-box;
         }
 
@@ -183,7 +190,7 @@
         }
 
         /* -------------------------------------- */
-        /* GALLERY / THUMBNAIL STYLING */
+        /* GALLERY / THUMBNAIL STYLING (Functional) */
         /* -------------------------------------- */
         .gallery-container {
             padding-top: 20px;
@@ -215,12 +222,10 @@
             opacity: 0.7;
         }
 
-        /* Hide radio buttons (the mechanism for the click) */
         .thumbnail-item input[type="radio"] {
             display: none;
         }
 
-        /* Full Image Display */
         .full-image-display {
             display: none;
             width: 100%;
@@ -234,7 +239,6 @@
         }
 
         /* --- PURE CSS CLICK/DISPLAY LOGIC --- */
-        /* This works now because radio inputs and full-image-display are in the same parent (right-column-wrapper) */
         .gallery-container input[type="radio"]:checked ~ .full-image-display {
             display: none; 
         }
@@ -317,19 +321,19 @@
                     
                     <a href="https://example.com/project-delta" target="_blank" class="timeline-item-link">
                         <div class="timeline-date">2023 - </div>
-                        <div class="timeline-title"><strong>MIXED REALITY</strong></div>
+                        <div class="timeline-title"><b>MIXED REALITY</b></div>
                         <p>Developed a full-stack e-commerce solution using React and Node.js. Led a team of four developers.</p>
                     </a>
 
                     <a href="https://example.com/startup-x-redesign" target="_blank" class="timeline-item-link">
                         <div class="timeline-date">2020 - 2021</div>
-                        <div class="timeline-title"><strong>VIRTUAL REALITY</strong></div>
+                        <div class="timeline-title"><b>VIRTUAL REALITY</b></div>
                         <p>Implemented a responsive, mobile-first design system that resulted in a 30% increase in user engagement.</p>
                     </a>
 
                     <a href="https://example.com/portfolio-v1" target="_blank" class="timeline-item-link">
                         <div class="timeline-date">2021</div>
-                        <div class="timeline-title"><strong>MUSIC RELEASES</strong></div>
+                        <div class="timeline-title"><b>MUSIC RELEASES</b></div>
                         <p>First public-facing project, a static site built with pure HTML/CSS to showcase fundamental skills.</p>
                     </a>
                 </div>
@@ -401,7 +405,7 @@
                         <div class="thumbnail-item">
                             <input type="radio" id="img-9" name="gallery-select">
                             <label for="img-9">
-                                <img src="superFlower-light-frame1-3k+.png" alt="Thumbnail 9">
+                                <img src="superFlower-light-frame1-3k+.pngg" alt="Thumbnail 9">
                             </label>
                         </div>
                     </div>
@@ -450,7 +454,7 @@
     </div>
 
     <div class="footer">
-        For questions email <a href="mailto:paul@paularthurmusic.com">paul@paularthurmusic.com</a>
+        For questions email: <a href="mailto:paul@paularthurmusic.com">paul@paularthurmusic.com</a>
     </div>
 
 </body>
