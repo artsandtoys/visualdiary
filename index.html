@@ -49,24 +49,25 @@
             top: 0; /* Stick it to the top */
             height: 100vh; /* Ensure it takes up the full viewport height */
             padding-right: 20px; /* Space between columns */
+            box-sizing: border-box; /* Include padding in height calculation */
         }
 
         .left-column h1, .left-column h2, .left-column h3 {
             margin: 0.5em 0;
         }
 
-        .left-column a {
+        .left-column nav a {
             color: #fff;
             text-decoration: none;
             display: block;
             margin: 10px 0;
             padding: 5px 10px;
-            border: 1px solid transparent;
-            transition: border-color 0.3s;
+            /* Removed border styling */
+            transition: color 0.3s;
         }
 
-        .left-column a:hover {
-            border-color: #fff;
+        .left-column nav a:hover {
+            color: #b3ff00; /* Neon yellow/green on hover for navigation links */
         }
 
         /* -------------------------------------- */
@@ -80,12 +81,17 @@
             overflow-y: auto; /* Enable scrolling for the content */
             padding-left: 20px; /* Space between columns */
             padding-top: 5vh; /* Top padding for aesthetics */
+            box-sizing: border-box;
         }
 
         /* Content Sections */
         .content-section {
             padding: 40px 0;
-            border-bottom: 1px solid #333;
+            /* The 'About Me' section should align with the headers.
+               Adjust padding-top for the first section to achieve this visually. */
+        }
+        #about-me {
+            padding-top: 15vh; /* Adjusted to align with left column headers visually */
         }
 
         .content-section:last-child {
@@ -108,21 +114,33 @@
             background: #444; /* Timeline line color */
         }
 
-        .timeline-item {
+        .timeline-item-link { /* New class for the clickable wrapper */
             position: relative;
+            display: block; /* Make the entire item clickable */
             margin-bottom: 30px;
-            padding-left: 20px;
+            padding: 15px 20px; /* Padding for hover effect */
+            padding-left: 20px; /* Consistent with previous offset */
+            text-decoration: none; /* Remove underline from links */
+            color: inherit; /* Inherit text color from parent */
+            border-radius: 5px; /* Slightly rounded corners for hover */
+            transition: background-color 0.3s ease;
         }
 
-        .timeline-item::before {
+        .timeline-item-link:hover {
+            background-color: #333; /* Dark gray on hover */
+            cursor: pointer; /* Indicate clickability */
+        }
+
+        .timeline-item-link::before {
             content: '';
             position: absolute;
-            left: -10px;
-            top: 5px;
-            width: 10px;
-            height: 10px;
-            background: #fff;
+            left: -10px; /* Position relative to the timeline line */
+            top: 20px; /* Adjust vertical position */
+            width: 8px; /* Half size */
+            height: 8px; /* Half size */
+            background: #b3ff00; /* Neon yellow/green */
             border-radius: 50%;
+            z-index: 1; /* Ensure it's above the timeline line */
         }
 
         .timeline-title {
@@ -151,6 +169,7 @@
             left: 0;
             right: 0;
             border-top: 1px solid #222; /* Optional: subtle separator */
+            z-index: 1000; /* Ensure footer is on top of other content */
         }
     </style>
 </head>
@@ -182,23 +201,23 @@
             <section id="projects" class="content-section">
                 <h2>Project Timeline</h2>
                 <div class="timeline">
-                    <div class="timeline-item">
+                    <a href="https://example.com/project-delta" target="_blank" class="timeline-item-link">
                         <div class="timeline-date">2024</div>
                         <div class="timeline-title">Project Delta (Current Role)</div>
                         <p>Developed a full-stack e-commerce solution using React and Node.js. Led a team of four developers.</p>
-                    </div>
+                    </a>
 
-                    <div class="timeline-item">
+                    <a href="https://example.com/startup-x-redesign" target="_blank" class="timeline-item-link">
                         <div class="timeline-date">2022 - 2023</div>
                         <div class="timeline-title">Startup X Website Redesign</div>
                         <p>Implemented a responsive, mobile-first design system that resulted in a 30% increase in user engagement.</p>
-                    </div>
+                    </a>
 
-                    <div class="timeline-item">
+                    <a href="https://example.com/portfolio-v1" target="_blank" class="timeline-item-link">
                         <div class="timeline-date">2020</div>
                         <div class="timeline-title">Personal Portfolio (v1)</div>
                         <p>First public-facing project, a static site built with pure HTML/CSS to showcase fundamental skills.</p>
-                    </div>
+                    </a>
                 </div>
             </section>
 
