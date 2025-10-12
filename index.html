@@ -22,6 +22,7 @@
         /* -------------------------------------- */
 
         .main-container {
+            /* Kept width at 75% for centering, but its role is diminished due to fixed column */
             width: 75%;
             max-width: 1200px;
             margin: 0 auto;
@@ -41,29 +42,34 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: sticky;
+            
+            /* FIXED POSITIONING */
+            position: fixed; 
             top: 0;
             height: 90vh;
+            
+            /* Ensure the fixed column aligns with the centered main-container */
+            left: 12.5%; 
+            width: calc(1200px * 0.3333); 
+            max-width: calc(75vw * 0.3333);
+
             padding-right: 20px;
             box-sizing: border-box;
         }
 
-        /* Container for content inside the left column to align text and control position */
+        /* Content inside the left column */
         .left-content {
             text-align: left;
             width: 75%;
-            
-            /* KEY CHANGE: Increased negative margin to pull the whole block up (h1 closer to top) */
             margin-top: -30vh; 
         }
 
         .left-content h1 {
-            /* Adjust h1 margin to push h2 down and align it with the right column h2 */
-            margin: 0 0 1em 0; /* No top/bottom margin, increased bottom margin */
+            margin: 0 0 0.5em 0; 
         }
         
         .left-content h2 {
-            margin: 0 0 0em 0; /* Resetting h2 top margin */
+            margin: 0 0 0em 0; 
         }
 
         .left-content .description-text {
@@ -92,6 +98,9 @@
         /* -------------------------------------- */
 
         .right-column-wrapper {
+            /* Push content right to clear the fixed left column */
+            margin-left: 33.33%; 
+
             flex-basis: 66.66%;
             flex-grow: 1;
             overflow-y: auto;
@@ -105,19 +114,18 @@
             padding: 36px 0;
         }
         #about-me {
-            /* This is the target vertical position for alignment (h2 target) */
             padding-top: 15vh; 
         }
         
         #about-me p:first-of-type {
-            margin-top: 0em;
+            margin-top: 0em; 
         }
 
         .right-column-wrapper p {
             line-height: 1.5;
         }
 
-        /* Timeline Styling - Reverted/Simplified for text-only hover */
+        /* Timeline Styling - No Change */
         .timeline {
             position: relative;
             padding: 20px 0 20px 30px;
@@ -158,12 +166,6 @@
             background: #b3ff00;
             border-radius: 50%;
             z-index: 1;
-        }
-
-        /* Hover color inheritance for nested text elements */
-        .timeline-date, .timeline-title, .timeline-item-link p {
-            margin-bottom: 5px;
-            transition: color 0.3s ease;
         }
 
         .timeline-item-link:hover .timeline-date, 
@@ -232,20 +234,7 @@
         }
 
         /* --- PURE CSS CLICK/DISPLAY LOGIC --- */
-        /* Target the full-image-display div */
-        #img-1:checked ~ .full-image-display.img-1,
-        #img-2:checked ~ .full-image-display.img-2,
-        #img-3:checked ~ .full-image-display.img-3,
-        #img-4:checked ~ .full-image-display.img-4,
-        #img-5:checked ~ .full-image-display.img-5,
-        #img-6:checked ~ .full-image-display.img-6,
-        #img-7:checked ~ .full-image-display.img-7,
-        #img-8:checked ~ .full-image-display.img-8,
-        #img-9:checked ~ .full-image-display.img-9 {
-            display: block;
-        }
-
-        /* Only show the matching image's container (the rule below ensures only one is visible) */
+        /* This works now because radio inputs and full-image-display are in the same parent (right-column-wrapper) */
         .gallery-container input[type="radio"]:checked ~ .full-image-display {
             display: none; 
         }
@@ -262,8 +251,9 @@
             display: block;
         }
 
+
         /* -------------------------------------- */
-        /* FOOTER */
+        /* FOOTER - No Change */
         /* -------------------------------------- */
 
         .footer {
@@ -307,8 +297,8 @@
                     <a href="#gallery">Gallery</a>
                 </nav>
                 
+            </div>
         </div>
-    </div>
 
         <div class="right-column-wrapper">
 
