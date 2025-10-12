@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Two-Column Portfolio Layout - Final Alignment</title>
+    <title>Paul Arthur - Creative Technologist</title>
     <style>
         /* Base Styling */
         body {
@@ -52,22 +52,17 @@
         .left-content {
             text-align: left;
             width: 75%;
-            
-            /* KEY CHANGE: Increased negative margin to pull content up further. */
-            /* -25vh is used to pull the h1 much higher, while h2 still aligns with the right column's h2. */
-            margin-top: -25vh; 
+            margin-top: -20vh; /* Aligns h2 and description */
         }
 
         .left-content h1, .left-content h2 {
             margin: 0.5em 0;
         }
 
-        /* Styling for the new description text (formerly h3) */
         .left-content .description-text {
-            /* Remove the bold/heading style */
             font-size: 1em; 
             font-weight: normal;
-            line-height: 1.5; /* Matches typical paragraph text in the right column */
+            line-height: 1.5;
             margin-top: 1em; 
             margin-bottom: 2em;
         }
@@ -103,16 +98,16 @@
             padding: 40px 0;
         }
         #about-me {
-            /* This is the target vertical position for alignment (h2 target) */
             padding-top: 15vh; 
         }
         
-        /* Ensure the paragraph text is consistent */
-        .right-column-wrapper p {
-            line-height: 1.5;
+        #about-me p:first-of-type {
             margin-top: 1em;
         }
 
+        .right-column-wrapper p {
+            line-height: 1.5;
+        }
 
         /* Timeline Styling - Reverted/Simplified for text-only hover */
         .timeline {
@@ -157,12 +152,6 @@
             z-index: 1;
         }
 
-        /* Hover color inheritance for nested text elements */
-        .timeline-date, .timeline-title, .timeline-item-link p {
-            margin-bottom: 5px;
-            transition: color 0.3s ease;
-        }
-
         .timeline-item-link:hover .timeline-date, 
         .timeline-item-link:hover .timeline-title, 
         .timeline-item-link:hover p {
@@ -172,9 +161,95 @@
         .timeline-date {
             color: #ccc;
         }
-
         .timeline-item-link:hover .timeline-date {
              color: #666;
+        }
+
+        /* -------------------------------------- */
+        /* GALLERY / THUMBNAIL STYLING */
+        /* -------------------------------------- */
+        .gallery-container {
+            padding-top: 20px;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr); /* 9 equal columns */
+            gap: 5px; /* Small space between thumbnails */
+            margin-bottom: 30px;
+        }
+
+        .thumbnail-item {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            aspect-ratio: 1 / 1; /* Keep images square */
+        }
+
+        .thumbnail-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.3s;
+        }
+        
+        .thumbnail-item:hover img {
+            opacity: 0.7;
+        }
+
+        /* Hide radio buttons (the mechanism for the click) */
+        .thumbnail-item input[type="radio"] {
+            display: none;
+        }
+
+        /* Full Image Display */
+        .full-image-display {
+            display: none;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .full-image-display img {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        /* --- PURE CSS CLICK/DISPLAY LOGIC --- */
+        /* When a radio button is checked, display the corresponding image (and hide the default state) */
+        /* The IDs in the HTML must match the 'for' attribute of the labels */
+
+        /* Target the full-image-display div */
+        #img-1:checked ~ .full-image-display.img-1,
+        #img-2:checked ~ .full-image-display.img-2,
+        #img-3:checked ~ .full-image-display.img-3,
+        #img-4:checked ~ .full-image-display.img-4,
+        #img-5:checked ~ .full-image-display.img-5,
+        #img-6:checked ~ .full-image-display.img-6,
+        #img-7:checked ~ .full-image-display.img-7,
+        #img-8:checked ~ .full-image-display.img-8,
+        #img-9:checked ~ .full-image-display.img-9 {
+            display: block;
+        }
+
+        /* The full-image-display should only show ONE image at a time. */
+        /* We must hide the other full image containers when one is selected */
+        .gallery-container input[type="radio"]:checked ~ .full-image-display {
+            display: none; 
+        }
+
+        /* Only show the matching image's container */
+        #img-1:checked ~ .full-image-display.img-1,
+        #img-2:checked ~ .full-image-display.img-2,
+        #img-3:checked ~ .full-image-display.img-3,
+        #img-4:checked ~ .full-image-display.img-4,
+        #img-5:checked ~ .full-image-display.img-5,
+        #img-6:checked ~ .full-image-display.img-6,
+        #img-7:checked ~ .full-image-display.img-7,
+        #img-8:checked ~ .full-image-display.img-8,
+        #img-9:checked ~ .full-image-display.img-9 {
+            display: block;
         }
 
         /* -------------------------------------- */
@@ -193,6 +268,14 @@
             border-top: 1px solid #222;
             z-index: 1000;
         }
+        
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -200,16 +283,16 @@
     <div class="main-container">
         <div class="left-column">
             <div class="left-content">
-                <h1>[Your Name]</h1>
-                <h2>[Your Job Title]</h2>
+                <h1>Paul Arthur</h1>
+                <h2>Creative Technologist</h2>
                 <div class="description-text">
-                    A brief, punchy description of what you do, now styled like the paragraph text on the right.
+                    I build fun things.
                 </div>
 
                 <nav>
                     <a href="#about-me">About Me</a>
                     <a href="#projects">Projects & Timeline</a>
-                    <a href="#contact">Contact</a>
+                    <a href="#gallery">Gallery</a>
                 </nav>
             </div>
         </div>
@@ -219,7 +302,7 @@
             <section id="about-me" class="content-section">
                 <h2>About Me</h2>
                 <p>
-                    This is the main descriptive text part on top. It serves as an introduction or an overview of your professional self. You can use this space to elaborate on your skills, philosophy, and background.
+                    This section will contain a professional summary about **Paul Arthur** and his work as a **Creative Technologist**. It should detail your skills, background, and passion for building innovative and fun digital experiences.
                 </p>
             </section>
 
@@ -243,13 +326,118 @@
                         <div class="timeline-date">2020</div>
                         <div class="timeline-title">Personal Portfolio (v1)</div>
                         <p>First public-facing project, a static site built with pure HTML/CSS to showcase fundamental skills.</p>
-                    </p>
+                    </a>
                 </div>
             </section>
 
-            <section id="contact" class="content-section">
-                <h2>Contact</h2>
-                <p>You can reach me at: contact@example.com</p>
+            <section id="gallery" class="content-section">
+                <h2>Gallery</h2>
+                
+                <div class="gallery-container">
+                    
+                    <div class="thumbnail-grid">
+                        
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-1" name="gallery-select">
+                            <label for="img-1">
+                                <img src="https://via.placeholder.com/100x100/333333/FFFFFF?text=T1" alt="Thumbnail 1">
+                            </label>
+                        </div>
+                        
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-2" name="gallery-select">
+                            <label for="img-2">
+                                <img src="https://via.placeholder.com/100x100/444444/FFFFFF?text=T2" alt="Thumbnail 2">
+                            </label>
+                        </div>
+
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-3" name="gallery-select">
+                            <label for="img-3">
+                                <img src="https://via.placeholder.com/100x100/555555/FFFFFF?text=T3" alt="Thumbnail 3">
+                            </label>
+                        </div>
+
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-4" name="gallery-select">
+                            <label for="img-4">
+                                <img src="https://via.placeholder.com/100x100/666666/FFFFFF?text=T4" alt="Thumbnail 4">
+                            </label>
+                        </div>
+                        
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-5" name="gallery-select">
+                            <label for="img-5">
+                                <img src="https://via.placeholder.com/100x100/777777/FFFFFF?text=T5" alt="Thumbnail 5">
+                            </label>
+                        </div>
+
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-6" name="gallery-select">
+                            <label for="img-6">
+                                <img src="https://via.placeholder.com/100x100/888888/FFFFFF?text=T6" alt="Thumbnail 6">
+                            </label>
+                        </div>
+
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-7" name="gallery-select">
+                            <label for="img-7">
+                                <img src="https://via.placeholder.com/100x100/999999/FFFFFF?text=T7" alt="Thumbnail 7">
+                            </label>
+                        </div>
+
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-8" name="gallery-select">
+                            <label for="img-8">
+                                <img src="https://via.placeholder.com/100x100/aaaaaa/FFFFFF?text=T8" alt="Thumbnail 8">
+                            </label>
+                        </div>
+
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-9" name="gallery-select">
+                            <label for="img-9">
+                                <img src="https://via.placeholder.com/100x100/bbbbbb/FFFFFF?text=T9" alt="Thumbnail 9">
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="full-image-display img-1">
+                        <img src="https://via.placeholder.com/800x400/333333/FFFFFF?text=FULL+IMAGE+1" alt="Full Image 1">
+                    </div>
+
+                    <div class="full-image-display img-2">
+                        <img src="https://via.placeholder.com/800x400/444444/FFFFFF?text=FULL+IMAGE+2" alt="Full Image 2">
+                    </div>
+
+                    <div class="full-image-display img-3">
+                        <img src="https://via.placeholder.com/800x400/555555/FFFFFF?text=FULL+IMAGE+3" alt="Full Image 3">
+                    </div>
+
+                    <div class="full-image-display img-4">
+                        <img src="https://via.placeholder.com/800x400/666666/FFFFFF?text=FULL+IMAGE+4" alt="Full Image 4">
+                    </div>
+
+                    <div class="full-image-display img-5">
+                        <img src="https://via.placeholder.com/800x400/777777/FFFFFF?text=FULL+IMAGE+5" alt="Full Image 5">
+                    </div>
+
+                    <div class="full-image-display img-6">
+                        <img src="https://via.placeholder.com/800x400/888888/FFFFFF?text=FULL+IMAGE+6" alt="Full Image 6">
+                    </div>
+
+                    <div class="full-image-display img-7">
+                        <img src="https://via.placeholder.com/800x400/999999/FFFFFF?text=FULL+IMAGE+7" alt="Full Image 7">
+                    </div>
+
+                    <div class="full-image-display img-8">
+                        <img src="https://via.placeholder.com/800x400/aaaaaa/FFFFFF?text=FULL+IMAGE+8" alt="Full Image 8">
+                    </div>
+
+                    <div class="full-image-display img-9">
+                        <img src="https://via.placeholder.com/800x400/bbbbbb/FFFFFF?text=FULL+IMAGE+9" alt="Full Image 9">
+                    </div>
+
+                </div>
                 <div style="height: 300px;"></div>
                 <p>End of content.</p>
             </section>
@@ -257,7 +445,7 @@
     </div>
 
     <div class="footer">
-        © 2025 [Your Name]. All Rights Reserved.
+        For questions email <a href="mailto:paul@paularthurmusic.com">paul@paularthurmusic.com</a>
     </div>
 
 </body>
