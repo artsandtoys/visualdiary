@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Two-Column Portfolio Layout - Final</title>
+    <title>Two-Column Portfolio Layout - Final Alignment</title>
     <style>
         /* Base Styling */
         body {
@@ -48,10 +48,13 @@
             box-sizing: border-box;
         }
 
-        /* Container for content inside the left column to align text */
+        /* Container for content inside the left column to align text and control position */
         .left-content {
             text-align: left; /* Align text content to the left */
             width: 75%;
+            
+            /* KEY CHANGE: Move the content block up from the center point */
+            margin-top: -15vh; /* Adjusts the block to align h2 with right column's h2 */
         }
 
         .left-content h1, .left-content h2, .left-content h3 {
@@ -89,7 +92,8 @@
             padding: 40px 0;
         }
         #about-me {
-            padding-top: 15vh; /* Aligns with left column headers visually */
+            /* This is the target vertical position for alignment */
+            padding-top: 15vh; 
         }
 
         /* Timeline Styling */
@@ -111,12 +115,11 @@
         .timeline-item-link {
             position: relative;
             display: block;
-            /* Reverting padding and margin to the original/larger box size */
             margin-bottom: 30px; 
-            padding: 0 0 0 20px; /* Resetting padding for a cleaner text hover effect */
+            padding: 0 0 0 20px;
             text-decoration: none;
             color: inherit;
-            transition: color 0.3s ease; /* Only transitioning color */
+            transition: color 0.3s ease;
         }
 
         .timeline-item-link:hover {
@@ -128,10 +131,10 @@
             content: '';
             position: absolute;
             left: -10px;
-            top: 5px; /* Reverting bullet position to align with top text */
-            width: 8px; /* Half size */
-            height: 8px; /* Half size */
-            background: #b3ff00; /* Neon yellow/green */
+            top: 5px;
+            width: 8px;
+            height: 8px;
+            background: #b3ff00;
             border-radius: 50%;
             z-index: 1;
         }
@@ -139,21 +142,21 @@
         /* Ensuring all text elements inside the link inherit the hover color */
         .timeline-date, .timeline-title, .timeline-item-link p {
             margin-bottom: 5px;
-            transition: color 0.3s ease; /* Ensure sub-elements transition color */
+            transition: color 0.3s ease;
         }
 
         .timeline-item-link:hover .timeline-date, 
         .timeline-item-link:hover .timeline-title, 
         .timeline-item-link:hover p {
-            color: #666; /* Text turns gray on hover */
+            color: #666;
         }
         
         .timeline-date {
-            color: #ccc; /* Maintain default lighter gray for date */
+            color: #ccc;
         }
 
         .timeline-item-link:hover .timeline-date {
-             color: #666; /* Date also turns gray on hover */
+             color: #666;
         }
 
         /* -------------------------------------- */
