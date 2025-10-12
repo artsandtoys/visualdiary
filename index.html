@@ -5,264 +5,247 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paul Arthur - Portfolio</title>
     <style>
-        /* Base Styling */
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
+       /* Base Styling */
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
 
-        /* NEW: Reset all top/bottom margins on H1 and H2 globally for consistent spacing */
-        h1, h2 {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
+/* Reset heading margins */
+h1, h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
-        /* -------------------------------------- */
-        /* MAIN CONTAINER & MARGINS */
-        /* -------------------------------------- */
+/* -------------------------------------- */
+/* MAIN CONTAINER */
+/* -------------------------------------- */
 
-        .main-container {
-            width: 75%;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-grow: 1;
-            padding-bottom: 50px;
-        }
+.main-container {
+    width: 75%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-grow: 1;
+    padding-bottom: 50px;
+    align-items: flex-start; /* 👈 aligns both columns' top sections */
+}
 
-        /* -------------------------------------- */
-        /* LEFT COLUMN (STICKY NAV) */
-        /* -------------------------------------- */
+/* -------------------------------------- */
+/* LEFT COLUMN */
+/* -------------------------------------- */
 
-        .left-column {
-            flex-basis: 33.33%;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: sticky; 
-            top: 0;
-            height: 90vh;
-            padding-right: 20px;
-            box-sizing: border-box;
-        }
+.left-column {
+    flex-basis: 33.33%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: sticky;
+    top: 0;
+    height: 90vh;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
 
-        .left-content {
-            text-align: left;
-            width: 75%;
-            margin-top: -30vh; 
-        }
+.left-content {
+    width: 75%;
+    margin-top: 15vh; /* 👈 pushes content down slightly to align */
+}
 
-        .left-content h1 {
-            margin: 0; 
-        }
+.left-content h1 {
+    margin: 0;
+}
+
+.left-content h2 {
+    margin: 0 0 0.5em 0;
+}
+
+.description-text {
+    font-size: 1em;
+    font-weight: normal;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+/* -------------------------------------- */
+/* NAV LINKS */
+/* -------------------------------------- */
+
+.left-content nav a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin: 10px 0;
+    padding: 5px 10px;
+    transition: color 0.3s;
+}
+
+.left-content nav a:hover {
+    color: #b3ff00;
+}
+
+/* 👇 Active Page Link */
+.left-content nav a.active {
+    color: #b3ff00;
+    font-weight: bold;
+}
+
+/* -------------------------------------- */
+/* RIGHT COLUMN */
+/* -------------------------------------- */
+
+.right-column-wrapper {
+    flex-basis: 66.66%;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-left: 20px;
+    padding-top: 15vh; /* 👈 aligns “About Me” with left column */
+    box-sizing: border-box;
+}
+
+.right-column-wrapper h2 {
+    margin-bottom: 1.5em;
+}
+
+.content-section {
+    padding: 36px 0;
+}
+
+.right-column-wrapper p {
+    line-height: 1.5;
+    margin-bottom: 1.2em;
+}
+
+/* -------------------------------------- */
+/* TIMELINE */
+/* -------------------------------------- */
+
+.timeline {
+    position: relative;
+    padding: 20px 0 20px 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #444;
+}
+
+.timeline-item-link {
+    position: relative;
+    display: block;
+    margin-bottom: 30px;
+    padding: 0 0 0 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.timeline-item-link:hover {
+    color: #666;
+    cursor: pointer;
+}
+
+.timeline-item-link::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 5px;
+    width: 8px;
+    height: 8px;
+    background: #b3ff00;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-date {
+    color: #ccc;
+}
+
+/* -------------------------------------- */
+/* FOOTER */
+/* -------------------------------------- */
+
+.footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #222;
+    z-index: 1000;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* -------------------------------------- */
+/* MOBILE */
+/* -------------------------------------- */
+
+@media (max-width: 800px) {
+    .main-container {
+        width: 90%;
+        flex-direction: column;
+    }
+
+    .left-column {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding-right: 0;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .left-content {
+        width: 100%;
+        text-align: center;
+        margin-top: 0;
+        padding-top: 20px;
+    }
+
+    .left-content nav a {
+        display: inline-block;
+        margin: 5px 10px;
+    }
+
+    .right-column-wrapper {
+        flex-basis: 100%;
+        padding-left: 0;
+        padding-top: 20px;
+    }
+
+    .footer {
+        position: static;
+        margin-top: 20px;
+    }
+}
         
-        .left-content h2 {
-            margin: 0 0 0.5em 0; 
-        }
-
-        .left-content .description-text {
-            font-size: 1em; 
-            font-weight: normal;
-            line-height: 1.5;
-            /* Consistent Gap after H2/title (24px) */
-            margin-top: 1.5em; 
-            margin-bottom: 1.5em;
-        }
-
-        .left-content nav a {
-            color: #fff;
-            text-decoration: none;
-            display: block;
-            margin: 10px 0;
-            padding: 5px 10px;
-            transition: color 0.3s;
-        }
-
-        .left-content nav a:hover {
-            color: #b3ff00;
-        }
-
-        /* -------------------------------------- */
-        /* RIGHT COLUMN (SCROLLABLE CONTENT) */
-        /* -------------------------------------- */
-
-        .right-column-wrapper {
-            flex-basis: 66.66%;
-            flex-grow: 1;
-            overflow-y: auto;
-            padding-left: 20px;
-            padding-top: 5vh;
-            box-sizing: border-box;
-        }
-
-        /* General H2 Style (About Me, Projects Timeline) */
-        .right-column-wrapper h2 {
-            /* Consistent Gap: Enforces the 24px gap between H2 and content */
-            margin-bottom: 1.5em; 
-        }
-
-        /* Content Sections */
-        .content-section {
-            padding: 36px 0;
-        }
-        #about-me {
-            padding-top: 15vh; 
-        }
-        
-        #about-me p:first-of-type {
-            margin-top: 0; /* Ensures H2 margin controls the gap */
-        }
-
-        .right-column-wrapper p {
-            line-height: 1.5;
-            margin-bottom: 1.2em;
-        }
-        
-        /* -------------------------------------- */
-        /* Timeline Styling */
-        /* -------------------------------------- */
-        .timeline {
-            position: relative;
-            padding: 20px 0 20px 30px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #444;
-        }
-
-        .timeline-item-link {
-            position: relative;
-            display: block;
-            margin-bottom: 30px; 
-            padding: 0 0 0 20px;
-            text-decoration: none;
-            color: inherit;
-            transition: color 0.3s ease;
-        }
-
-        .timeline-item-link:hover {
-            color: #666; 
-            cursor: pointer;
-        }
-
-        .timeline-item-link::before {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 5px;
-            width: 8px;
-            height: 8px;
-            background: #b3ff00;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .timeline-date, .timeline-title, .timeline-item-link p {
-            margin-bottom: 5px;
-            transition: color 0.3s ease;
-        }
-
-        .timeline-item-link:hover .timeline-date, 
-        .timeline-item-link:hover .timeline-title, 
-        .timeline-item-link:hover p {
-            color: #666;
-        }
-        
-        .timeline-date {
-            color: #ccc;
-        }
-
-        .timeline-item-link:hover .timeline-date {
-            color: #666;
-        }
-
-        /* -------------------------------------- */
-        /* FOOTER */
-        /* -------------------------------------- */
-
-        .footer {
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-            padding: 15px 0;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            border-top: 1px solid #222;
-            z-index: 1000;
-        }
-        
-        .footer a {
-            color: #fff;
-            text-decoration: none;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        
-        /* ###################################################### */
-        /* MEDIA QUERY FOR MOBILE/NARROW SCREENS (Max 800px)    */
-        /* ###################################################### */
-
-        @media (max-width: 800px) {
-            .main-container {
-                width: 90%;
-                flex-direction: column;
-            }
-
-            .left-column {
-                position: static;
-                width: 100%;
-                height: auto;
-                padding-right: 0;
-                justify-content: flex-start;
-                align-items: flex-start;
-            }
-            
-            .left-content {
-                width: 100%;
-                text-align: center;
-                margin-top: 0;
-                padding-top: 20px;
-            }
-            
-            .left-content nav a {
-                display: inline-block;
-                margin: 5px 10px;
-            }
-
-            .right-column-wrapper {
-                flex-basis: 100%;
-                padding-left: 0;
-                padding-top: 20px;
-            }
-            
-            #about-me {
-                padding-top: 36px;
-            }
-
-            .footer {
-                position: static;
-                margin-top: 20px;
-            }
-        }
-    </style>
+</style>
 </head>
+    
 <body>
 
     <div class="main-container">
@@ -274,7 +257,7 @@
                 <h2>Creative Technologist</h2>
                 
                 <div class="description-text">
-                    Builder, tinker, musical storyteller.
+                    Builder, tinkerer, musical storyteller.
                 </div>
 
                 <nav>
