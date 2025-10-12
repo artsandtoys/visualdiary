@@ -68,6 +68,7 @@ h1, h2 {
 }
 
 .description-text {
+    color: #ddd; /* originally inherit */
     font-size: 1em;
     font-weight: normal;
     line-height: 1.5;
@@ -114,7 +115,11 @@ h1, h2 {
 .right-column-wrapper h2 {
     margin: 0 0 0.5em 0;
 }
-
+        
+/* Make the ABOUT ME description darker */
+#about-me p {
+    color: #ddd; /* or try #ccc for slightly dimmer */
+}
 .content-section {
     padding: 36px 0;
 }
