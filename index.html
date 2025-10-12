@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paul Arthur - Creative Technologist</title>
-    
-    <link href="path/to/lightbox.css" rel="stylesheet" />
-    
     <style>
         /* Base Styling */
         body {
@@ -26,7 +23,7 @@
 
         .main-container {
             width: 75%;
-            max-width: 1200px; 
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             flex-grow: 1;
@@ -34,7 +31,7 @@
         }
 
         /* -------------------------------------- */
-        /* LEFT COLUMN (FIXED NAV) */
+        /* LEFT COLUMN (STICKY NAV) */
         /* -------------------------------------- */
 
         .left-column {
@@ -44,30 +41,29 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            
-            /* FIXED POSITIONING */
-            position: fixed; 
+            /* Using sticky instead of fixed allows it to respect its container's height/boundaries */
+            position: sticky; 
             top: 0;
             height: 90vh;
-            
-            /* Dynamic width, capped at 400px, ensures it aligns when resizing */
-            width: min(calc(75vw * 0.3333), 400px); 
-            left: 12.5%; 
-            max-width: 400px;
-
             padding-right: 20px;
             box-sizing: border-box;
-            transition: all 0.3s ease; 
         }
 
+        /* Container for content inside the left column to align text and control position */
         .left-content {
             text-align: left;
             width: 75%;
+            /* Pulling the whole block up */
             margin-top: -30vh; 
         }
 
-        .left-content h1 { margin: 0 0 0.5em 0; }
-        .left-content h2 { margin: 0 0 0em 0; }
+        .left-content h1 {
+            margin: 0 0 1em 0; 
+        }
+        
+        .left-content h2 {
+            margin: 0 0 0em 0; 
+        }
 
         .left-content .description-text {
             font-size: 1em; 
@@ -95,10 +91,7 @@
         /* -------------------------------------- */
 
         .right-column-wrapper {
-            /* This clears the space now occupied by the fixed left column */
-            margin-left: 33.33%; 
-
-            flex-basis: 66.66%; 
+            flex-basis: 66.66%;
             flex-grow: 1;
             overflow-y: auto;
             padding-left: 20px;
@@ -111,49 +104,85 @@
             padding: 36px 0;
         }
         #about-me {
+            /* This is the target vertical position for alignment (h2 target) */
             padding-top: 15vh; 
         }
         
-        /* ... (Other content styles like timeline remain unchanged) ... */
-
-        /* -------------------------------------- */
-        /* GALLERY / THUMBNAIL STYLING */
-        /* -------------------------------------- */
-        .gallery-container {
-            padding-top: 20px;
+        #about-me p:first-of-type {
+            margin-top: 0em;
         }
 
-        .thumbnail-grid {
-            display: grid;
-            /* Changed to 3 columns for better responsiveness on larger screens */
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 15px; /* Increased gap for visual clarity */
-            margin-bottom: 30px;
+        .right-column-wrapper p {
+            line-height: 1.5;
         }
 
-        .thumbnail-item {
+        /* Timeline Styling */
+        .timeline {
             position: relative;
-            cursor: pointer;
-            overflow: hidden;
-            aspect-ratio: 1 / 1; 
+            padding: 20px 0 20px 30px;
         }
-        
-        /* Ensure the anchor and image fill the container */
-        .thumbnail-item a,
-        .thumbnail-item img {
-            width: 100%;
-            height: 100%;
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #444;
+        }
+
+        .timeline-item-link {
+            position: relative;
             display: block;
-            object-fit: cover;
-            transition: opacity 0.3s;
+            margin-bottom: 30px; 
+            padding: 0 0 0 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        .timeline-item-link:hover {
+            color: #666; 
+            cursor: pointer;
+        }
+
+        .timeline-item-link::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 5px;
+            width: 8px;
+            height: 8px;
+            background: #b3ff00;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Hover color inheritance for nested text elements */
+        .timeline-date, .timeline-title, .timeline-item-link p {
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .timeline-item-link:hover .timeline-date, 
+        .timeline-item-link:hover .timeline-title, 
+        .timeline-item-link:hover p {
+            color: #666;
         }
         
-        .thumbnail-item a:hover img {
-            opacity: 0.7;
+        .timeline-date {
+            color: #ccc;
         }
 
-        /* Removed all old pure CSS gallery logic (.full-image-display, input[type="radio"], etc.) */
+        .timeline-item-link:hover .timeline-date {
+            color: #666;
+        }
 
+        /* -------------------------------------- */
+        /* GALLERY / THUMBNAIL STYLING - REMOVED */
+        /* -------------------------------------- */
+        /* All gallery-related CSS (thumbnail-grid, full-image-display, etc.) has been removed. */
 
         /* -------------------------------------- */
         /* FOOTER */
@@ -176,61 +205,8 @@
             color: #fff;
             text-decoration: none;
         }
-        
-        /* ###################################################### */
-        /* MEDIA QUERY FOR MOBILE/NARROW SCREENS (Max 800px)    */
-        /* ###################################################### */
-        
-        @media (max-width: 800px) {
-            
-            /* 1. MAIN CONTAINER: Stack columns and use full width */
-            .main-container {
-                width: 90%; 
-                flex-direction: column; 
-            }
-
-            /* 2. LEFT COLUMN: DISABLE FIXED BEHAVIOR */
-            .left-column {
-                position: static; 
-                width: 100%;     
-                max-width: none; 
-                left: auto;      
-                height: auto;    
-                margin-top: 5vh; 
-                padding-right: 0;
-                flex-basis: auto;
-                justify-content: flex-start;
-                align-items: flex-start;
-            }
-            
-            .left-content {
-                width: 100%;
-                text-align: center; 
-                margin-top: 0;
-            }
-            
-            .left-content nav a {
-                display: inline-block;
-                margin: 5px 10px;
-            }
-
-            /* 3. RIGHT COLUMN: RESET MARGIN AND WIDTH (Full width now) */
-            .right-column-wrapper {
-                margin-left: 0;    
-                flex-basis: 100%;  
-                padding-left: 0;   
-            }
-            
-            /* 4. GALLERY: Use 2 columns for a better mobile grid */
-            .thumbnail-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            /* 5. FOOTER: Make the footer static to follow content */
-            .footer {
-                position: static;
-                margin-top: 20px;
-            }
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -250,8 +226,7 @@
                 <nav>
                     <a href="#about-me">About Me</a>
                     <a href="#projects">Projects</a>
-                    <a href="#gallery">Gallery</a>
-                </nav>
+                    </nav>
                 
             </div>
         </div>
@@ -261,7 +236,9 @@
             <section id="about-me" class="content-section">
                 <h2>About Me:</h2>
                 <p>
-                    ... (Content remains the same) ...
+                    This section will contain a professional summary about Paul Arthur and his work as a Creative Technologist. 
+                    <br>
+                    It should detail your skills, background, and passion for building innovative and fun digital experiences.
                 </p>
             </section>
 
@@ -269,89 +246,34 @@
                 <h2>Projects Timeline:</h2>
                 <div class="timeline">
                     
-                    </div>
-            </section>
+                    <a href="https://example.com/project-delta" target="_blank" class="timeline-item-link">
+                        <div class="timeline-date">2023 - </div>
+                        <div class="timeline-title"><b>MIXED REALITY</b></div>
+                        <p>Developed a full-stack e-commerce solution using React and Node.js. Led a team of four developers.</p>
+                    </a>
 
-            <section id="gallery" class="content-section">
-                <h2>Gallery (Lightbox Enabled):</h2>
-                
-                <div class="gallery-container">
-                    
-                    <div class="thumbnail-grid">
-                        
-                        <div class="thumbnail-item">
-                            <a href="https://via.placeholder.com/1200x800/333333/FFFFFF?text=FULL+IMAGE+1" 
-                               data-lightbox="portfolio-gallery" 
-                               data-title="Project: Cyberspacestation Orbital Junker">
-                                <img src="https://via.placeholder.com/400x400/333333/FFFFFF?text=Thumb+1" alt="Thumbnail 1">
-                            </a>
-                        </div>
-                        
-                        <div class="thumbnail-item">
-                            <a href="https://via.placeholder.com/1200x800/444444/FFFFFF?text=FULL+IMAGE+2" 
-                               data-lightbox="portfolio-gallery" 
-                               data-title="Detail Shot: Control Panel">
-                                <img src="https://via.placeholder.com/400x400/444444/FFFFFF?text=Thumb+2" alt="Thumbnail 2">
-                            </a>
-                        </div>
+                    <a href="https://example.com/startup-x-redesign" target="_blank" class="timeline-item-link">
+                        <div class="timeline-date">2020 - 2021</div>
+                        <div class="timeline-title"><b>VIRTUAL REALITY</b></div>
+                        <p>Implemented a responsive, mobile-first design system that resulted in a 30% increase in user engagement.</p>
+                    </a>
 
-                        <div class="thumbnail-item">
-                            <a href="https://via.placeholder.com/1200x800/555555/FFFFFF?text=FULL+IMAGE+3" 
-                               data-lightbox="portfolio-gallery" 
-                               data-title="Concept Art: Space Debris">
-                                <img src="https://via.placeholder.com/400x400/555555/FFFFFF?text=Thumb+3" alt="Thumbnail 3">
-                            </a>
-                        </div>
-                        
-                        <div class="thumbnail-item">
-                            <a href="https://via.placeholder.com/1200x800/666666/FFFFFF?text=FULL+IMAGE+4" data-lightbox="portfolio-gallery" data-title="Caption 4">
-                                <img src="https://via.placeholder.com/400x400/666666/FFFFFF?text=Thumb+4" alt="Thumbnail 4">
-                            </a>
-                        </div>
-                        
-                        <div class="thumbnail-item">
-                            <a href="https://via.placeholder.com/1200x800/777777/FFFFFF?text=FULL+IMAGE+5" data-lightbox="portfolio-gallery" data-title="Caption 5">
-                                <img src="https://via.placeholder.com/400x400/777777/FFFFFF?text=Thumb+5" alt="Thumbnail 5">
-                            </a>
-                        </div>
-                        
-                        <div class="thumbnail-item">
-                            <a href="https://via.placeholder.com/1200x800/888888/FFFFFF?text=FULL+IMAGE+6" data-lightbox="portfolio-gallery" data-title="Caption 6">
-                                <img src="https://via.placeholder.com/400x400/888888/FFFFFF?text=Thumb+6" alt="Thumbnail 6">
-                            </a>
-                        </div>
-                        
-                        <div class="thumbnail-item">
-                            <a href="https://via.placeholder.com/1200x800/999999/FFFFFF?text=FULL+IMAGE+7" data-lightbox="portfolio-gallery" data-title="Caption 7">
-                                <img src="https://via.placeholder.com/400x400/999999/FFFFFF?text=Thumb+7" alt="Thumbnail 7">
-                            </a>
-                        </div>
-
-                        <div class="thumbnail-item">
-                            <a href="https://via.placeholder.com/1200x800/aaaaaa/FFFFFF?text=FULL+IMAGE+8" data-lightbox="portfolio-gallery" data-title="Caption 8">
-                                <img src="https://via.placeholder.com/400x400/aaaaaa/FFFFFF?text=Thumb+8" alt="Thumbnail 8">
-                            </a>
-                        </div>
-                        
-                        <div class="thumbnail-item">
-                            <a href="https://via.placeholder.com/1200x800/bbbbbb/FFFFFF?text=FULL+IMAGE+9" data-lightbox="portfolio-gallery" data-title="Caption 9">
-                                <img src="https://via.placeholder.com/400x400/bbbbbb/FFFFFF?text=Thumb+9" alt="Thumbnail 9">
-                            </a>
-                        </div>
-                    </div>
-                    
-                    </div>
+                    <a href="https://example.com/portfolio-v1" target="_blank" class="timeline-item-link">
+                        <div class="timeline-date">2021</div>
+                        <div class="timeline-title"><b>MUSIC RELEASES</b></div>
+                        <p>First public-facing project, a static site built with pure HTML/CSS to showcase fundamental skills.</p>
+                    </a>
+                </div>
                 <div style="height: 300px;"></div>
                 <p>Fin.</p>
             </section>
-        </div>
+            
+            </div>
     </div>
 
     <div class="footer">
         For questions email <a href="mailto:paul@paularthurmusic.com">paul@paularthurmusic.com</a>
     </div>
-    
-    <script src="path/to/lightbox-plus-jquery.js"></script>
 
 </body>
 </html>
