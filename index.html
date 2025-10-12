@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Two-Column Portfolio Layout - Refined</title>
+    <title>Two-Column Portfolio Layout - Final</title>
     <style>
         /* Base Styling */
         body {
@@ -50,9 +50,8 @@
 
         /* Container for content inside the left column to align text */
         .left-content {
-            /* This is a wrapper to constrain the size of the text block */
             text-align: left; /* Align text content to the left */
-            width: 75%; /* Arbitrary width for a compact look */
+            width: 75%;
         }
 
         .left-content h1, .left-content h2, .left-content h3 {
@@ -112,53 +111,49 @@
         .timeline-item-link {
             position: relative;
             display: block;
-            /* Adjust padding to create a tighter rectangle around the text */
-            margin-bottom: 15px; /* Less margin to compress the timeline */
-            padding: 10px 20px; 
-            padding-left: 20px;
+            /* Reverting padding and margin to the original/larger box size */
+            margin-bottom: 30px; 
+            padding: 0 0 0 20px; /* Resetting padding for a cleaner text hover effect */
             text-decoration: none;
             color: inherit;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            /* To make the bullet point align correctly, we need the link's text content
-               to start further in. */
-            margin-left: -20px; /* Shift the content back left to align bullet */
-        }
-        
-        /* New class to contain the text and pull it over the bullet */
-        .timeline-text-content {
-            padding-left: 20px; /* Indent the text to the right of the bullet */
+            transition: color 0.3s ease; /* Only transitioning color */
         }
 
         .timeline-item-link:hover {
-            background-color: #333; /* Dark gray on hover */
+            color: #666; /* Text turns dark gray on hover */
             cursor: pointer;
         }
-        
-        /* Position the bullet relative to the .timeline-item-link container */
+
         .timeline-item-link::before {
             content: '';
             position: absolute;
             left: -10px;
-            top: 50%; /* Center vertically within the link box */
-            transform: translateY(-50%); /* Fine-tune vertical centering */
-            width: 8px;
-            height: 8px;
+            top: 5px; /* Reverting bullet position to align with top text */
+            width: 8px; /* Half size */
+            height: 8px; /* Half size */
             background: #b3ff00; /* Neon yellow/green */
             border-radius: 50%;
             z-index: 1;
         }
 
-        .timeline-title {
-            font-size: 1.2em;
-            font-weight: bold;
+        /* Ensuring all text elements inside the link inherit the hover color */
+        .timeline-date, .timeline-title, .timeline-item-link p {
             margin-bottom: 5px;
+            transition: color 0.3s ease; /* Ensure sub-elements transition color */
         }
 
+        .timeline-item-link:hover .timeline-date, 
+        .timeline-item-link:hover .timeline-title, 
+        .timeline-item-link:hover p {
+            color: #666; /* Text turns gray on hover */
+        }
+        
         .timeline-date {
-            font-size: 0.9em;
-            color: #ccc;
-            margin-bottom: 5px;
+            color: #ccc; /* Maintain default lighter gray for date */
+        }
+
+        .timeline-item-link:hover .timeline-date {
+             color: #666; /* Date also turns gray on hover */
         }
 
         /* -------------------------------------- */
@@ -210,27 +205,21 @@
                 <div class="timeline">
                     
                     <a href="https://example.com/project-delta" target="_blank" class="timeline-item-link">
-                        <div class="timeline-text-content">
-                            <div class="timeline-date">2024</div>
-                            <div class="timeline-title">Project Delta (Current Role)</div>
-                            <p>Developed a full-stack e-commerce solution using React and Node.js. Led a team of four developers.</p>
-                        </div>
+                        <div class="timeline-date">2024</div>
+                        <div class="timeline-title">Project Delta (Current Role)</div>
+                        <p>Developed a full-stack e-commerce solution using React and Node.js. Led a team of four developers.</p>
                     </a>
 
                     <a href="https://example.com/startup-x-redesign" target="_blank" class="timeline-item-link">
-                        <div class="timeline-text-content">
-                            <div class="timeline-date">2022 - 2023</div>
-                            <div class="timeline-title">Startup X Website Redesign</div>
-                            <p>Implemented a responsive, mobile-first design system that resulted in a 30% increase in user engagement.</p>
-                        </div>
+                        <div class="timeline-date">2022 - 2023</div>
+                        <div class="timeline-title">Startup X Website Redesign</div>
+                        <p>Implemented a responsive, mobile-first design system that resulted in a 30% increase in user engagement.</p>
                     </a>
 
                     <a href="https://example.com/portfolio-v1" target="_blank" class="timeline-item-link">
-                        <div class="timeline-text-content">
-                            <div class="timeline-date">2020</div>
-                            <div class="timeline-title">Personal Portfolio (v1)</div>
-                            <p>First public-facing project, a static site built with pure HTML/CSS to showcase fundamental skills.</p>
-                        </div>
+                        <div class="timeline-date">2020</div>
+                        <div class="timeline-title">Personal Portfolio (v1)</div>
+                        <p>First public-facing project, a static site built with pure HTML/CSS to showcase fundamental skills.</p>
                     </a>
                 </div>
             </section>
