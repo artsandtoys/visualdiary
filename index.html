@@ -31,7 +31,7 @@
         }
 
         /* -------------------------------------- */
-        /* LEFT COLUMN (STICKY NAV) */
+        /* LEFT COLUMN (FIXED NAV) */
         /* -------------------------------------- */
 
         .left-column {
@@ -41,40 +41,38 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: sticky; 
+            position: sticky;
             top: 0;
             height: 90vh;
             padding-right: 20px;
             box-sizing: border-box;
         }
 
+        /* Container for content inside the left column to align text and control position */
         .left-content {
             text-align: left;
             width: 75%;
+            
+            /* KEY CHANGE: Increased negative margin to pull the whole block up (h1 closer to top) */
             margin-top: -30vh; 
         }
 
         .left-content h1 {
-            /* No bottom margin */
-            margin: 0; 
+            /* Adjust h1 margin to push h2 down and align it with the right column h2 */
+            margin: 0 0 1em 0; /* No top/bottom margin, increased bottom margin */
         }
         
         .left-content h2 {
-            /* Gap between H2 (title) and H1 (name) */
-            margin: 0 0 0.5em 0; 
+            margin: 0 0 0em 0; /* Resetting h2 top margin */
         }
 
-        /* ************************************************* */
-        /* 🔥 CONSISTENT GAP: Left column description */
-        /* The margin-top and margin-bottom here define the space */
         .left-content .description-text {
             font-size: 1em; 
             font-weight: normal;
             line-height: 1.5;
-            margin-top: 1.5em;  /* Gap after H2/title (24px) */
-            margin-bottom: 1.5em; /* Gap before navigation (24px) */
+            margin-top: 1em; 
+            margin-bottom: 2em;
         }
-        /* ************************************************* */
 
         .left-content nav a {
             color: #fff;
@@ -102,36 +100,29 @@
             box-sizing: border-box;
         }
 
-        /* General H2 Style */
-        .right-column-wrapper h2 {
-            /* Set consistent bottom margin for all section headers (About Me, Projects) */
-            margin-bottom: 1.5em; /* 🔥 CONSISTENT GAP: Gap between H2 and content (24px) */
-        }
-
         /* Content Sections */
         .content-section {
             padding: 36px 0;
         }
         #about-me {
+            /* This is the target vertical position for alignment (h2 target) */
             padding-top: 15vh; 
         }
         
         #about-me p:first-of-type {
-            /* Ensures no top margin on the first paragraph, letting the H2 control the gap */
             margin-top: 0em;
         }
 
         .right-column-wrapper p {
             line-height: 1.5;
-            /* Added margin-bottom for better paragraph separation */
-            margin-bottom: 1.2em;
         }
-        
-        /* ... (Timeline Styling remains the same) ... */
+
+        /* Timeline Styling - Reverted/Simplified for text-only hover */
         .timeline {
             position: relative;
             padding: 20px 0 20px 30px;
         }
+
         .timeline::before {
             content: '';
             position: absolute;
@@ -141,6 +132,7 @@
             width: 2px;
             background: #444;
         }
+
         .timeline-item-link {
             position: relative;
             display: block;
@@ -150,10 +142,12 @@
             color: inherit;
             transition: color 0.3s ease;
         }
+
         .timeline-item-link:hover {
             color: #666; 
             cursor: pointer;
         }
+
         .timeline-item-link::before {
             content: '';
             position: absolute;
@@ -165,20 +159,107 @@
             border-radius: 50%;
             z-index: 1;
         }
+
+        /* Hover color inheritance for nested text elements */
         .timeline-date, .timeline-title, .timeline-item-link p {
             margin-bottom: 5px;
             transition: color 0.3s ease;
         }
+
         .timeline-item-link:hover .timeline-date, 
         .timeline-item-link:hover .timeline-title, 
         .timeline-item-link:hover p {
             color: #666;
         }
+        
         .timeline-date {
             color: #ccc;
         }
+
         .timeline-item-link:hover .timeline-date {
             color: #666;
+        }
+
+        /* -------------------------------------- */
+        /* GALLERY / THUMBNAIL STYLING */
+        /* -------------------------------------- */
+        .gallery-container {
+            padding-top: 20px;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr); 
+            gap: 5px; 
+            margin-bottom: 30px;
+        }
+
+        .thumbnail-item {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            aspect-ratio: 1 / 1; 
+        }
+
+        .thumbnail-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.3s;
+        }
+        
+        .thumbnail-item:hover img {
+            opacity: 0.7;
+        }
+
+        /* Hide radio buttons (the mechanism for the click) */
+        .thumbnail-item input[type="radio"] {
+            display: none;
+        }
+
+        /* Full Image Display */
+        .full-image-display {
+            display: none;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .full-image-display img {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        /* --- PURE CSS CLICK/DISPLAY LOGIC --- */
+        /* Target the full-image-display div */
+        #img-1:checked ~ .full-image-display.img-1,
+        #img-2:checked ~ .full-image-display.img-2,
+        #img-3:checked ~ .full-image-display.img-3,
+        #img-4:checked ~ .full-image-display.img-4,
+        #img-5:checked ~ .full-image-display.img-5,
+        #img-6:checked ~ .full-image-display.img-6,
+        #img-7:checked ~ .full-image-display.img-7,
+        #img-8:checked ~ .full-image-display.img-8,
+        #img-9:checked ~ .full-image-display.img-9 {
+            display: block;
+        }
+
+        /* Only show the matching image's container (the rule below ensures only one is visible) */
+        .gallery-container input[type="radio"]:checked ~ .full-image-display {
+            display: none; 
+        }
+
+        #img-1:checked ~ .full-image-display.img-1,
+        #img-2:checked ~ .full-image-display.img-2,
+        #img-3:checked ~ .full-image-display.img-3,
+        #img-4:checked ~ .full-image-display.img-4,
+        #img-5:checked ~ .full-image-display.img-5,
+        #img-6:checked ~ .full-image-display.img-6,
+        #img-7:checked ~ .full-image-display.img-7,
+        #img-8:checked ~ .full-image-display.img-8,
+        #img-9:checked ~ .full-image-display.img-9 {
+            display: block;
         }
 
         /* -------------------------------------- */
@@ -205,53 +286,6 @@
         .footer a:hover {
             text-decoration: underline;
         }
-        
-        /* ###################################################### */
-        /* MEDIA QUERY FOR MOBILE/NARROW SCREENS (Max 800px)    */
-        /* ###################################################### */
-
-        @media (max-width: 800px) {
-            .main-container {
-                width: 90%;
-                flex-direction: column;
-            }
-
-            .left-column {
-                position: static;
-                width: 100%;
-                height: auto;
-                padding-right: 0;
-                justify-content: flex-start;
-                align-items: flex-start;
-            }
-            
-            .left-content {
-                width: 100%;
-                text-align: center;
-                margin-top: 0;
-                padding-top: 20px;
-            }
-            
-            .left-content nav a {
-                display: inline-block;
-                margin: 5px 10px;
-            }
-
-            .right-column-wrapper {
-                flex-basis: 100%;
-                padding-left: 0;
-                padding-top: 20px;
-            }
-            
-            #about-me {
-                padding-top: 36px;
-            }
-
-            .footer {
-                position: static;
-                margin-top: 20px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -270,6 +304,7 @@
                 <nav>
                     <a href="#about-me">About Me</a>
                     <a href="#projects">Projects</a>
+                    <a href="#gallery">Gallery</a>
                 </nav>
                 
             </div>
@@ -307,6 +342,116 @@
                         <div class="timeline-title"><b>MUSIC RELEASES</b></div>
                         <p>First public-facing project, a static site built with pure HTML/CSS to showcase fundamental skills.</p>
                     </a>
+                </div>
+            </section>
+
+            <section id="gallery" class="content-section">
+                <h2>Gallery:</h2>
+                
+                <div class="gallery-container">
+                    
+                    <div class="thumbnail-grid">
+                        
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-1" name="gallery-select">
+                            <label for="img-1">
+                                <img src="superFlower-light-frame1-3k+.png" alt="Thumbnail 1">
+                            </label>
+                        </div>
+                        
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-2" name="gallery-select">
+                            <label for="img-2">
+                                <img src="superFlower-light-frame1-3k+.png" alt="Thumbnail 2">
+                            </label>
+                        </div>
+
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-3" name="gallery-select">
+                            <label for="img-3">
+                                <img src="superFlower-light-frame1-3k+.png" alt="Thumbnail 3">
+                            </label>
+                        </div>
+
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-4" name="gallery-select">
+                            <label for="img-4">
+                                <img src="superFlower-light-frame1-3k+.png" alt="Thumbnail 4">
+                            </label>
+                        </div>
+                        
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-5" name="gallery-select">
+                            <label for="img-5">
+                                <img src="superFlower-light-frame1-3k+.png" alt="Thumbnail 5">
+                            </label>
+                        </div>
+
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-6" name="gallery-select">
+                            <label for="img-6">
+                                <img src="superFlower-light-frame1-3k+.png" alt="Thumbnail 6">
+                            </label>
+                        </div>
+
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-7" name="gallery-select">
+                            <label for="img-7">
+                                <img src="superFlower-light-frame1-3k+.png" alt="Thumbnail 7">
+                            </label>
+                        </div>
+
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-8" name="gallery-select">
+                            <label for="img-8">
+                                <img src="superFlower-light-frame1-3k+.png" alt="Thumbnail 8">
+                            </label>
+                        </div>
+
+                        <div class="thumbnail-item">
+                            <input type="radio" id="img-9" name="gallery-select">
+                            <label for="img-9">
+                                <img src="superFlower-light-frame1-3k+.pngg" alt="Thumbnail 9">
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="full-image-display img-1">
+                        <img src="https://via.placeholder.com/800x400/333333/FFFFFF?text=FULL+IMAGE+1" alt="Full Image 1">
+                    </div>
+
+                    <div class="full-image-display img-2">
+                        <img src="https://via.placeholder.com/800x400/444444/FFFFFF?text=FULL+IMAGE+2" alt="Full Image 2">
+                    </div>
+
+                    <div class="full-image-display img-3">
+                        <img src="https://via.placeholder.com/800x400/555555/FFFFFF?text=FULL+IMAGE+3" alt="Full Image 3">
+                    </div>
+
+                    <div class="full-image-display img-4">
+                        <img src="https://via.placeholder.com/800x400/666666/FFFFFF?text=FULL+IMAGE+4" alt="Full Image 4">
+                    </div>
+
+                    <div class="full-image-display img-5">
+                        <img src="https://via.placeholder.com/800x400/777777/FFFFFF?text=FULL+IMAGE+5" alt="Full Image 5">
+                    </div>
+
+                    <div class="full-image-display img-6">
+                        <img src="https://via.placeholder.com/800x400/888888/FFFFFF?text=FULL+IMAGE+6" alt="Full Image 6">
+                    </div>
+
+                    <div class="full-image-display img-7">
+                        <img src="https://via.placeholder.com/800x400/999999/FFFFFF?text=FULL+IMAGE+7" alt="Full Image 7">
+                    </div>
+
+                    <div class="full-image-display img-8">
+                        <img src="https://via.placeholder.com/800x400/aaaaaa/FFFFFF?text=FULL+IMAGE+8" alt="Full Image 8">
+                    </div>
+
+                    <div class="full-image-display img-9">
+                        <img src="https://via.placeholder.com/800x400/bbbbbb/FFFFFF?text=FULL+IMAGE+9" alt="Full Image 9">
+                    </div>
+
                 </div>
                 <div style="height: 300px;"></div>
                 <p>Fin.</p>
