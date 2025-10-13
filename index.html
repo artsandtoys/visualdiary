@@ -296,5 +296,60 @@ h1, h2 {
     </div>
 </div>
 
+<script>
+    // Get all content sections and navigation links
+    const sections = document.querySelectorAll('.content-section');
+    const navLinks = document.querySelectorAll('.left-content nav a');
+
+    // Options for the Intersection Observer
+    // The rootMargin is used to adjust the viewport area (e.g., 
+    // to account for the sticky left column's height/padding).
+    const observerOptions = {
+        root: null, // viewport as the root
+        rootMargin: '-30% 0px -60% 0px', // Top 30%, Bottom 60% of viewport is ignored,
+                                         // making the "active" zone the middle 10%
+        threshold: 0 // Trigger as soon as any part of the section is visible
+    };
+
+    // Callback function for the observer
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Remove 'active' class from all links
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+
+                // Get the ID of the intersecting section (e.g., 'about-me')
+                const sectionId = entry.target.id;
+                
+                // Construct the ID of the corresponding navigation link (e.g., 'nav-about-me')
+                const correspondingLink = document.getElementById(`nav-${sectionId}`);
+
+                // Add 'active' class to the corresponding link
+                if (correspondingLink) {
+                    correspondingLink.classList.add('active');
+                }
+            }
+        });
+    };
+
+    // Create a new observer and start observing each section
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+    
+    // Initial setup: Add 'active' class to the first link on page load
+    // The Intersection Observer handles the rest as the user scrolls.
+    document.addEventListener('DOMContentLoaded', () => {
+        if (navLinks.length > 0) {
+            navLinks[0].classList.add('active');
+        }
+    });
+
+</script>
+    
 </body>
 </html>
