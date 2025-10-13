@@ -297,49 +297,53 @@ h1, h2 {
 </div>
 
 <script>
-    // Get all navigation links
-    const navLinks = document.querySelectorAll('.nav-link');
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Get all navigation links that need the active class
+        const navLinks = document.querySelectorAll('.left-content nav a');
 
-    // Function to handle the click event
-    function handleClick(event) {
-        // Prevent the default anchor jump behavior, 
-        // as the hash change will be handled by the click
-        // event itself and we don't need to prevent the default 
-        // here unless you wanted to disable the default jump entirely.
-        // For a seamless jump, we will let the default behavior run.
-        
-        // 1. Remove the 'active' class from all links
+        // 2. Function to remove the active class from all links
+        function removeActiveClasses() {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+        }
+
+        // 3. Attach a click event listener to each link
         navLinks.forEach(link => {
-            link.classList.remove('active');
+            link.addEventListener('click', function(event) {
+                // Remove 'active' from all other links
+                removeActiveClasses();
+                
+                // Add 'active' to the link that was clicked
+                this.classList.add('active');
+                
+                // Note: We don't prevent the default behavior (event.preventDefault())
+                // because we *want* the browser to follow the href="#section-id"
+                // and jump to the correct section.
+            });
         });
 
-        // 2. Add the 'active' class to the link that was clicked
-        event.currentTarget.classList.add('active');
-    }
+        // 4. Handle initial load (which link should be active when the page first loads?)
+        // Check the URL hash (e.g., if the user loaded the page with url#projects)
+        const currentHash = window.location.hash;
+        let initialLinkFound = false;
 
-    // Attach the click handler to each navigation link
-    navLinks.forEach(link => {
-        link.addEventListener('click', handleClick);
-    });
-
-    // Optional: Set the first link as active on initial load
-    document.addEventListener('DOMContentLoaded', () => {
-        if (navLinks.length > 0) {
-            // Check the current URL hash to activate the correct link on load
-            const currentHash = window.location.hash;
-            let initialLink = navLinks[0]; // Default to the first link
-
-            if (currentHash) {
-                // Find the link whose href matches the current hash
-                const matchingLink = Array.from(navLinks).find(link => link.getAttribute('href') === currentHash);
-                if (matchingLink) {
-                    initialLink = matchingLink;
+        if (currentHash) {
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentHash) {
+                    link.classList.add('active');
+                    initialLinkFound = true;
                 }
-            }
-            initialLink.classList.add('active');
+            });
+        }
+        
+        // If no hash is present or a matching link wasn't found, 
+        // default to making the first link active.
+        if (!initialLinkFound && navLinks.length > 0) {
+            navLinks[0].classList.add('active');
         }
     });
 </script>
-    
+
 </body>
 </html>
