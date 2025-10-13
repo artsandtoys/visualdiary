@@ -296,59 +296,52 @@ h1, h2 {
     </div>
 </div>
 
+</div>
+</div>
+
 <script>
-    // Get all content sections and navigation links
-    const sections = document.querySelectorAll('.content-section');
-    const navLinks = document.querySelectorAll('.left-content nav a');
+    // Get all navigation links
+    const navLinks = document.querySelectorAll('.nav-link');
 
-    // Options for the Intersection Observer
-    // The rootMargin is used to adjust the viewport area (e.g., 
-    // to account for the sticky left column's height/padding).
-    const observerOptions = {
-        root: null, // viewport as the root
-        rootMargin: '-30% 0px -60% 0px', // Top 30%, Bottom 60% of viewport is ignored,
-                                         // making the "active" zone the middle 10%
-        threshold: 0 // Trigger as soon as any part of the section is visible
-    };
-
-    // Callback function for the observer
-    const observerCallback = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Remove 'active' class from all links
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                });
-
-                // Get the ID of the intersecting section (e.g., 'about-me')
-                const sectionId = entry.target.id;
-                
-                // Construct the ID of the corresponding navigation link (e.g., 'nav-about-me')
-                const correspondingLink = document.getElementById(`nav-${sectionId}`);
-
-                // Add 'active' class to the corresponding link
-                if (correspondingLink) {
-                    correspondingLink.classList.add('active');
-                }
-            }
+    // Function to handle the click event
+    function handleClick(event) {
+        // Prevent the default anchor jump behavior, 
+        // as the hash change will be handled by the click
+        // event itself and we don't need to prevent the default 
+        // here unless you wanted to disable the default jump entirely.
+        // For a seamless jump, we will let the default behavior run.
+        
+        // 1. Remove the 'active' class from all links
+        navLinks.forEach(link => {
+            link.classList.remove('active');
         });
-    };
 
-    // Create a new observer and start observing each section
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+        // 2. Add the 'active' class to the link that was clicked
+        event.currentTarget.classList.add('active');
+    }
 
-    sections.forEach(section => {
-        observer.observe(section);
+    // Attach the click handler to each navigation link
+    navLinks.forEach(link => {
+        link.addEventListener('click', handleClick);
     });
-    
-    // Initial setup: Add 'active' class to the first link on page load
-    // The Intersection Observer handles the rest as the user scrolls.
+
+    // Optional: Set the first link as active on initial load
     document.addEventListener('DOMContentLoaded', () => {
         if (navLinks.length > 0) {
-            navLinks[0].classList.add('active');
+            // Check the current URL hash to activate the correct link on load
+            const currentHash = window.location.hash;
+            let initialLink = navLinks[0]; // Default to the first link
+
+            if (currentHash) {
+                // Find the link whose href matches the current hash
+                const matchingLink = Array.from(navLinks).find(link => link.getAttribute('href') === currentHash);
+                if (matchingLink) {
+                    initialLink = matchingLink;
+                }
+            }
+            initialLink.classList.add('active');
         }
     });
-
 </script>
     
 </body>
