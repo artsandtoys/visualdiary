@@ -184,44 +184,29 @@ h1, h2 {
     color: #ccc; 
 }
 
+/* The column should have position: relative; */
 
-    
-/* The column this is in should have: position: relative; */
 #columnPopup {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* optional transparent backdrop */
+  background: rgba(0, 0, 0, 0.6); /* optional overlay */
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 10;
+  cursor: pointer; /* shows clickable pointer */
 }
 
-/* The image itself */
-#popupImage {
+#columnPopup img {
   max-width: 90%;
   max-height: 90%;
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   object-fit: contain;
 }
-
-/* Optional: close button styling */
-#closeColumnPopup {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  padding: 6px 10px;
-  border: none;
-  border-radius: 5px;
-  background: white;
-  cursor: pointer;
-}
-
-
 
 /* -------------------------------------- */
 /* MOBILE */
@@ -339,11 +324,6 @@ h1, h2 {
                 <br>
                     <br>
                <p>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;  <a href="#"> <b> <i> Fin. </i> </b> </a> </p>  </section>
-
-        
-
-
-
         
     </div>
 </div>
@@ -399,14 +379,14 @@ h1, h2 {
   // NEW
   const popup = document.getElementById('columnPopup');
   const openBtn = document.getElementById('openColumnPopup');
-  const closeBtn = document.getElementById('closeColumnPopup');
 
   openBtn.addEventListener('click', e => {
     e.preventDefault();
     popup.style.display = 'flex';
   });
 
-  closeBtn.addEventListener('click', () => {
+  // Close popup when user clicks anywhere on it
+  popup.addEventListener('click', () => {
     popup.style.display = 'none';
   });
 
