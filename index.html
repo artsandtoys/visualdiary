@@ -376,17 +376,25 @@ h1, h2 {
   // NEW
   const popup = document.getElementById('columnPopup');
   const openBtn = document.getElementById('openColumnPopup');
+  const popupImage = document.getElementById('popupImage');
 
-  openBtn.addEventListener('click', e => {
+  // Open popup
+  openBtn.addEventListener('click', (e) => {
     e.preventDefault();
     popup.style.display = 'flex';
   });
 
-  // Close popup when user clicks anywhere on it
+  // Close popup when clicking anywhere on the overlay
   popup.addEventListener('click', () => {
     popup.style.display = 'none';
   });
 
+  // Make sure clicking the image also closes it
+  popupImage.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevents the event from bubbling up twice
+    popup.style.display = 'none';
+  });
+    
 </script>
 
 </body>
