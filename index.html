@@ -184,27 +184,43 @@ h1, h2 {
     color: #ccc; 
 }
 
-/* Make sure the column has: position: relative; */
 
+    
+/* The column this is in should have: position: relative; */
 #columnPopup {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.6); /* optional transparent backdrop */
   display: none;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 
-#columnPopup .popup-content {
-  background: white;
-  color: black;
-  padding: 1.5rem;
-  border-radius: 10px;
-  text-align: center;
+/* The image itself */
+#popupImage {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  object-fit: contain;
 }
+
+/* Optional: close button styling */
+#closeColumnPopup {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+}
+
 
 
 /* -------------------------------------- */
@@ -291,18 +307,18 @@ h1, h2 {
                 <br>
                 <div class="timeline">
                     
-                    <a href="superFlower-light-frame1-3k+.png" target="_blank" class="timeline-item-link" id="openColumnPopup">
+                    <a href="#" target="_blank" class="timeline-item-link" id="openColumnPopup">
+<div id="columnPopup">
+  <img src="superFlower-light-frame1-3k+.png" alt="Popup Image" id="popupImage">
+  <button id="closeColumnPopup">Close</button>
+</div>
                         <div class="timeline-date"><i>2023 - </i></div>
                         <div class="timeline-title">Meta Start</div>
                         <p style="color: #ddd;">Joined the Meta Horizon Start program (fka as Oculus Start), to port my arcage game "Cyberspace Station - Orbital Junker" to Mixed Reality.</p>
                     </a>
                     
-<div id="columnPopup">
-  <div class="popup-content">
-    <p>This popup covers only this column.</p>
-    <button id="closeColumnPopup">Close</button>
-  </div>
-</div>
+
+                    
                     <a href="https://www.djpaularthur.com/" target="_blank" class="timeline-item-link">
                         <div class="timeline-date">2021</div>
                         <div class="timeline-title">Endless Bloom EP</div>
@@ -393,7 +409,6 @@ h1, h2 {
   closeBtn.addEventListener('click', () => {
     popup.style.display = 'none';
   });
-
 
 </script>
 
