@@ -184,6 +184,29 @@ h1, h2 {
     color: #ccc; 
 }
 
+/* Make sure the column has: position: relative; */
+
+#columnPopup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#columnPopup .popup-content {
+  background: white;
+  color: black;
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+
 /* -------------------------------------- */
 /* MOBILE */
 /* -------------------------------------- */
@@ -267,7 +290,8 @@ h1, h2 {
                 <h2>works</h2>
                 <br>
                 <div class="timeline">
-                    <a href="https://weareofearth.com" target="_blank" class="timeline-item-link">
+                    
+                    <a href="superFlower-light-frame1-3k+.png" target="_blank" class="timeline-item-link" id="openColumnPopup">
                         <div class="timeline-date"><i>2023 - </i></div>
                         <div class="timeline-title">Meta Start</div>
                         <p style="color: #ddd;">Joined the Meta Horizon Start program (fka as Oculus Start), to port my arcage game "Cyberspace Station - Orbital Junker" to Mixed Reality.</p>
@@ -284,6 +308,7 @@ h1, h2 {
                         <div class="timeline-title">Oculus Launch Pad</div>
                         <p style="color: #ddd;">1/100 Up-and-coming VR devs & creators invited to participate in the 2020 class of Oculus Launch Pad. Click here to see an excerpt from my experience, "Cyberspace Station - Orbital Observatory".</p>
                     </a>
+                    
                 </div>
                 
             <div style="height: 80px;"></div>
@@ -292,7 +317,18 @@ h1, h2 {
                 <br>
                     <br>
                <p>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;  <a href="#"> <b> <i> Fin. </i> </b> </a> </p>  </section>
-            
+
+        
+<a href="#" id="openColumnPopup">Open Popup</a>
+
+<div id="columnPopup">
+  <div class="popup-content">
+    <p>This popup covers only this column.</p>
+    <button id="closeColumnPopup">Close</button>
+  </div>
+</div>
+
+        
     </div>
 </div>
 
@@ -343,6 +379,22 @@ h1, h2 {
             navLinks[0].classList.add('active');
         }
     });
+
+  // NEW
+  const popup = document.getElementById('columnPopup');
+  const openBtn = document.getElementById('openColumnPopup');
+  const closeBtn = document.getElementById('closeColumnPopup');
+
+  openBtn.addEventListener('click', e => {
+    e.preventDefault();
+    popup.style.display = 'flex';
+  });
+
+  closeBtn.addEventListener('click', () => {
+    popup.style.display = 'none';
+  });
+
+
 </script>
 
 </body>
