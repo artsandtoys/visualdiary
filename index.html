@@ -200,8 +200,8 @@ h1, h2 {
 }
 
 #columnPopup img {
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 100%;
+  max-height: 100%;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   object-fit: contain;
@@ -383,7 +383,7 @@ h1, h2 {
   // Open popup
   openBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    popup.style.display = 'inline';
+    popup.style.display = 'inline-flex';
   });
 
   // Close popup when clicking anywhere on the overlay
