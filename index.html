@@ -14,7 +14,6 @@ body {
     background-color: #000;
     color: #fff;
     font-family: Helvetica, Arial, sans-serif;
-    /* Added explicit font-size for em conversion baseline */
     font-size: 16px; 
     margin: 0;
     padding: 0;
@@ -33,12 +32,12 @@ h1, h2 {
 /* -------------------------------------- */
 
 .main-container {
-    width: 75%; /* Retained % */
-    max-width: 1200px; /* Retained px */
+    width: 75%;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     flex-grow: 1;
-    padding-bottom: 50px; /* Converted from 50px (no change) */
+    padding-bottom: 50px;
     align-items: flex-start;
 }
 
@@ -47,21 +46,21 @@ h1, h2 {
 /* -------------------------------------- */
 
 .left-column {
-    flex-basis: 33.33%; /* Retained % */
+    flex-basis: 33.33%; 
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     position: sticky;
     top: 0;
-    height: 90vh; /* Retained vh */
-    padding-right: 20px; /* Converted from 20px (no change) */
+    height: 90vh;
+    padding-right: 20px;
     box-sizing: border-box;
 }
 
 .left-content {
-    width: 75%; /* Retained % */
-    margin-top: 14vh; /* Retained vh */
+    width: 75%;
+    margin-top: 14vh;
 }
 
 .left-content h1 {
@@ -89,8 +88,8 @@ h1, h2 {
     color: #fff;
     text-decoration: none;
     display: block;
-    margin: 10px 0; /* Converted from 10px (no change) */
-    padding: 5px 0px; /* Converted from 5px 0px (no change) */
+    margin: 10px 0;
+    padding: 5px 0px;
     transition: color 0.3s;
 }
 
@@ -108,12 +107,12 @@ h1, h2 {
 /* -------------------------------------- */
 
 .right-column-wrapper {
-    flex-basis: 66.66%; /* Retained % */
+    flex-basis: 66.66%; 
     flex-grow: 1;
     overflow-y: auto;
-    margin-top: 0.5vh; /* Retained vh */ 
-    padding-top: 16vh; /* Retained vh */ 
-    padding-left: 20px; /* Converted from 20px (no change) */
+    margin-top: 0.5vh; 
+    padding-top: 16vh; 
+    padding-left: 20px; 
     box-sizing: border-box;
 }
 
@@ -125,11 +124,11 @@ h1, h2 {
     color: #ddd; 
 }
 .content-section {
-    padding: 32px 0; /* Converted from 32px (no change) */
+    padding: 32px 0;
 }
 
 .right-column-wrapper p {
-    line-height: 1.5; /* Retained unitless line-height (best practice) */
+    line-height: 1.5;
     margin-bottom: 16px; /* Converted 1em to 16px */
 }
 
@@ -139,7 +138,7 @@ h1, h2 {
 
 .timeline {
     position: relative;
-    padding: 20px 0 2px 30px; /* Converted from 20px, 2px, 30px (no change) */
+    padding: 20px 0 2px 30px;
 }
 
 /* line */
@@ -149,15 +148,15 @@ h1, h2 {
     left: 0;
     top: 0;
     bottom: 0;
-    width: 2px; /* Converted from 2px (no change) */
+    width: 2px; 
     background: #444;
 }
 
 .timeline-item-link {
     position: relative;
     display: block;
-    margin-bottom: 30px; /* Converted from 30px (no change) */
-    padding: 0 0 0 20px; /* Converted from 20px (no change) */
+    margin-bottom: 30px; 
+    padding: 0 0 0 20px; 
     text-decoration: none;
     color: #fff; 
     transition: color 0.3s ease;
@@ -172,10 +171,10 @@ h1, h2 {
 .timeline-item-link::before {
     content: '';
     position: absolute;
-    left: -10px; /* Converted from -10px (no change) */
-    top: 5px; /* Converted from 5px (no change) */
-    width: 8px; /* Converted from 8px (no change) */
-    height: 8px; /* Converted from 8px (no change) */
+    left: -10px; 
+    top: 5px;
+    width: 8px; 
+    height: 8px; 
     background: #b3ff00; 
     border-radius: 50%;
     z-index: 1;
@@ -189,23 +188,23 @@ h1, h2 {
 /* MOBILE */
 /* -------------------------------------- */
 
-@media (max-width: 800px) { /* Retained px for media query */
+@media (max-width: 800px) { 
     .main-container {
-        width: 84%; /* Retained % */
+        width: 84%;
         flex-direction: column;
-        margin: 0px 4px; /* Converted from 0px 4px (no change) */
+        margin: 0px 4px;
     }
 
     .left-column {
         position: static;
-        width: 100%; /* Retained % */
+        width: 100%; 
         padding-right: 0;
         justify-content: flex-start;
         align-items: flex-start;
     }
 
     .left-content {
-        width: 100%; /* Retained % */
+        width: 100%; 
         text-align: left; 
         margin-top: 0;
         padding-top: 0; 
@@ -213,12 +212,12 @@ h1, h2 {
 
     .left-content nav a {
         display: inline-block; 
-        margin: 0px 0px 0px 0px; /* Converted from 0px (no change) */
+        margin: 0px 0px 0px 0px; 
     }
 
     .right-column-wrapper {
-        flex-basis: 100%; /* Retained % */
-        padding: 0 0 0 4px; /* Converted from 4px (no change) */
+        flex-basis: 100%; 
+        padding: 0 0 0 4px; 
         padding-left: 0; 
         padding-top: 0; 
     }
