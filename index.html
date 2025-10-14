@@ -9,11 +9,13 @@
 <link rel="icon" href="tinyguru3-10px_small.png" type="image/png">
     
 <style>
-       
+        
 body {
     background-color: #000;
     color: #fff;
     font-family: Helvetica, Arial, sans-serif;
+    /* Added explicit font-size for em conversion baseline */
+    font-size: 16px; 
     margin: 0;
     padding: 0;
     display: flex;
@@ -31,12 +33,12 @@ h1, h2 {
 /* -------------------------------------- */
 
 .main-container {
-    width: 75%;
-    max-width: 1200px;
+    width: 75%; /* Retained % */
+    max-width: 1200px; /* Retained px */
     margin: 0 auto;
     display: flex;
     flex-grow: 1;
-    padding-bottom: 50px;
+    padding-bottom: 50px; /* Converted from 50px (no change) */
     align-items: flex-start;
 }
 
@@ -45,21 +47,21 @@ h1, h2 {
 /* -------------------------------------- */
 
 .left-column {
-    flex-basis: 33.33%;
+    flex-basis: 33.33%; /* Retained % */
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     position: sticky;
     top: 0;
-    height: 90vh;
-    padding-right: 20px;
+    height: 90vh; /* Retained vh */
+    padding-right: 20px; /* Converted from 20px (no change) */
     box-sizing: border-box;
 }
 
 .left-content {
-    width: 75%;
-    margin-top: 14vh; /* 13.5 viewport units */
+    width: 75%; /* Retained % */
+    margin-top: 14vh; /* Retained vh */
 }
 
 .left-content h1 {
@@ -67,16 +69,16 @@ h1, h2 {
 }
 
 .left-content h2 {
-    margin: 0 0 0.5em 0;
+    margin: 0 0 8px 0; /* Converted 0.5em to 8px */
 }
 
 .description-text {
-    color: #ddd; /* originally inherit */
-    font-size: 1em;
+    color: #ddd; 
+    font-size: 16px; /* Converted 1em to 16px */
     font-weight: normal;
-    line-height: 1.5;
-    margin-top: 1em;
-    margin-bottom: 1em; /* 1.5 em */
+    line-height: 1.5; /* Retained unitless line-height (best practice) */
+    margin-top: 16px; /* Converted 1em to 16px */
+    margin-bottom: 16px; /* Converted 1em to 16px */
 }
 
 /* -------------------------------------- */
@@ -87,8 +89,8 @@ h1, h2 {
     color: #fff;
     text-decoration: none;
     display: block;
-    margin: 10px 0;
-    padding: 5px 0px; /* originally 10 not 0 */
+    margin: 10px 0; /* Converted from 10px (no change) */
+    padding: 5px 0px; /* Converted from 5px 0px (no change) */
     transition: color 0.3s;
 }
 
@@ -106,29 +108,29 @@ h1, h2 {
 /* -------------------------------------- */
 
 .right-column-wrapper {
-    flex-basis: 66.66%;
+    flex-basis: 66.66%; /* Retained % */
     flex-grow: 1;
     overflow-y: auto;
-    margin-top: .5vh; 
-    padding-top: 16vh; /* viewport units 15vh */
-    padding-left: 20px;
+    margin-top: 0.5vh; /* Retained vh */ 
+    padding-top: 16vh; /* Retained vh */ 
+    padding-left: 20px; /* Converted from 20px (no change) */
     box-sizing: border-box;
 }
 
 .right-column-wrapper h2 {
-    margin: 0 0 0.5em 0;
+    margin: 0 0 8px 0; /* Converted 0.5em to 8px */
 }
         
 #about-me p {
     color: #ddd; 
 }
 .content-section {
-    padding: 32px 0;
+    padding: 32px 0; /* Converted from 32px (no change) */
 }
 
 .right-column-wrapper p {
-    line-height: 1.5;
-    margin-bottom: 1em; /* 1em */
+    line-height: 1.5; /* Retained unitless line-height (best practice) */
+    margin-bottom: 16px; /* Converted 1em to 16px */
 }
 
 /* -------------------------------------- */
@@ -137,7 +139,7 @@ h1, h2 {
 
 .timeline {
     position: relative;
-    padding: 20px 0 2px 30px;
+    padding: 20px 0 2px 30px; /* Converted from 20px, 2px, 30px (no change) */
 }
 
 /* line */
@@ -147,22 +149,22 @@ h1, h2 {
     left: 0;
     top: 0;
     bottom: 0;
-    width: 2px;
+    width: 2px; /* Converted from 2px (no change) */
     background: #444;
 }
 
 .timeline-item-link {
     position: relative;
     display: block;
-    margin-bottom: 30px;
-    padding: 0 0 0 20px;
+    margin-bottom: 30px; /* Converted from 30px (no change) */
+    padding: 0 0 0 20px; /* Converted from 20px (no change) */
     text-decoration: none;
-    color: #fff; /* originally inherit */
+    color: #fff; 
     transition: color 0.3s ease;
 }
 
 .timeline-item-link:hover {
-    color: #22cc33; /* 666 dark */
+    color: #22cc33;
     cursor: pointer;
 }
 
@@ -170,55 +172,55 @@ h1, h2 {
 .timeline-item-link::before {
     content: '';
     position: absolute;
-    left: -10px;
-    top: 5px;
-    width: 8px;
-    height: 8px; 
-    background: #b3ff00; /* neon yellow */
+    left: -10px; /* Converted from -10px (no change) */
+    top: 5px; /* Converted from 5px (no change) */
+    width: 8px; /* Converted from 8px (no change) */
+    height: 8px; /* Converted from 8px (no change) */
+    background: #b3ff00; 
     border-radius: 50%;
     z-index: 1;
 }
 
 .timeline-date {
-    color: #ccc; /* light gray */
+    color: #ccc; 
 }
 
 /* -------------------------------------- */
 /* MOBILE */
 /* -------------------------------------- */
 
-@media (max-width: 800px) {
+@media (max-width: 800px) { /* Retained px for media query */
     .main-container {
-        width: 84%; /* originally 90% */
+        width: 84%; /* Retained % */
         flex-direction: column;
-        margin: 0px 4px; /* NEW */
+        margin: 0px 4px; /* Converted from 0px 4px (no change) */
     }
 
     .left-column {
         position: static;
-        width: 100%;
+        width: 100%; /* Retained % */
         padding-right: 0;
         justify-content: flex-start;
         align-items: flex-start;
     }
 
     .left-content {
-        width: 100%;
-        text-align: left; /* center */
+        width: 100%; /* Retained % */
+        text-align: left; 
         margin-top: 0;
-        padding-top: 0; /* 20 */
+        padding-top: 0; 
     }
 
     .left-content nav a {
-        display: inline-block; /* inline-block */
-        margin: 0px 0px 0px 0px;
+        display: inline-block; 
+        margin: 0px 0px 0px 0px; /* Converted from 0px (no change) */
     }
 
     .right-column-wrapper {
-        flex-basis: 100%;
-        padding: 0 0 0 4px;
-        padding-left: 0; /* 0 */
-        padding-top: 0; /* 20 */
+        flex-basis: 100%; /* Retained % */
+        padding: 0 0 0 4px; /* Converted from 4px (no change) */
+        padding-left: 0; 
+        padding-top: 0; 
     }
 }
         
@@ -290,9 +292,7 @@ h1, h2 {
                 <p>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; Design by artsandtoys. </p>
                 <br>
                     <br>
-               <p>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;  <a href="#"> <b> <i> Fin. </i> </b> </a> </p>  <!-- use for going back up -->
-                
-            </section>
+               <p>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;  <a href="#"> <b> <i> Fin. </i> </b> </a> </p>  </section>
             
     </div>
 </div>
