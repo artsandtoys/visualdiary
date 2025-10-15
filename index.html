@@ -356,9 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
     
   if (!initialLinkFound && navLinks.length > 0) navLinks[0].classList.add('active');
-                          </script>
-
-    <script>
+                          
   // --- GALLERY POPUP ---
   const popup = document.getElementById('columnPopup');
   const popupImage = document.getElementById('popupImage');
@@ -417,6 +415,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+  // Disable right-click on the entire page
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    alert("Right-click is disabled on this page.");
+  });
 </script>
 
 </body>
