@@ -177,8 +177,8 @@ h1, h2 {
 }
 
 #columnPopup img {
-  max-width: 98%;
-  max-height: 98%;
+  max-width: 99%;
+  max-height: 99%;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   object-fit: contain;
   opacity: 0.94; /* preserve original opacity */
@@ -376,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
  function showImage(index) {
-    popupImage.style.opacity = 0.2; // fade out
+    popupImage.style.opacity = 0.1; // fade out
     const newSrc = currentGallery[index];
     popupImage.src = newSrc;
     // Force opacity to fade in after a tiny delay
