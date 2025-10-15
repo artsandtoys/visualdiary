@@ -24,9 +24,7 @@ h1, h2 {
     margin-bottom: 0;
 }
 
-/* -------------------------------------- */
 /* MAIN CONTAINER */
-/* -------------------------------------- */
 .main-container {
     width: 75%;
     max-width: 1200px;
@@ -37,9 +35,7 @@ h1, h2 {
     align-items: flex-start;
 }
 
-/* -------------------------------------- */
 /* LEFT COLUMN */
-/* -------------------------------------- */
 .left-column {
     flex-basis: 33.33%;
     flex-shrink: 0;
@@ -71,9 +67,7 @@ h1, h2 {
     margin-bottom: 16px;
 }
 
-/* -------------------------------------- */
 /* LEFT NAV LINKS */
-/* -------------------------------------- */
 .left-content nav a {
     color: #fff;
     text-decoration: none;
@@ -92,9 +86,7 @@ h1, h2 {
     font-weight: bold;
 }
 
-/* -------------------------------------- */
 /* RIGHT COLUMN */
-/* -------------------------------------- */
 .right-column-wrapper {
     flex-basis: 66.66%;
     flex-grow: 1;
@@ -120,9 +112,7 @@ h1, h2 {
     padding: 32px 0;
 }
 
-/* -------------------------------------- */
 /* TIMELINE */
-/* -------------------------------------- */
 .timeline {
     position: relative;
     padding: 20px 0 2px 30px;
@@ -169,9 +159,7 @@ h1, h2 {
     color: #ccc;
 }
 
-/* -------------------------------------- */
 /* POPUP GALLERY */
-/* -------------------------------------- */
 #columnPopup {
   position: absolute;
   top: 0;
@@ -191,7 +179,7 @@ h1, h2 {
   max-height: 97.5%;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   object-fit: contain;
-  opacity: 0.94;
+  opacity: 0.94; /* preserve original opacity */
   transition: opacity 0.3s ease;
   cursor: pointer;
 }
@@ -226,7 +214,6 @@ h1, h2 {
 
 /* -------------------------------------- */
 /* MOBILE RESPONSIVE */
-/* -------------------------------------- */
 @media (max-width: 800px) {
     .main-container {
         width: 84%;
@@ -290,34 +277,34 @@ h1, h2 {
 
     <section id="about-me" class="content-section">
       <h2>about</h2>
-      <p>
-        I am an Audio / Visual Artist working at the intersection of emerging tech and entertainment.
+      <p> 
+        I am an Audio / Visual Artist working at the intersection of emerging tech and entertainment. 
         <br>
         My passion is for crafting immersive experiences and games using narrative and sonic storytelling.
-      </p>
+      </p> 
     </section>
 
     <section id="projects" class="content-section">
       <h2>works</h2>
-      <br>
+      <br> 
       <div class="timeline">
 
         <a href="#" class="timeline-item-link gallery-trigger" data-images="superFlower-light-frame1-3k+.png, superFlower-light-frame2-3k+.png">
           <div class="timeline-date"><i>2023 - </i></div>
           <div class="timeline-title">Meta Start</div>
-          <p>Joined the Meta Horizon Start program (fka Oculus Start), to port my arcade game "Cyberspace Station - Orbital Junker" to Mixed Reality.</p>
+          <p style="color: #ddd;">Joined the Meta Horizon Start program (fka as Oculus Start), to port my arcage game "Cyberspace Station - Orbital Junker" to Mixed Reality.</p>
         </a>
 
         <a href="https://www.djpaularthur.com/" target="_blank" class="timeline-item-link">
           <div class="timeline-date">2021</div>
           <div class="timeline-title">Endless Bloom EP</div>
-          <p>Electronic music project with 3D visuals, packaged and released via Symphonic.</p>
+          <p style="color: #ddd;">My goal with this project was to see if I could write and produce an electronic music project, craft 3D visuals that matched the sonic aesthetic, package it, pitch it to a label distributor, and have them agree to sign and release the project. Thank you, Symphonic!</p>
         </a>
 
         <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
           <div class="timeline-date">2020 - 2021</div>
           <div class="timeline-title">Oculus Launch Pad</div>
-          <p>1/100 Up-and-coming VR devs & creators invited to participate in Oculus Launch Pad.</p>
+          <p style="color: #ddd;">1/100 Up-and-coming VR devs & creators invited to participate in the 2020 class of Oculus Launch Pad. Click here to see an excerpt from my experience, "Cyberspace Station - Orbital Observatory".</p>
         </a>
 
       </div>
@@ -364,6 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+    
   if (!initialLinkFound && navLinks.length > 0) navLinks[0].classList.add('active');
 
   // --- GALLERY POPUP ---
@@ -388,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
     popupImage.style.opacity = 0;
     setTimeout(() => {
       popupImage.src = currentGallery[index];
-      popupImage.onload = () => popupImage.style.opacity = 1;
+      popupImage.onload = () => popupImage.style.opacity = 0.94; // preserve opacity
     }, 200);
   }
 
