@@ -20,9 +20,7 @@ body {
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 h1, h2 { margin: 0; }
 
@@ -63,7 +61,8 @@ h1, h2 { margin: 0; }
     font-size: 16px;
     font-weight: normal;
     line-height: 1.5;
-    margin: 16px 0;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 /* NAV LINKS */
@@ -72,7 +71,7 @@ h1, h2 { margin: 0; }
     text-decoration: none;
     display: block;
     margin: 10px 0;
-    padding: 5px 0;
+    padding: 5px 0px;
     transition: color 0.3s;
 }
 
@@ -144,7 +143,7 @@ h1, h2 { margin: 0; }
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.6);
   display: none;
   justify-content: center;
   align-items: center;
@@ -239,19 +238,19 @@ h1, h2 { margin: 0; }
         <a href="#" class="timeline-item-link gallery-trigger" data-images="superFlower-light-frame1-3k.png, superFlower-light-frame2-3k.png">
             <div class="timeline-date"><i>2023 - </i></div>
             <div class="timeline-title">Meta Start</div>
-            <p style="color: #ddd;">Joined the Meta Horizon Start program (fka Oculus Start) to port my arcade game "Cyberspace Station - Orbital Junker" to Mixed Reality.</p>
+            <p style="color: #ddd;">Joined the Meta Horizon Start program (fka as Oculus Start), to port my arcage game "Cyberspace Station - Orbital Junker" to Mixed Reality.</p>
         </a>
 
         <a href="https://www.djpaularthur.com/" target="_blank" class="timeline-item-link">
             <div class="timeline-date">2021</div>
             <div class="timeline-title">Endless Bloom EP</div>
-            <p style="color: #ddd;">My goal with this project was to write and produce an electronic music project, craft 3D visuals to match the sonic aesthetic, package it, pitch it to a label distributor, and have them release it. Thank you, Symphonic!</p>
+            <p style="color: #ddd;">My goal with this project was to see if I could write and produce an electronic music project, craft 3D visuals that matched the sonic aesthetic, package it, pitch it to a label distributor, and have them agree to sign and release the project. Thank you, Symphonic!</p>
         </a>
 
         <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
             <div class="timeline-date">2020 - 2021</div>
             <div class="timeline-title">Oculus Launch Pad</div>
-            <p style="color: #ddd;">1/100 Up-and-coming VR devs & creators invited to participate in the 2020 Oculus Launch Pad class.</p>
+            <p style="color: #ddd;">1/100 Up-and-coming VR devs & creators invited to participate in the 2020 class of Oculus Launch Pad. Click here to see an excerpt from my experience, "Cyberspace Station - Orbital Observatory".</p>
         </a>
       </div>
 
@@ -273,7 +272,7 @@ h1, h2 { margin: 0; }
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // --- NAV LINKS ---
+  // --- NAV ACTIVE LINKS ---
   const navLinks = document.querySelectorAll('.left-content nav a');
   function removeActiveClasses() { navLinks.forEach(link => link.classList.remove('active')); }
   navLinks.forEach(link => link.addEventListener('click', function() {
@@ -301,20 +300,37 @@ document.addEventListener('DOMContentLoaded', () => {
       currentGallery = item.dataset.images.split(',').map(img => img.trim()).filter(img => img.length);
       currentIndex = 0;
 
-      // preload images
+      // preload all images
       currentGallery.forEach(src => { const img = new Image(); img.src = src; });
 
-      // show first image immediately
+      // show first image
       popupImage.src = currentGallery[currentIndex];
-      popupImage.style.opacity = 0.94;
       popup.style.display = 'flex';
     });
   });
 
   function showImage(index){
     popupImage.style.opacity = 0;
-    setTimeout(() => { popupImage.src = currentGallery[index]; popupImage.style.opacity = 0.94; }, 100);
+    setTimeout(() => { 
+      popupImage.src = currentGallery[index]; 
+      popupImage.style.opacity = 0.94; 
+    }, 50);
   }
 
   nextBtn.addEventListener('click', e => { e.stopPropagation(); currentIndex = (currentIndex + 1) % currentGallery.length; showImage(currentIndex); });
-  prevBtn.addEventListener('click', e => { e.stopPropagation(); currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery
+  prevBtn.addEventListener('click', e => { e.stopPropagation(); currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; showImage(currentIndex); });
+
+  popup.addEventListener('click', e => { if(e.target === popup || e.target === popupImage) popup.style.display = 'none'; });
+
+  document.addEventListener('keydown', e => {
+    if(popup.style.display === 'flex'){
+      if(e.key === 'Escape') popup.style.display = 'none';
+      if(e.key === 'ArrowRight') nextBtn.click();
+      if(e.key === 'ArrowLeft') prevBtn.click();
+    }
+  });
+});
+</script>
+
+</body>
+</html>
