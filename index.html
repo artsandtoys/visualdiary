@@ -208,6 +208,29 @@ h1, h2 {
     opacity: 0.94; /* NEW */
 }
 
+/* NEW */
+.gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2em;
+  cursor: pointer;
+  padding: 20px;
+  user-select: none;
+  z-index: 10000;
+}
+
+#prevBtn { left: 30px; }
+    
+#nextBtn { right: 30px; }
+
+.gallery-btn:hover {
+  color: #b3ff00;
+}
+    
 /* -------------------------------------- */
 /* MOBILE */
 /* -------------------------------------- */
@@ -293,7 +316,7 @@ h1, h2 {
             
         <div class="timeline">
                     
-            <a href="#" class="timeline-item-link" id="openColumnPopup">
+            <a href="#" class="timeline-item-link"  data-images="meta1.png,meta2.png,meta3.png"> <!-- id="openColumnPopup" */ -->
                 <div class="timeline-date"><i>2023 - </i></div>
                 <div class="timeline-title">Meta Start</div>
                     <p style="color: #ddd;">Joined the Meta Horizon Start program (fka as Oculus Start), to port my arcage game "Cyberspace Station - Orbital Junker" to Mixed Reality.</p>
@@ -312,10 +335,13 @@ h1, h2 {
             </a>
                     
         </div>
-                
+            
+        <!-- Popup Gallery -->
         <div id="columnPopup">
-            <img src="superFlower-light-frame1-3k+.png" alt="Popup Image" id="popupImage">
-        </div>             
+            <button id="prevBtn" class="gallery-btn">&#10094;</button>
+                <img id="popupImage" src="superFlower-light-frame1-3k+.png" alt="Popup Image">
+            <button id="nextBtn" class="gallery-btn">&#10095;</button>
+        </div>
                 
         <div style="height: 80px;"></div>
                 
@@ -377,26 +403,62 @@ h1, h2 {
     });
 
   // NEW
+  document.addEventListener('DOMContentLoaded', () => {
   const popup = document.getElementById('columnPopup');
-  const openBtn = document.getElementById('openColumnPopup');
   const popupImage = document.getElementById('popupImage');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let currentGallery = [];
+  let currentIndex = 0;
 
-  // Open popup
-  openBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    popup.style.display = 'inline-flex';
+  // Open gallery
+  document.querySelectorAll('.gallery-trigger').forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentGallery = item.dataset.images.split(',');
+      currentIndex = 0;
+      showImage(currentIndex);
+      popup.style.display = 'flex';
+    });
   });
 
-  // Close popup when clicking anywhere on the overlay
-  popup.addEventListener('click', () => {
-    popup.style.display = 'none';
+  // Show selected image
+  function showImage(index) {
+    popupImage.style.opacity = 0;
+    setTimeout(() => {
+      popupImage.src = currentGallery[index];
+      popupImage.onload = () => popupImage.style.opacity = 1;
+    }, 200);
+  }
+
+  // Navigation buttons
+  nextBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    currentIndex = (currentIndex + 1) % currentGallery.length;
+    showImage(currentIndex);
   });
 
-  // Make sure clicking the image also closes it
-  popupImage.addEventListener('click', (e) => {
-    e.stopPropagation(); // Prevents the event from bubbling up twice
-    popup.style.display = 'none';
+  prevBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+    showImage(currentIndex);
   });
+
+  // Close popup (click outside image)
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) popup.style.display = 'none';
+  });
+
+  // Keyboard support
+  document.addEventListener('keydown', (e) => {
+    if (popup.style.display === 'flex') {
+      if (e.key === 'Escape') popup.style.display = 'none';
+      if (e.key === 'ArrowRight') nextBtn.click();
+      if (e.key === 'ArrowLeft') prevBtn.click();
+    }
+  });
+});
+
     
 </script>
 
