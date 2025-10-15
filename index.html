@@ -311,10 +311,10 @@ h1, h2 {
         </a>
       </div>
 
-      <!-- POPUP GALLERY -->
+     <!-- POPUP GALLERY -->
       <div id="columnPopup">
         <button id="prevBtn" class="gallery-btn">&#10094;</button>
-        <img id="popupImage" src="superFlower-light-frame1-3k.png" alt="Popup Image">
+            <!-- <img id="popupImage" src="superFlower-light-frame1-3k.png" alt="Popup Image"> -->
         <button id="nextBtn" class="gallery-btn">&#10095;</button>
       </div>
 
@@ -368,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.gallery-trigger').forEach(item => {
     item.addEventListener('click', e => {
       e.preventDefault();
-      currentGallery = item.dataset.images.split(',').map(img => img.trim()).filter(img => img.length);;
+      currentGallery = item.dataset.images.split(',').map(img => img.trim()).filter(img => img.length);
       currentIndex = 0;
       showImage(currentIndex);
       popup.style.display = 'flex';
