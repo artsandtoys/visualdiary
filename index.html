@@ -161,7 +161,7 @@ h1, h2 {
 
 /* POPUP GALLERY */
 #columnPopup {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -179,7 +179,7 @@ h1, h2 {
   max-height: 97.5%;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   object-fit: contain;
-  opacity: 0.94; /* preserve original opacity */
+  opacity: 0.94;
   transition: opacity 0.3s ease;
   cursor: pointer;
 }
@@ -212,7 +212,6 @@ h1, h2 {
   }
 }
 
-/* -------------------------------------- */
 /* MOBILE RESPONSIVE */
 @media (max-width: 800px) {
     .main-container {
@@ -351,7 +350,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-    
   if (!initialLinkFound && navLinks.length > 0) navLinks[0].classList.add('active');
 
   // --- GALLERY POPUP ---
@@ -365,7 +363,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.gallery-trigger').forEach(item => {
     item.addEventListener('click', e => {
       e.preventDefault();
-      currentGallery = item.dataset.images.split(',').map(img => img.trim());
+      // FIX: trim and filter to avoid blank slides
+      currentGallery = item.dataset.images
+        .split(',')
+        .map(img => img.trim())
+        .filter(img => img.length);
       currentIndex = 0;
       showImage(currentIndex);
       popup.style.display = 'flex';
@@ -376,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
     popupImage.style.opacity = 0;
     setTimeout(() => {
       popupImage.src = currentGallery[index];
-      popupImage.onload = () => popupImage.style.opacity = 0.94; // preserve opacity
+      popupImage.onload = () => popupImage.style.opacity = 0.94;
     }, 200);
   }
 
