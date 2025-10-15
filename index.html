@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>hi i'm paul</title>
-<link rel="icon" href="tinyguru3-10px_small.png" type="image/png">
+    <title>hi i'm paul</title>
+    <link rel="favicon" href="tinyguru3-10px_small.png" type="image/png">
 
 <style>
+    
 body {
     background-color: #000;
     color: #fff;
@@ -20,9 +21,10 @@ body {
     box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
-
-h1, h2 { margin: 0; }
+h1, h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
 /* MAIN CONTAINER */
 .main-container {
@@ -54,7 +56,9 @@ h1, h2 { margin: 0; }
     margin-top: 14vh;
 }
 
-.left-content h1, .left-content h2 { margin: 0; }
+.left-content h1, .left-content h2 {
+    margin: 0;
+}
 
 .description-text {
     color: #ddd;
@@ -65,7 +69,7 @@ h1, h2 { margin: 0; }
     margin-bottom: 16px;
 }
 
-/* NAV LINKS */
+/* LEFT NAV LINKS */
 .left-content nav a {
     color: #fff;
     text-decoration: none;
@@ -75,8 +79,14 @@ h1, h2 { margin: 0; }
     transition: color 0.3s;
 }
 
-.left-content nav a:hover { color: #b3ff00; }
-.left-content nav a.active { color: #b3ff00; font-weight: bold; }
+.left-content nav a:hover {
+    color: #b3ff00;
+}
+
+.left-content nav a.active {
+    color: #b3ff00;
+    font-weight: bold;
+}
 
 /* RIGHT COLUMN */
 .right-column-wrapper {
@@ -90,9 +100,19 @@ h1, h2 { margin: 0; }
     position: relative;
 }
 
-.right-column-wrapper h2 { margin: 0 0 8px 0; }
-#about-me p, .right-column-wrapper p { color: #ddd; line-height: 1.5; margin-bottom: 16px; }
-.content-section { padding: 32px 0; }
+.right-column-wrapper h2 {
+    margin: 0 0 8px 0;
+}
+
+#about-me p, .right-column-wrapper p {
+    color: #ddd;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.content-section {
+    padding: 32px 0;
+}
 
 /* TIMELINE */
 .timeline {
@@ -120,7 +140,10 @@ h1, h2 { margin: 0; }
     transition: color 0.3s ease;
 }
 
-.timeline-item-link:hover { color: #22cc33; cursor: pointer; }
+.timeline-item-link:hover {
+    color: #22cc33;
+    cursor: pointer;
+}
 
 .timeline-item-link::before {
     content: '';
@@ -134,11 +157,13 @@ h1, h2 { margin: 0; }
     z-index: 1;
 }
 
-.timeline-date { color: #ccc; }
+.timeline-date {
+    color: #ccc;
+}
 
 /* POPUP GALLERY */
 #columnPopup {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -147,7 +172,7 @@ h1, h2 { margin: 0; }
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 10000;
+  z-index: 10;
   cursor: pointer;
 }
 
@@ -155,182 +180,4 @@ h1, h2 { margin: 0; }
   max-width: 98%;
   max-height: 98%;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  object-fit: contain;
-  opacity: 0.94;
-  transition: opacity 0.3s ease;
-  cursor: pointer;
-}
-
-.gallery-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 2em;
-  cursor: pointer;
-  padding: 20px;
-  user-select: none;
-  z-index: 10001;
-}
-
-#prevBtn { left: 30px; }
-#nextBtn { right: 30px; }
-
-.gallery-btn:hover { color: #b3ff00; }
-
-@media (max-width: 600px) {
-  .gallery-btn { font-size: 2.5em; padding: 10px; }
-}
-
-/* MOBILE RESPONSIVE */
-@media (max-width: 800px) {
-    .main-container { width: 84%; flex-direction: column; margin: 0 4px; }
-
-    .left-column { position: static; width: 100%; padding-right: 0; justify-content: flex-start; align-items: flex-start; }
-    .left-content { width: 100%; text-align: left; margin-top: 0; padding-top: 0; }
-    .left-content nav a { display: inline-block; margin: 0; }
-    .right-column-wrapper { flex-basis: 100%; padding-left: 0; padding-top: 0; }
-}
-</style>
-</head>
-
-<body>
-<div class="main-container">
-
-  <!-- LEFT COLUMN -->
-  <div class="left-column">
-    <div class="left-content">
-        <h1>Paul Arthur</h1>
-        <br>
-        <h2>Creative Technologist</h2>
-
-        <div class="description-text">
-            Audio / Visual Artist and Storyteller
-        </div>
-
-        <nav>
-            <a href="#about-me">about &ensp;</a>
-            <a href="#projects">works &ensp;</a>
-        </nav>
-    </div>
-  </div>
-
-  <!-- RIGHT COLUMN -->
-  <div class="right-column-wrapper">
-
-    <section id="about-me" class="content-section">
-      <h2>about</h2>
-      <p> 
-        I am an Audio / Visual Artist working at the intersection of emerging tech and entertainment. 
-        <br>
-        My passion is for crafting immersive experiences and games using narrative and sonic storytelling.
-      </p> 
-    </section>
-
-    <section id="projects" class="content-section">
-      <h2>works</h2>
-      <br> 
-
-      <!-- TIMELINE -->
-      <div class="timeline">
-        <a href="#" class="timeline-item-link gallery-trigger" data-images="superFlower-light-frame1-3k.png, superFlower-light-frame2-3k.png">
-            <div class="timeline-date"><i>2023 - </i></div>
-            <div class="timeline-title">Meta Start</div>
-            <p style="color: #ddd;">Joined the Meta Horizon Start program (fka as Oculus Start), to port my arcage game "Cyberspace Station - Orbital Junker" to Mixed Reality.</p>
-        </a>
-
-        <a href="https://www.djpaularthur.com/" target="_blank" class="timeline-item-link">
-            <div class="timeline-date">2021</div>
-            <div class="timeline-title">Endless Bloom EP</div>
-            <p style="color: #ddd;">My goal with this project was to see if I could write and produce an electronic music project, craft 3D visuals that matched the sonic aesthetic, package it, pitch it to a label distributor, and have them agree to sign and release the project. Thank you, Symphonic!</p>
-        </a>
-
-        <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
-            <div class="timeline-date">2020 - 2021</div>
-            <div class="timeline-title">Oculus Launch Pad</div>
-            <p style="color: #ddd;">1/100 Up-and-coming VR devs & creators invited to participate in the 2020 class of Oculus Launch Pad. Click here to see an excerpt from my experience, "Cyberspace Station - Orbital Observatory".</p>
-        </a>
-      </div>
-
-      <!-- POPUP GALLERY -->
-      <div id="columnPopup">
-        <button id="prevBtn" class="gallery-btn">&#10094;</button>
-        <img id="popupImage" src="" alt="Popup Image">
-        <button id="nextBtn" class="gallery-btn">&#10095;</button>
-      </div>
-
-      <div style="height: 80px;"></div>
-      <p>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; Design by artsandtoys.</p>
-      <br><br>
-      <p>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; <a href="#"><b><i>Fin.</i></b></a></p>
-    </section>
-
-  </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // --- NAV ACTIVE LINKS ---
-  const navLinks = document.querySelectorAll('.left-content nav a');
-  function removeActiveClasses() { navLinks.forEach(link => link.classList.remove('active')); }
-  navLinks.forEach(link => link.addEventListener('click', function() {
-    removeActiveClasses();
-    this.classList.add('active');
-  }));
-  const currentHash = window.location.hash;
-  let initialLinkFound = false;
-  if (currentHash) {
-    navLinks.forEach(link => { if(link.getAttribute('href') === currentHash){ link.classList.add('active'); initialLinkFound = true; }});
-  }
-  if (!initialLinkFound && navLinks.length > 0) navLinks[0].classList.add('active');
-
-  // --- GALLERY POPUP ---
-  const popup = document.getElementById('columnPopup');
-  const popupImage = document.getElementById('popupImage');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  let currentGallery = [];
-  let currentIndex = 0;
-
-  document.querySelectorAll('.gallery-trigger').forEach(item => {
-    item.addEventListener('click', e => {
-      e.preventDefault();
-      currentGallery = item.dataset.images.split(',').map(img => img.trim()).filter(img => img.length);
-      currentIndex = 0;
-
-      // preload all images
-      currentGallery.forEach(src => { const img = new Image(); img.src = src; });
-
-      // show first image
-      popupImage.src = currentGallery[currentIndex];
-      popup.style.display = 'flex';
-    });
-  });
-
-  function showImage(index){
-    popupImage.style.opacity = 0;
-    setTimeout(() => { 
-      popupImage.src = currentGallery[index]; 
-      popupImage.style.opacity = 0.94; 
-    }, 50);
-  }
-
-  nextBtn.addEventListener('click', e => { e.stopPropagation(); currentIndex = (currentIndex + 1) % currentGallery.length; showImage(currentIndex); });
-  prevBtn.addEventListener('click', e => { e.stopPropagation(); currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; showImage(currentIndex); });
-
-  popup.addEventListener('click', e => { if(e.target === popup || e.target === popupImage) popup.style.display = 'none'; });
-
-  document.addEventListener('keydown', e => {
-    if(popup.style.display === 'flex'){
-      if(e.key === 'Escape') popup.style.display = 'none';
-      if(e.key === 'ArrowRight') nextBtn.click();
-      if(e.key === 'ArrowLeft') prevBtn.click();
-    }
-  });
-});
-</script>
-
-</body>
-</html>
+  object
