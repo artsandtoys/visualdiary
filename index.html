@@ -329,8 +329,8 @@ h1, h2 {
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  // -- NAV ACTIVE LINKS --
+ // -- NAV ACTIVE LINKS --
+ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.left-content nav a');
 
   function removeActiveClasses() {
@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
   if (!initialLinkFound && navLinks.length > 0) navLinks[0].classList.add('active');
                           
-  // -- GALLERY POPUP --
+ // -- GALLERY POPUP --
   const popup = document.getElementById('columnPopup');
   const popupImage = document.getElementById('popupImage');
   const prevBtn = document.getElementById('prevBtn');
@@ -404,6 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === popup || e.target === popupImage) popup.style.display = 'none';
   });
 
+  // -- KEYBOARD --
   document.addEventListener('keydown', e => {
     if (popup.style.display === 'flex') {
       if (e.key === 'Escape') popup.style.display = 'none';
