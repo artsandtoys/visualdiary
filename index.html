@@ -161,7 +161,7 @@ h1, h2 {
 
 /* POPUP GALLERY */
 #columnPopup {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -175,11 +175,11 @@ h1, h2 {
 }
 
 #columnPopup img {
-  max-width: 97.5%;
-  max-height: 97.5%;
+  max-width: 98%;
+  max-height: 98%;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   object-fit: contain;
-  opacity: 0.94;
+  opacity: 0.94; /* preserve original opacity */
   transition: opacity 0.3s ease;
   cursor: pointer;
 }
@@ -212,6 +212,7 @@ h1, h2 {
   }
 }
 
+/* -------------------------------------- */
 /* MOBILE RESPONSIVE */
 @media (max-width: 800px) {
     .main-container {
@@ -350,6 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+    
   if (!initialLinkFound && navLinks.length > 0) navLinks[0].classList.add('active');
 
   // --- GALLERY POPUP ---
@@ -363,11 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.gallery-trigger').forEach(item => {
     item.addEventListener('click', e => {
       e.preventDefault();
-      // FIX: trim and filter to avoid blank slides
-      currentGallery = item.dataset.images
-        .split(',')
-        .map(img => img.trim())
-        .filter(img => img.length);
+      currentGallery = item.dataset.images.split(',').map(img => img.trim());
       currentIndex = 0;
       showImage(currentIndex);
       popup.style.display = 'flex';
@@ -378,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
     popupImage.style.opacity = 0;
     setTimeout(() => {
       popupImage.src = currentGallery[index];
-      popupImage.onload = () => popupImage.style.opacity = 0.94;
+      popupImage.onload = () => popupImage.style.opacity = 0.94; // preserve opacity
     }, 200);
   }
 
