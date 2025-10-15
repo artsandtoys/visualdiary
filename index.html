@@ -1,456 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>hi i'm paul</title>
     <link rel="icon" href="tinyguru3-10px_small.png" type="image/png">
 
-    <style>
-        /* ----------------------------- */
-        /* GLOBAL STYLES */
-        /* ----------------------------- */
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 16px;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
+<style>
+    
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
 
-        h1,
-        h2 {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
+h1, h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
-        /* ----------------------------- */
-        /* MAIN CONTAINER */
-        /* ----------------------------- */
-        .main-container {
-            width: 75%;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-grow: 1;
-            padding-bottom: 50px;
-            align-items: flex-start;
-        }
+/* MAIN CONTAINER */
+.main-container {
+    width: 75%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-grow: 1;
+    padding-bottom: 50px;
+    align-items: flex-start;
+}
 
-        /* ----------------------------- */
-        /* LEFT COLUMN */
-        /* ----------------------------- */
-        .left-column {
-            flex-basis: 33.33%;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            position: sticky;
-            top: 0;
-            height: 90vh;
-            padding-right: 20px;
-            box-sizing: border-box;
-        }
+/* LEFT COLUMN */
+.left-column {
+    flex-basis: 33.33%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: sticky;
+    top: 0;
+    height: 90vh;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
 
-        .left-content {
-            width: 75%;
-            margin-top: 14vh;
-        }
+.left-content {
+    width: 75%;
+    margin-top: 14vh;
+}
 
-        .left-content h1,
-        .left-content h2 {
-            margin: 0;
-        }
+.left-content h1, .left-content h2 {
+    margin: 0;
+}
 
-        .description-text {
-            color: #ddd;
-            font-size: 16px;
-            font-weight: normal;
-            line-height: 1.5;
-            margin: 16px 0;
-        }
+.description-text {
+    color: #ddd;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.5;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
 
-        /* LEFT NAV LINKS */
-        .left-content nav a {
-            color: #fff;
-            text-decoration: none;
-            display: block;
-            margin: 10px 0;
-            padding: 5px 0;
-            transition: color 0.3s;
-        }
+/* LEFT NAV LINKS */
+.left-content nav a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin: 10px 0;
+    padding: 5px 0px;
+    transition: color 0.3s;
+}
 
-        .left-content nav a:hover {
-            color: #b3ff00;
-        }
+.left-content nav a:hover {
+    color: #b3ff00;
+}
 
-        .left-content nav a.active {
-            color: #b3ff00;
-            font-weight: bold;
-        }
+.left-content nav a.active {
+    color: #b3ff00;
+    font-weight: bold;
+}
 
-        /* ----------------------------- */
-        /* RIGHT COLUMN */
-        /* ----------------------------- */
-        .right-column-wrapper {
-            flex-basis: 66.66%;
-            flex-grow: 1;
-            overflow-y: auto;
-            margin-top: 0.5vh;
-            padding-top: 16vh;
-            padding-left: 20px;
-            box-sizing: border-box;
-            position: relative;
-        }
+/* RIGHT COLUMN */
+.right-column-wrapper {
+    flex-basis: 66.66%;
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-top: 0.5vh;
+    padding-top: 16vh;
+    padding-left: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
 
-        .right-column-wrapper h2 {
-            margin: 0 0 8px 0;
-        }
+.right-column-wrapper h2 {
+    margin: 0 0 8px 0;
+}
 
-        #about-me p,
-        .right-column-wrapper p {
-            color: #ddd;
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
+#about-me p, .right-column-wrapper p {
+    color: #ddd;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
 
-        .content-section {
-            padding: 32px 0;
-        }
+.content-section {
+    padding: 32px 0;
+}
 
-        /* ----------------------------- */
-        /* RIGHT TIMELINE */
-        /* ----------------------------- */
-        .timeline {
-            position: relative;
-            padding: 20px 0 2px 30px;
-        }
+/* TIMELINE */
+.timeline {
+    position: relative;
+    padding: 20px 0 2px 30px;
+}
 
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #444;
-        }
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #444;
+}
 
-        .timeline-item-link {
-            position: relative;
-            display: block;
-            margin-bottom: 30px;
-            padding-left: 20px;
-            text-decoration: none;
-            color: #fff;
-            transition: color 0.3s ease;
-        }
+.timeline-item-link {
+    position: relative;
+    display: block;
+    margin-bottom: 30px;
+    padding: 0 0 0 20px;
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease;
+}
 
-        .timeline-item-link:hover {
-            color: #22cc33;
-            cursor: pointer;
-        }
+.timeline-item-link:hover {
+    color: #22cc33;
+    cursor: pointer;
+}
 
-        .timeline-item-link::before {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 5px;
-            width: 8px;
-            height: 8px;
-            background: #b3ff00;
-            border-radius: 50%;
-            z-index: 1;
-        }
+.timeline-item-link::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 5px;
+    width: 8px;
+    height: 8px;
+    background: #b3ff00;
+    border-radius: 50%;
+    z-index: 1;
+}
 
-        .timeline-date {
-            color: #ccc;
-        }
+.timeline-date {
+    color: #ccc;
+}
 
-        /* ----------------------------- */
-        /* RIGHT TIMELINE POPUP GALLERY */
-        /* ----------------------------- */
-        #columnPopup {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-            cursor: pointer;
-        }
+/* POPUP GALLERY */
+#columnPopup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  cursor: pointer;
+}
 
-        #columnPopup img {
-            max-width: 99%;
-            max-height: 99%;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            object-fit: contain;
-            opacity: 0.94;
-            transition: opacity 0.3s ease;
-            cursor: pointer;
-        }
+#columnPopup img {
+  max-width: 99%;
+  max-height: 99%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  object-fit: contain;
+  opacity: 0.94; /* preserve original opacity */
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
 
-        .gallery-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 2em;
-            cursor: pointer;
-            padding: 20px;
-            user-select: none;
-            z-index: 10000;
-        }
+.gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2em;
+  cursor: pointer;
+  padding: 20px;
+  user-select: none;
+  z-index: 10000;
+}
 
-        #prevBtn {
-            left: 30px;
-        }
+#prevBtn { left: 30px; }
+#nextBtn { right: 30px; }
 
-        #nextBtn {
-            right: 30px;
-        }
+.gallery-btn:hover {
+  color: #b3ff00;
+}
 
-        .gallery-btn:hover {
-            color: #b3ff00;
-        }
+/* -------------------------------------- */
+/* MOBILE RESPONSIVE */
+@media (max-width: 800px) {
+    .main-container {
+        width: 84%;
+        flex-direction: column;
+        margin: 0px 4px;
+    }
 
-        /* ----------------------------- */
-        /* MOBILE RESPONSIVE */
-        /* ----------------------------- */
-        @media (max-width: 800px) {
-            .main-container {
-                width: 84%;
-                flex-direction: column;
-                margin: 0px 4px;
-            }
+    .left-column {
+        position: static;
+        width: 100%;
+        padding-right: 0;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
 
-            .left-column {
-                position: static;
-                width: 100%;
-                padding-right: 0;
-                justify-content: flex-start;
-                align-items: flex-start;
-            }
+    .left-content {
+        width: 100%;
+        text-align: left;
+        margin-top: 0;
+        padding-top: 0;
+    }
 
-            .left-content {
-                width: 100%;
-                text-align: left;
-                margin-top: 0;
-                padding-top: 0;
-            }
+    .left-content nav a {
+        display: inline-block;
+        margin: 0;
+    }
 
-            .left-content nav a {
-                display: inline-block;
-                margin: 0;
-            }
+    .right-column-wrapper {
+        flex-basis: 100%;
+        padding-left: 0;
+        padding-top: 0;
+    }
+}
 
-            .right-column-wrapper {
-                flex-basis: 100%;
-                padding-left: 0;
-                padding-top: 0;
-            }
-
-            .gallery-btn {
-                font-size: 2.5em;
-                padding: 10px;
-            }
-        }
-    </style>
+.gallery-btn {
+    font-size: 2.5em;
+    padding: 10px;
+  }
+}
+    
+</style>
 </head>
 
 <body>
 
-    <div class="main-container">
+<div class="main-container">
 
-        <!-- LEFT COLUMN -->
-        <div class="left-column">
-            <div class="left-content">
-                <h1>Paul Arthur</h1>
-                <h2>Creative Technologist</h2>
+  <!-- LEFT COLUMN -->
+    <div class="left-column">
+    <div class="left-content">
+        <h1>Paul Arthur</h1>
+        <br>
+        <h2>Creative Technologist</h2>
 
-                <div class="description-text">
-                    Audio / Visual Artist and Storyteller
-                </div>
-
-                <nav>
-                    <a href="#about-me">about &ensp;</a>
-                    <a href="#projects">works &ensp;</a>
-                </nav>
-            </div>
+        <div class="description-text">
+            Audio / Visual Artist and Storyteller
         </div>
 
-        <!-- RIGHT COLUMN -->
-        <div class="right-column-wrapper">
-
-            <section id="about-me" class="content-section">
-                <h2>about</h2>
-                <p>
-                    I am an Audio / Visual Artist working at the intersection of emerging tech and entertainment.
-                    <br>
-                    My passion is for crafting immersive experiences and games using narrative and sonic storytelling.
-                </p>
-            </section>
-
-            <section id="projects" class="content-section">
-                <h2>works</h2>
-
-                <!-- TIMELINE -->
-                <div class="timeline">
-                    <a href="https://weareofearth.xyz/cyberspacestation-orbitaljunker/" target="_blank"
-                        class="timeline-item-link">
-                        <div class="timeline-date"><i>2023 - </i></div>
-                        <div class="timeline-title">Meta Start</div>
-                        <p>Joined the Meta Horizon Start program (fka Oculus Start), to port my arcade game
-                            "Cyberspace Station - Orbital Junker" to Mixed Reality.
-                        </p>
-                    </a>
-
-                    <a href="#" class="timeline-item-link gallery-trigger"
-                        data-images="images/b3d_ca-synthocean-frame89-3k-EP-Merch1.png">
-                        <div class="timeline-date">2021</div>
-                        <div class="timeline-title">Endless Bloom EP</div>
-                        <p>My goal with this project was to write and produce an electronic music project, craft 3D
-                            visuals that matched the sonic aesthetic, package it, pitch it to a label distributor, and
-                            have them agree to sign and release the project. Thank you, Symphonic!
-                        </p>
-                    </a>
-
-                    <a href="#" class="timeline-item-link gallery-trigger"
-                        data-images="images/level-cybersprint++bw.png, images/level-cybersprint++.png">
-                        <div class="timeline-date">2020 - 2021</div>
-                        <div class="timeline-title">Oculus Launch Pad</div>
-                        <p>1/100 Up-and-coming VR devs & creators invited to participate in the 2020 class of Oculus
-                            Launch Pad. Click here to see an excerpt from my experience, "Cyberspace Station -
-                            Orbital Observatory".
-                        </p>
-                    </a>
-
-                    <!-- POPUP GALLERY -->
-                    <div id="columnPopup">
-                        <button id="prevBtn" class="gallery-btn">&#10094;</button>
-                        <img id="popupImage" src="" alt="Popup Image">
-                        <button id="nextBtn" class="gallery-btn">&#10095;</button>
-                    </div>
-                </div>
-
-                <!-- END -->
-                <div style="height: 80px;"></div>
-                <p>Design by artsandtoys.</p>
-                <p><a href="#"><b><i>Fin.</i></b></a></p>
-            </section>
-
-        </div>
+        <nav>
+            <a href="#about-me">about &ensp;</a>
+            <a href="#projects">works &ensp;</a>
+        </nav>
+    </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            /* ----------------------------- */
-            /* NAV ACTIVE LINKS */
-            /* ----------------------------- */
-            const navLinks = document.querySelectorAll('.left-content nav a');
+  <!-- RIGHT COLUMN -->
+  <div class="right-column-wrapper">
 
-            function removeActiveClasses() {
-                navLinks.forEach(link => link.classList.remove('active'));
-            }
+    <section id="about-me" class="content-section">
+      <h2>about</h2>
+      <p> 
+        I am an Audio / Visual Artist working at the intersection of emerging tech and entertainment. 
+        <br>
+        My passion is for crafting immersive experiences and games using narrative and sonic storytelling.
+      </p> 
+    </section>
 
-            navLinks.forEach(link => {
-                link.addEventListener('click', function () {
-                    removeActiveClasses();
-                    this.classList.add('active');
-                });
-            });
+    <section id="projects" class="content-section">
+      <h2>works</h2>
+        <br> 
 
-            const currentHash = window.location.hash;
-            let initialLinkFound = false;
-            if (currentHash) {
-                navLinks.forEach(link => {
-                    if (link.getAttribute('href') === currentHash) {
-                        link.classList.add('active');
-                        initialLinkFound = true;
-                    }
-                });
-            }
+        <!-- TIMELINE -->
+        <div class="timeline">
+        <a href="https://weareofearth.xyz/cyberspacestation-orbitaljunker/" target="_blank" class="timeline-item-link">
+            <div class="timeline-date"><i>2023 - </i></div>
+            <div class="timeline-title">Meta Start</div>
+            <p style="color: #ddd;">Joined the Meta Horizon Start program (fka as Oculus Start), to port my arcade game "Cyberspace Station - Orbital Junker" to Mixed Reality.</p>
+        </a>
 
-            if (!initialLinkFound && navLinks.length > 0) navLinks[0].classList.add('active');
+        <a href="#" class="timeline-item-link gallery-trigger" data-images="images/b3d_ca-synthocean-frame89-3k-EP-Merch1.png">
+            <div class="timeline-date">2021</div>
+            <div class="timeline-title">Endless Bloom EP</div>
+            <p style="color: #ddd;">My goal with this project was to see if I could write and produce an electronic music project, craft 3D visuals that matched the sonic aesthetic, package it, pitch it to a label distributor, and have them agree to sign and release the project. Thank you, Symphonic!</p>
+        </a>
 
-            /* ----------------------------- */
-            /* GALLERY POPUP */
-            /* ----------------------------- */
-            const popup = document.getElementById('columnPopup');
-            const popupImage = document.getElementById('popupImage');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            let currentGallery = [];
-            let currentIndex = 0;
+        <a href="#" class="timeline-item-link gallery-trigger" data-images="level-cybersprint++bw.png">
+            <div class="timeline-date">2020 - 2021</div>
+            <div class="timeline-title">Oculus Launch Pad</div>
+            <p style="color: #ddd;">1/100 Up-and-coming VR devs & creators invited to participate in the 2020 class of Oculus Launch Pad. Click here to see an excerpt from my experience, "Cyberspace Station - Orbital Observatory".</p>
+        </a>
 
-            document.querySelectorAll('.gallery-trigger').forEach(item => {
-                item.addEventListener('click', e => {
-                    e.preventDefault();
-                    currentGallery = item.dataset.images.split(',').map(img => img.trim()).filter(img => img.length);
-                    currentIndex = 0;
-                    showImage(currentIndex);
-                    popup.style.display = 'flex';
-                });
-            });
+        <!-- POPUP GALLERY -->
+          <div id="columnPopup">
+            <button id="prevBtn" class="gallery-btn">&#10094;</button>
+            <img id="popupImage" src="" alt="Popup Image">
+            <button id="nextBtn" class="gallery-btn">&#10095;</button>
+          </div>      
+      </div>
 
-            function showImage(index) {
-                popupImage.style.opacity = 0.1;
-                const newSrc = currentGallery[index];
-                popupImage.src = newSrc;
-                setTimeout(() => {
-                    popupImage.style.opacity = 0.94;
-                }, 50);
-            }
+      <!-- END -->
+      <div style="height: 80px;"></div>
+      <p>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; Design by artsandtoys.</p>
+      <br><br>
+      <p>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; <a href="#"><b><i>Fin.</i></b></a></p>
+    </section>
 
-            /* ----------------------------- */
-            /* BUTTONS */
-            /* ----------------------------- */
-            nextBtn.addEventListener('click', e => {
-                e.stopPropagation();
-                currentIndex = (currentIndex + 1) % currentGallery.length;
-                showImage(currentIndex);
-            });
+  </div>
+</div>
 
-            prevBtn.addEventListener('click', e => {
-                e.stopPropagation();
-                currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-                showImage(currentIndex);
-            });
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // --- NAV ACTIVE LINKS ---
+  const navLinks = document.querySelectorAll('.left-content nav a');
 
-            popup.addEventListener('click', e => {
-                if (e.target === popup || e.target === popupImage) popup.style.display = 'none';
-            });
+  function removeActiveClasses() {
+    navLinks.forEach(link => link.classList.remove('active'));
+  }
 
-            document.addEventListener('keydown', e => {
-                if (popup.style.display === 'flex') {
-                    if (e.key === 'Escape') popup.style.display = 'none';
-                    if (e.key === 'ArrowRight') nextBtn.click();
-                    if (e.key === 'ArrowLeft') prevBtn.click();
-                }
-            });
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      removeActiveClasses();
+      this.classList.add('active');
+    });
+  });
 
-            /* ----------------------------- */
-            /* DISABLE RIGHT-CLICK */
-            /* ----------------------------- */
-            document.addEventListener('contextmenu', function (e) {
-                e.preventDefault();
-                alert("Right-click is disabled on this page.");
-            });
-        });
-    </script>
+  const currentHash = window.location.hash;
+  let initialLinkFound = false;
+  if (currentHash) {
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentHash) {
+        link.classList.add('active');
+        initialLinkFound = true;
+      }
+    });
+  }
+    
+  if (!initialLinkFound && navLinks.length > 0) navLinks[0].classList.add('active');
+                          
+  // --- GALLERY POPUP ---
+  const popup = document.getElementById('columnPopup');
+  const popupImage = document.getElementById('popupImage');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let currentGallery = [];
+  let currentIndex = 0;
+
+  document.querySelectorAll('.gallery-trigger').forEach(item => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      currentGallery = item.dataset.images.split(',').map(img => img.trim()).filter(img => img.length);
+      currentIndex = 0;
+      showImage(currentIndex);
+      popup.style.display = 'flex';
+    });
+  });
+
+ function showImage(index) {
+    popupImage.style.opacity = 0.1; // fade out
+    const newSrc = currentGallery[index];
+    popupImage.src = newSrc;
+    // Force opacity to fade in after a tiny delay
+    setTimeout(() => {
+        popupImage.style.opacity = 0.94;
+    }, 50); 
+}
+
+// BUTTON R
+  nextBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    currentIndex = (currentIndex + 1) % currentGallery.length;
+    showImage(currentIndex);
+  });
+
+// BUTTON L
+  prevBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+    showImage(currentIndex);
+  });
+
+  // CLOSE POPUP
+  popup.addEventListener('click', e => {
+    if (e.target === popup || e.target === popupImage) popup.style.display = 'none';
+  });
+
+  // popupImage.addEventListener('click', e => e.stopPropagation()); // REMOVED TO ENABLE CLICK ANYWHERE AND CLOSE
+
+  document.addEventListener('keydown', e => {
+    if (popup.style.display === 'flex') {
+      if (e.key === 'Escape') popup.style.display = 'none';
+      if (e.key === 'ArrowRight') nextBtn.click();
+      if (e.key === 'ArrowLeft') prevBtn.click();
+    }
+  });
+
+});
+
+  // Disable right-click on the entire page
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    alert("Right-click is disabled on this page.");
+  });
+</script>
 
 </body>
-
 </html>
