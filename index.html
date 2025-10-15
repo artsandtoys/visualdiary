@@ -9,7 +9,9 @@
     <link rel="icon" href="tinyguru3-10px_small.png" type="image/png">
     
 <style>
-        
+/* -------------------------------------- */
+/* BASE STYLES */
+/* -------------------------------------- */
 body {
     background-color: #000;
     color: #fff;
@@ -68,16 +70,16 @@ h1, h2 {
 }
 
 .left-content h2 {
-    margin: 0 0 8px 0; /* Converted 0.5em to 8px */
+    margin: 0 0 8px 0;
 }
 
 .description-text {
     color: #ddd; 
-    font-size: 16px; /* Converted 1em to 16px */
+    font-size: 16px; 
     font-weight: normal;
-    line-height: 1.5; /* Retained unitless line-height (best practice) */
-    margin-top: 16px; /* Converted 1em to 16px */
-    margin-bottom: 16px; /* Converted 1em to 16px */
+    line-height: 1.5;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 /* -------------------------------------- */
@@ -114,11 +116,11 @@ h1, h2 {
     padding-top: 16vh; 
     padding-left: 20px; 
     box-sizing: border-box;
-        position: relative; /* new for pop up */
+    position: relative;
 }
 
 .right-column-wrapper h2 {
-    margin: 0 0 8px 0; /* Converted 0.5em to 8px */
+    margin: 0 0 8px 0;
 }
         
 #about-me p {
@@ -130,7 +132,7 @@ h1, h2 {
 
 .right-column-wrapper p {
     line-height: 1.5;
-    margin-bottom: 16px; /* Converted 1em to 16px */
+    margin-bottom: 16px;
 }
 
 /* -------------------------------------- */
@@ -186,22 +188,22 @@ h1, h2 {
 }
 
 
-/* pop up - MODIFIED FOR GALLERY */
-/* NEW/MODIFIED: Replaced single image styles with gallery styles */
+/* -------------------------------------- */
+/* NEW GALLERY CSS */
+/* -------------------------------------- */
 #columnPopup {
-  position: fixed; /* NEW/MODIFIED: Changed from absolute to fixed to cover entire viewport */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.9); /* NEW/MODIFIED: Darker overlay for focus */
+  background: rgba(0, 0, 0, 0.9);
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 100; /* NEW/MODIFIED: High z-index to be on top */
+  z-index: 100;
 }
 
-/* NEW/MODIFIED: Wrapper for image, controls, and counter */
 .popup-content {
   position: relative;
   max-width: 90%;
@@ -213,15 +215,15 @@ h1, h2 {
 
 #columnPopup img {
   max-width: 100%;
-  max-height: 100vh; /* NEW/MODIFIED: Use viewport height for better sizing */
-  display: block; /* NEW */
+  max-height: 100vh;
+  display: block; 
   object-fit: contain;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  opacity: 1; /* MODIFIED */
-  transition: opacity 0.3s; /* NEW */
+  opacity: 1;
+  transition: opacity 0.3s;
 }
 
-/* NEW: Navigation Buttons (Prev/Next) */
+/* Navigation Buttons (Prev/Next) */
 .prev-btn, .next-btn, .close-btn {
   cursor: pointer;
   position: absolute;
@@ -253,7 +255,7 @@ h1, h2 {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* NEW: Close Button (top right) */
+/* Close Button (top right) */
 .close-btn {
   top: 15px;
   right: 35px;
@@ -267,7 +269,7 @@ h1, h2 {
 }
 
 
-/* NEW: Image Counter/Caption */
+/* Image Counter/Caption */
 .caption-container {
   position: absolute;
   bottom: 0;
@@ -368,7 +370,7 @@ h1, h2 {
                 data-images='["superFlower-light-frame1-3k+.png", "image2.jpg", "image3.png"]'> 
                 <div class="timeline-date"><i>2023 - </i></div>
                 <div class="timeline-title">Meta Start (Gallery)</div>
-                    <p style="color: #ddd;">Joined the Meta Horizon Start program (fka as Oculus Start), to port my arcage game "Cyberspace Station - Orbital Junker" to Mixed Reality. (Click for Gallery)</p>
+                    <p style="color: #ddd;">Click to view the gallery for the Meta Horizon Start program.</p>
             </a>
                     
             <a href="https://www.djpaularthur.com/" target="_blank" class="timeline-item-link">
@@ -410,6 +412,9 @@ h1, h2 {
 </div>
 
 <script>
+/* -------------------------------------- */
+/* PRIMARY NAVIGATION SCRIPT */
+/* -------------------------------------- */
     document.addEventListener('DOMContentLoaded', () => {
         // 1. Get all navigation links that need the active class
         const navLinks = document.querySelectorAll('.left-content nav a');
@@ -430,14 +435,11 @@ h1, h2 {
                 // Add 'active' to the link that was clicked
                 this.classList.add('active');
                 
-                // Note: We don't prevent the default behavior (event.preventDefault())
-                // because we *want* the browser to follow the href="#section-id"
-                // and jump to the correct section.
+                // We want the browser to follow the href="#section-id"
             });
         });
 
-        // 4. Handle initial load (which link should be active when the page first loads?)
-        // Check the URL hash (e.g., if the user loaded the page with url#projects)
+        // 4. Handle initial load
         const currentHash = window.location.hash;
         let initialLinkFound = false;
 
@@ -450,31 +452,30 @@ h1, h2 {
             });
         }
         
-        // If no hash is present or a matching link wasn't found, 
-        // default to making the first link active.
+        // Default to making the first link active.
         if (!initialLinkFound && navLinks.length > 0) {
             navLinks[0].classList.add('active');
         }
     });
 
 
-/* ======================================================= */
-/* NEW GALLERY JAVASCRIPT LOGIC (Replaces old single-image pop-up script) */
-/* ======================================================= */
+/* -------------------------------------- */
+/* GALLERY POP-UP SCRIPT */
+/* -------------------------------------- */
 
 const popup = document.getElementById('columnPopup');
 const popupImage = document.getElementById('popupImage');
-const prevBtn = document.querySelector('.prev-btn'); /* NEW */
-const nextBtn = document.querySelector('.next-btn'); /* NEW */
-const closeBtn = document.querySelector('.close-btn'); /* NEW */
-const imageCounter = document.getElementById('imageCounter'); /* NEW */
-const galleryTriggers = document.querySelectorAll('.gallery-trigger'); /* NEW */
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+const closeBtn = document.querySelector('.close-btn');
+const imageCounter = document.getElementById('imageCounter');
+const galleryTriggers = document.querySelectorAll('.gallery-trigger');
 
-let currentImageIndex = 0; /* NEW */
-let galleryImages = []; /* NEW */
+let currentImageIndex = 0;
+let galleryImages = [];
 
-function showImage(n) { /* NEW */
-  // Wrap index around if it goes out of bounds (looping gallery)
+function showImage(n) { 
+  // Loop the index
   if (n >= galleryImages.length) {
     currentImageIndex = 0;
   } else if (n < 0) {
@@ -487,25 +488,25 @@ function showImage(n) { /* NEW */
   imageCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
 }
 
-function nextImage() { /* NEW */
+function nextImage() { 
   showImage(currentImageIndex + 1);
 }
 
-function prevImage() { /* NEW */
+function prevImage() { 
   showImage(currentImageIndex - 1);
 }
 
-function closePopup() { /* NEW/MODIFIED */
+function closePopup() { 
   popup.style.display = 'none';
 }
 
 
 // 1. Open Gallery when a trigger is clicked
-galleryTriggers.forEach(trigger => { /* NEW */
+galleryTriggers.forEach(trigger => { 
   trigger.addEventListener('click', (e) => {
     e.preventDefault(); 
     
-    // Get the list of images from the data attribute
+    // Get the list of images from the data attribute (JSON)
     const imagesData = trigger.getAttribute('data-images');
     
     try {
@@ -516,7 +517,7 @@ galleryTriggers.forEach(trigger => { /* NEW */
     }
 
     if (galleryImages.length > 0) {
-      currentImageIndex = 0; // Always start at the first image
+      currentImageIndex = 0; 
       showImage(currentImageIndex);
       popup.style.display = 'flex'; // Show the popup
 
@@ -532,28 +533,28 @@ galleryTriggers.forEach(trigger => { /* NEW */
 
 
 // 2. Navigation and Closing Listeners
-nextBtn.addEventListener('click', (e) => { /* NEW */
-  e.stopPropagation(); // Prevents closing
+nextBtn.addEventListener('click', (e) => { 
+  e.stopPropagation(); 
   nextImage();
 });
 
-prevBtn.addEventListener('click', (e) => { /* NEW */
+prevBtn.addEventListener('click', (e) => { 
   e.stopPropagation();
   prevImage();
 });
 
-closeBtn.addEventListener('click', closePopup); /* NEW */
+closeBtn.addEventListener('click', closePopup); 
 
-// Close when clicking the backdrop (outside the image and controls)
-popup.addEventListener('click', closePopup); /* MODIFIED: No longer needs the image close logic */
+// Close when clicking the backdrop 
+popup.addEventListener('click', closePopup); 
 
-// Stop event bubbling on the inner content so clicking inside doesn't close it
-document.querySelector('.popup-content').addEventListener('click', (e) => { /* NEW */
+// Stop event bubbling on the inner content (the image area)
+document.querySelector('.popup-content').addEventListener('click', (e) => { 
   e.stopPropagation();
 });
 
-// 3. Keyboard support (Optional)
-document.addEventListener('keydown', (e) => { /* NEW */
+// 3. Keyboard support
+document.addEventListener('keydown', (e) => { 
   if (popup.style.display === 'flex') {
     if (e.key === 'ArrowRight') {
       nextImage();
