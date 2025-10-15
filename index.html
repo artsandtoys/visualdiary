@@ -304,7 +304,7 @@ h1, h2 {
             <p style="color: #ddd;">My goal with this project was to see if I could write and produce an electronic music project, craft 3D visuals that matched the sonic aesthetic, package it, pitch it to a label distributor, and have them agree to sign and release the project. Thank you, Symphonic!</p>
         </a>
 
-        <a href="#" class="timeline-item-link gallery-trigger" data-images="level-cybersprint++bw.png">
+        <a href="#" class="timeline-item-link gallery-trigger" data-images="images/level-cybersprint++bw.png">
             <div class="timeline-date">2020 - 2021</div>
             <div class="timeline-title">Oculus Launch Pad</div>
             <p style="color: #ddd;">1/100 Up-and-coming VR devs & creators invited to participate in the 2020 class of Oculus Launch Pad. Click here to see an excerpt from my experience, "Cyberspace Station - Orbital Observatory".</p>
@@ -330,7 +330,7 @@ h1, h2 {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // --- NAV ACTIVE LINKS ---
+  // -- NAV ACTIVE LINKS --
   const navLinks = document.querySelectorAll('.left-content nav a');
 
   function removeActiveClasses() {
@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
   if (!initialLinkFound && navLinks.length > 0) navLinks[0].classList.add('active');
                           
-  // --- GALLERY POPUP ---
+  // -- GALLERY POPUP --
   const popup = document.getElementById('columnPopup');
   const popupImage = document.getElementById('popupImage');
   const prevBtn = document.getElementById('prevBtn');
@@ -385,26 +385,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 50); 
 }
 
-// BUTTON R
+  // -- BUTTON R -- 
   nextBtn.addEventListener('click', e => {
     e.stopPropagation();
     currentIndex = (currentIndex + 1) % currentGallery.length;
     showImage(currentIndex);
   });
 
-// BUTTON L
+  // -- BUTTON L -- 
   prevBtn.addEventListener('click', e => {
     e.stopPropagation();
     currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
     showImage(currentIndex);
   });
 
-  // CLOSE POPUP
+  // -- CLOSE POPUP --
   popup.addEventListener('click', e => {
     if (e.target === popup || e.target === popupImage) popup.style.display = 'none';
   });
-
-  // popupImage.addEventListener('click', e => e.stopPropagation()); // REMOVED TO ENABLE CLICK ANYWHERE AND CLOSE
 
   document.addEventListener('keydown', e => {
     if (popup.style.display === 'flex') {
@@ -416,7 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-  // Disable right-click on the entire page
+  // -- Disable right-click on the entire page -- 
   document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
     alert("Right-click is disabled on this page.");
