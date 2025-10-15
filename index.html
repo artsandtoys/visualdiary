@@ -368,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.gallery-trigger').forEach(item => {
     item.addEventListener('click', e => {
       e.preventDefault();
-      currentGallery = item.dataset.images.split(',').map(img => img.trim());
+      currentGallery = item.dataset.images.split(',').map(img => img.trim()).filter(img => img.length);;
       currentIndex = 0;
       showImage(currentIndex);
       popup.style.display = 'flex';
