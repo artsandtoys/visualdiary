@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>hi i'm paul</title>
   <link rel="icon" href="tinyguru3-10px_small.png" type="image/png">
 
@@ -25,7 +24,6 @@ h1, h2 {
   margin-bottom: 0;
 }
 
-/* MAIN CONTAINER */
 .main-container {
   width: 75%;
   max-width: 1200px;
@@ -36,7 +34,6 @@ h1, h2 {
   align-items: flex-start;
 }
 
-/* LEFT COLUMN */
 .left-column {
   flex-basis: 33.33%;
   flex-shrink: 0;
@@ -55,10 +52,6 @@ h1, h2 {
   margin-top: 14vh;
 }
 
-.left-content h1, .left-content h2 {
-  margin: 0;
-}
-
 .description-text {
   color: #ddd;
   font-size: 16px;
@@ -68,7 +61,6 @@ h1, h2 {
   margin-bottom: 16px;
 }
 
-/* LEFT NAV LINKS */
 .left-content nav a {
   color: #fff;
   text-decoration: none;
@@ -87,7 +79,6 @@ h1, h2 {
   font-weight: bold;
 }
 
-/* RIGHT COLUMN */
 .right-column-wrapper {
   flex-basis: 66.66%;
   flex-grow: 1;
@@ -99,21 +90,6 @@ h1, h2 {
   position: relative;
 }
 
-.right-column-wrapper h2 {
-  margin: 0 0 8px 0;
-}
-
-#about-me p, .right-column-wrapper p {
-  color: #ddd;
-  line-height: 1.5;
-  margin-bottom: 16px;
-}
-
-.content-section {
-  padding: 32px 0;
-}
-
-/* TIMELINE */
 .timeline {
   position: relative;
   padding: 20px 0 2px 30px;
@@ -160,7 +136,7 @@ h1, h2 {
   color: #ccc;
 }
 
-/* POPUP GALLERY */
+/* POPUP */
 #columnPopup {
   position: absolute;
   top: 0;
@@ -177,11 +153,10 @@ h1, h2 {
 
 #columnPopup img,
 #columnPopup video {
-  max-width: 99%;
-  max-height: 99%;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 .gallery-btn {
@@ -205,20 +180,16 @@ h1, h2 {
   color: #b3ff00;
 }
 
-/* MOBILE RESPONSIVE */
 @media (max-width: 800px) {
   .main-container {
     width: 84%;
     flex-direction: column;
-    margin: 0px 4px;
   }
 
   .left-column {
     position: static;
     width: 100%;
     padding-right: 0;
-    justify-content: flex-start;
-    align-items: flex-start;
   }
 
   .left-content {
@@ -228,20 +199,10 @@ h1, h2 {
     padding-top: 0;
   }
 
-  .left-content nav a {
-    display: inline-block;
-    margin: 0;
-  }
-
   .right-column-wrapper {
     flex-basis: 100%;
     padding-left: 0;
     padding-top: 0;
-  }
-
-  .gallery-btn {
-    font-size: 2.5em;
-    padding: 10px;
   }
 }
 </style>
@@ -270,7 +231,6 @@ h1, h2 {
 
   <!-- RIGHT COLUMN -->
   <div class="right-column-wrapper">
-
     <section id="about-me" class="content-section">
       <h2>about</h2>
       <p>I am an Audio / Visual Artist working at the intersection of emerging tech and entertainment.
@@ -282,30 +242,21 @@ h1, h2 {
       <h2>works</h2>
       <br> 
 
-      <!-- TIMELINE -->
       <div class="timeline">
-        <a href="https://weareofearth.xyz/cyberspacestation-orbitaljunker/" target="_blank" class="timeline-item-link">
-          <div class="timeline-date"><i>2023 - </i></div>
-          <div class="timeline-title">Meta Start</div>
-          <p style="color: #ddd;">Joined the Meta Horizon Start program...</p>
-        </a>
-
         <a href="#" class="timeline-item-link gallery-trigger" data-images="images/b3d_ca-synthocean-frame89-3k-EP-Merch1.png, images/0001-0096-3k-24fps.mp4">
           <div class="timeline-date">2021</div>
           <div class="timeline-title">Endless Bloom EP</div>
-          <p style="color: #ddd;">My goal with this project was...</p>
+          <p style="color: #ddd;">My goal with this project was to blend physical and virtual art into a coherent story-driven soundscape.</p>
         </a>
 
         <a href="#" class="timeline-item-link gallery-trigger" data-images="images/level-cybersprint++bw.png, images/level-cybersprint++.png">
           <div class="timeline-date">2020 - 2021</div>
           <div class="timeline-title">Oculus Launch Pad</div>
-          <p style="color: #ddd;">1/100 Up-and-coming VR devs...</p>
+          <p style="color: #ddd;">Selected among 100 emerging VR creators to develop narrative-driven interactive experiences.</p>
         </a>
 
-        <!-- POPUP GALLERY -->
         <div id="columnPopup">
           <button id="prevBtn" class="gallery-btn">&#10094;</button>
-          <img id="popupImage" src="" alt="Popup Image">
           <button id="nextBtn" class="gallery-btn">&#10095;</button>
         </div>      
       </div>
@@ -321,37 +272,7 @@ h1, h2 {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // -- NAV ACTIVE LINKS --
-  const navLinks = document.querySelectorAll('.left-content nav a');
-
-  function removeActiveClasses() {
-    navLinks.forEach(link => link.classList.remove('active'));
-  }
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      removeActiveClasses();
-      this.classList.add('active');
-    });
-  });
-
-  const currentHash = window.location.hash;
-  let initialLinkFound = false;
-  if (currentHash) {
-    navLinks.forEach(link => {
-      if (link.getAttribute('href') === currentHash) {
-        link.classList.add('active');
-        initialLinkFound = true;
-      }
-    });
-  }
-  if (!initialLinkFound && navLinks.length > 0) navLinks[0].classList.add('active');
-
-  // ------------------------------------------
-  // UPDATED POPUP LOGIC (handles both images & videos)
-  // ------------------------------------------
   const popup = document.getElementById('columnPopup');
-  const popupImage = document.getElementById('popupImage');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   let currentGallery = [];
@@ -360,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.gallery-trigger').forEach(item => {
     item.addEventListener('click', e => {
       e.preventDefault();
-      currentGallery = item.dataset.images.split(',').map(img => img.trim()).filter(img => img.length);
+      currentGallery = item.dataset.images.split(',').map(x => x.trim());
       currentIndex = 0;
       showMedia(currentIndex);
       popup.style.display = 'flex';
@@ -368,34 +289,26 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function showMedia(index) {
-    const currentSrc = currentGallery[index];
-    const isVideo = currentSrc.endsWith('.mp4') || currentSrc.endsWith('.webm');
-
-    // Remove previous media
     popup.querySelectorAll('img, video').forEach(el => el.remove());
+    const src = currentGallery[index];
+    const isVideo = src.endsWith('.mp4') || src.endsWith('.webm');
 
     if (isVideo) {
       const video = document.createElement('video');
-      video.src = currentSrc;
+      video.src = src;
       video.controls = true;
       video.autoplay = true;
       video.muted = true;
+      video.loop = true;
       video.playsInline = true;
-      video.style.maxWidth = '99%';
-      video.style.maxHeight = '99%';
-      video.style.borderRadius = '10px';
       popup.insertBefore(video, nextBtn);
     } else {
       const img = document.createElement('img');
-      img.src = currentSrc;
-      img.style.maxWidth = '99%';
-      img.style.maxHeight = '99%';
-      img.style.opacity = '0.94';
+      img.src = src;
       popup.insertBefore(img, nextBtn);
     }
   }
 
-  // BUTTONS
   nextBtn.addEventListener('click', e => {
     e.stopPropagation();
     currentIndex = (currentIndex + 1) % currentGallery.length;
@@ -408,12 +321,10 @@ document.addEventListener('DOMContentLoaded', () => {
     showMedia(currentIndex);
   });
 
-  // CLOSE POPUP
   popup.addEventListener('click', e => {
     if (e.target === popup) popup.style.display = 'none';
   });
 
-  // KEYBOARD
   document.addEventListener('keydown', e => {
     if (popup.style.display === 'flex') {
       if (e.key === 'Escape') popup.style.display = 'none';
@@ -421,12 +332,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'ArrowLeft') prevBtn.click();
     }
   });
-});
-
-// Disable right-click
-document.addEventListener('contextmenu', e => {
-  e.preventDefault();
-  alert("Right-click is disabled on this page.");
 });
 </script>
 </body>
