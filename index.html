@@ -357,9 +357,8 @@ h1, h2 {
     
   if (!initialLinkFound && navLinks.length > 0) navLinks[0].classList.add('active');
                           
- // -- GALLERY POPUP --
+  // -- GALLERY POPUP (handles images + looping videos) --
   const popup = document.getElementById('columnPopup');
-  const popupImage = document.getElementById('popupImage');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   let currentGallery = [];
@@ -368,52 +367,102 @@ h1, h2 {
   document.querySelectorAll('.gallery-trigger').forEach(item => {
     item.addEventListener('click', e => {
       e.preventDefault();
-      currentGallery = item.dataset.images.split(',').map(img => img.trim()).filter(img => img.length);
+      currentGallery = item.dataset.images.split(',').map(x => x.trim()).filter(x => x.length);
       currentIndex = 0;
-      showImage(currentIndex);
+      showMedia(currentIndex);
       popup.style.display = 'flex';
     });
   });
 
- function showImage(index) {
-    popupImage.style.opacity = 0.1; // fade out
-    const newSrc = currentGallery[index];
-    popupImage.src = newSrc;
-    // Force opacity to fade in after a tiny delay
-    setTimeout(() => {
-        popupImage.style.opacity = 0.94;
-    }, 50); 
-}
+  function clearMedia() {
+    // remove any existing img/video elements inside popup
+    popup.querySelectorAll('img, video').forEach(el => {
+      // if video, pause first
+      if (el.tagName && el.tagName.toLowerCase() === 'video') {
+        try { el.pause(); } catch (err) {}
+        el.removeAttribute('src');
+      }
+      el.remove();
+    });
+  }
 
-  // -- BUTTON R -- 
+  function showMedia(index) {
+    clearMedia();
+    const src = currentGallery[index];
+    if (!src) return;
+
+    const isVideo = src.match(/\.(mp4|webm)(\?.*)?$/i);
+
+    if (isVideo) {
+      const video = document.createElement('video');
+      video.src = src;
+      video.controls = true;
+      video.autoplay = true;
+      video.muted = true;       // helps Chrome allow autoplay
+      video.loop = true;        // user requested looping
+      video.playsInline = true;
+      video.style.maxWidth = '100%';
+      video.style.maxHeight = '100%';
+      video.setAttribute('aria-label', 'Gallery video');
+      // Insert before nextBtn so prev/next remain visible
+      popup.insertBefore(video, nextBtn);
+
+      // handle playback errors in console for debugging
+      video.addEventListener('error', (ev) => console.warn('Video error', ev));
+      // ensure it attempts to play (catch promise rejection)
+      video.play().catch(err => {
+        // most likely autoplay blocked if not muted; we set muted true above
+        console.warn('Play promise rejected:', err);
+      });
+    } else {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = 'Gallery image';
+      img.style.maxWidth = '100%';
+      img.style.maxHeight = '100%';
+      popup.insertBefore(img, nextBtn);
+    }
+  }
+
+  // NEXT
   nextBtn.addEventListener('click', e => {
     e.stopPropagation();
+    if (!currentGallery.length) return;
     currentIndex = (currentIndex + 1) % currentGallery.length;
-    showImage(currentIndex);
+    showMedia(currentIndex);
   });
 
-  // -- BUTTON L -- 
+  // PREV     
   prevBtn.addEventListener('click', e => {
     e.stopPropagation();
+    if (!currentGallery.length) return;
     currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-    showImage(currentIndex);
+    showMedia(currentIndex);
   });
 
-  // -- CLOSE POPUP --
+  // CLOSE
   popup.addEventListener('click', e => {
-    if (e.target === popup || e.target === popupImage) popup.style.display = 'none';
+    if (e.target === popup) {
+      // pause any playing video before hiding
+      popup.querySelectorAll('video').forEach(v => { try { v.pause(); } catch (err) {} });
+      popup.style.display = 'none';
+      clearMedia();
+    }
   });
 
-  // -- KEYBOARD --
+  // KEYBOARD
   document.addEventListener('keydown', e => {
     if (popup.style.display === 'flex') {
-      if (e.key === 'Escape') popup.style.display = 'none';
+      if (e.key === 'Escape') {
+        popup.querySelectorAll('video').forEach(v => { try { v.pause(); } catch (err) {} });
+        popup.style.display = 'none';
+        clearMedia();
+      }
       if (e.key === 'ArrowRight') nextBtn.click();
       if (e.key === 'ArrowLeft') prevBtn.click();
     }
   });
 
-});
 
   // -- Disable right-click on the entire page -- 
   document.addEventListener('contextmenu', function(e) {
