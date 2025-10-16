@@ -357,7 +357,7 @@ h1, h2 {
     
   if (!initialLinkFound && navLinks.length > 0) navLinks[0].classList.add('active');
                           
-  // -- GALLERY POPUP (handles images + looping videos) --
+  // -- GALLERY POPUP --
   const popup = document.getElementById('columnPopup');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
@@ -386,6 +386,7 @@ h1, h2 {
     });
   }
 
+  // NEW UPDATED ADDED VIDEO
   function showMedia(index) {
     clearMedia();
     const src = currentGallery[index];
@@ -398,8 +399,8 @@ h1, h2 {
       video.src = src;
       video.controls = true;
       video.autoplay = true;
-      video.muted = true;       // helps Chrome allow autoplay
-      video.loop = true;        // user requested looping
+      video.muted = true;
+      video.loop = true; 
       video.playsInline = true;
       video.style.maxWidth = '100%';
       video.style.maxHeight = '100%';
