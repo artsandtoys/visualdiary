@@ -442,12 +442,7 @@ h1, h2 {
 
   // CLOSE
   popup.addEventListener('click', e => {
-    if (e.target === popup) {
-      // pause any playing video before hiding
-      popup.querySelectorAll('video').forEach(v => { try { v.pause(); } catch (err) {} });
-      popup.style.display = 'none';
-      clearMedia();
-    }
+    if (e.target === popup || e.target === popupImage) popup.style.display = 'none';
   });
 
   // KEYBOARD
@@ -462,6 +457,7 @@ h1, h2 {
       if (e.key === 'ArrowLeft') prevBtn.click();
     }
   });
+     
 });
 
   // -- Disable right-click on the entire page -- 
