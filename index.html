@@ -441,9 +441,21 @@ h1, h2 {
   });
 
   // CLOSE
+  //popup.addEventListener('click', e => {
+  //  if (e.target === popup || e.target === popupImage) popup.style.display = 'none';
+  //});
+
+  // CLOSE
   popup.addEventListener('click', e => {
-    if (e.target === popup || e.target === popupImage) popup.style.display = 'none';
+  // close if click is outside media or on the popup background
+  if (e.target === popup || e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG') {
+    popup.style.display = 'none';
+    // pause video if it exists
+    const vid = popup.querySelector('video');
+    if (vid) vid.pause();
+    }
   });
+
 
   // KEYBOARD
   document.addEventListener('keydown', e => {
@@ -457,8 +469,7 @@ h1, h2 {
       if (e.key === 'ArrowLeft') prevBtn.click();
     }
   });
-     
-});
+ });
 
   // -- Disable right-click on the entire page -- 
   document.addEventListener('contextmenu', function(e) {
