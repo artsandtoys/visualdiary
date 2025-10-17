@@ -1,5 +1,5 @@
 // ================================
-// Three.js Boids / Flocking Script
+// Three.js Boids / Arrow-Shaped Flocking
 // ================================
 
 // -- SCENE SETUP --
@@ -14,11 +14,11 @@ camera.position.z = 120;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0x000000, 0); // transparent
+renderer.setClearColor(0x000000, 0);
 renderer.domElement.style.position = 'fixed';
 renderer.domElement.style.top = '0';
 renderer.domElement.style.left = '0';
-renderer.domElement.style.zIndex = '-1'; // behind content
+renderer.domElement.style.zIndex = '-1';
 document.body.appendChild(renderer.domElement);
 
 // -- BOID PARAMETERS --
@@ -30,22 +30,26 @@ const SEPARATION_DIST = 15;
 const ALIGN_FORCE = 0.05;
 const COHESION_FORCE = 0.02;
 const SEPARATION_FORCE = 0.1;
-const MOUSE_ATTRACT_FORCE = 0.02; // slightly stronger attraction
+const MOUSE_ATTRACT_FORCE = 0.02;
 
 // -- CREATE BOIDS --
 const boids = [];
-const geometry = new THREE.ConeGeometry(1, 2, 3); // triangle-shaped, half-size
-const material = new THREE.MeshBasicMaterial({ color: 0x00ffff });
+const geometry = new THREE.ConeGeometry(0.5, 2, 4); // elongated arrow
+geometry.rotateX(Math.PI / 2); // point along +X axis initially
 
 for (let i = 0; i < BOID_COUNT; i++) {
-  const boid = new THREE.Mesh(geometry, material.clone());
+  const color = new THREE.Color(0x00ffff);
+  color.offsetHSL(0, 0, Math.random() * 0.3); // slight brightness variation
+  const material = new THREE.MeshBasicMaterial({ color });
+  const boid = new THREE.Mesh(geometry, material);
+
   boid.position.set(
     (Math.random() - 0.5) * 200,
     (Math.random() - 0.5) * 200,
     (Math.random() - 0.5) * 200
   );
   boid.velocity = new THREE.Vector3(
-    (Math.random() - 0.5) * 0.5, // slower initial velocity
+    (Math.random() - 0.5) * 0.5,
     (Math.random() - 0.5) * 0.5,
     (Math.random() - 0.5) * 0.5
   );
@@ -58,7 +62,7 @@ const mouse = new THREE.Vector3();
 document.addEventListener('mousemove', (event) => {
   const x = (event.clientX / window.innerWidth - 0.5) * 200;
   const y = -(event.clientY / window.innerHeight - 0.5) * 200;
-  mouse.set(x, y, 0); // keep z=0 for planar attraction
+  mouse.set(x, y, 0);
 });
 
 // -- BOID LOGIC --
@@ -70,7 +74,7 @@ function updateBoids() {
     let separation = new THREE.Vector3();
     let countAlign = 0, countCohesion = 0, countSeparation = 0;
 
-    // Flocking behavior
+    // Flocking
     for (let j = 0; j < boids.length; j++) {
       if (i === j) continue;
       const other = boids[j];
@@ -85,8 +89,7 @@ function updateBoids() {
         countCohesion++;
       }
       if (distance < SEPARATION_DIST) {
-        let diff = new THREE.Vector3().subVectors(boid.position, other.position);
-        diff.divideScalar(distance);
+        const diff = new THREE.Vector3().subVectors(boid.position, other.position).divideScalar(distance);
         separation.add(diff);
         countSeparation++;
       }
@@ -96,7 +99,7 @@ function updateBoids() {
     if (countCohesion > 0) cohesion.divideScalar(countCohesion).sub(boid.position).multiplyScalar(COHESION_FORCE);
     if (countSeparation > 0) separation.multiplyScalar(SEPARATION_FORCE);
 
-    // Mouse attraction (on the XY plane)
+    // Mouse attraction
     const toMouse = new THREE.Vector3(
       mouse.x - boid.position.x,
       mouse.y - boid.position.y,
@@ -106,7 +109,7 @@ function updateBoids() {
     // Update velocity
     boid.velocity.add(align).add(cohesion).add(separation).add(toMouse);
 
-    // Slow down random motion a bit
+    // Dampen velocity
     boid.velocity.multiplyScalar(0.98);
 
     // Limit speed
@@ -115,12 +118,14 @@ function updateBoids() {
     // Update position
     boid.position.add(boid.velocity);
 
-    // Rotate boid to face direction
-    boid.lookAt(boid.position.clone().add(boid.velocity));
+    // Rotate to face direction
+    if (boid.velocity.length() > 0.001) {
+      boid.lookAt(boid.position.clone().add(boid.velocity));
+    }
   }
 }
 
-// -- RENDER LOOP --
+// -- ANIMATE LOOP --
 function animate() {
   requestAnimationFrame(animate);
   updateBoids();
