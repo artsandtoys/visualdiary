@@ -14,16 +14,16 @@ camera.position.z = 120;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0x000000, 0); // transparent background
+renderer.setClearColor(0x000000, 0); // transparent
 renderer.domElement.style.position = 'fixed';
 renderer.domElement.style.top = '0';
 renderer.domElement.style.left = '0';
-renderer.domElement.style.zIndex = '-1'; // behind all content
+renderer.domElement.style.zIndex = '-1';
 document.body.appendChild(renderer.domElement);
 
 // -- BOID PARAMETERS --
-const BOID_COUNT = 80;
-const BOID_SPEED = 0.5;      // slower speed
+const BOID_COUNT = 40;       // half the amount
+const BOID_SPEED = 0.5;
 const ALIGN_DIST = 25;
 const COHESION_DIST = 40;
 const SEPARATION_DIST = 15;
@@ -34,7 +34,7 @@ const MOUSE_ATTRACT_FORCE = 0.015;
 
 // -- CREATE BOIDS --
 const boids = [];
-const geometry = new THREE.ConeGeometry(1, 4, 8);
+const geometry = new THREE.ConeGeometry(1, 2, 3); // triangle-shaped
 const material = new THREE.MeshBasicMaterial({ color: 0x00ffff });
 
 for (let i = 0; i < BOID_COUNT; i++) {
@@ -53,14 +53,12 @@ for (let i = 0; i < BOID_COUNT; i++) {
   boids.push(boid);
 }
 
-// -- MOUSE TRACKING --
+// -- MOUSE TRACKING (2D) --
 const mouse = new THREE.Vector3();
 document.addEventListener('mousemove', (event) => {
-  const x = (event.clientX / window.innerWidth) * 2 - 1;
-  const y = -(event.clientY / window.innerHeight) * 2 + 1;
-  const vector = new THREE.Vector3(x, y, 0.5);
-  vector.unproject(camera);
-  mouse.copy(vector);
+  const x = (event.clientX / window.innerWidth - 0.5) * 200;
+  const y = -(event.clientY / window.innerHeight - 0.5) * 200;
+  mouse.set(x, y, 0);
 });
 
 // -- BOID LOGIC --
@@ -98,10 +96,14 @@ function updateBoids() {
     if (countSeparation > 0) separation.multiplyScalar(SEPARATION_FORCE);
 
     // Mouse attraction
-    const mouseDir = new THREE.Vector3().subVectors(mouse, boid.position).multiplyScalar(MOUSE_ATTRACT_FORCE);
+    const toMouse = new THREE.Vector3(
+      mouse.x - boid.position.x,
+      mouse.y - boid.position.y,
+      0
+    ).multiplyScalar(MOUSE_ATTRACT_FORCE);
 
     // Update velocity
-    boid.velocity.add(align).add(cohesion).add(separation).add(mouseDir);
+    boid.velocity.add(align).add(cohesion).add(separation).add(toMouse);
 
     // Limit speed
     const speed = boid.velocity.length();
@@ -110,7 +112,7 @@ function updateBoids() {
     // Update position
     boid.position.add(boid.velocity);
 
-    // Rotate boid to face direction
+    // Rotate to face velocity
     boid.lookAt(boid.position.clone().add(boid.velocity));
   }
 }
